@@ -15,18 +15,15 @@ const Header = ({ className, ...rest }) => {
   return (
     <div className={clsx(classes.root, className)} {...rest}>
       <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
-        <Link variant="body1" color="inherit" to="/app" component={RouterLink}>
+        <Link variant="body1" color="inherit" to="/" component={RouterLink}>
           Dashboard
         </Link>
-        <Link variant="body1" color="inherit" to="/app/management/users" component={RouterLink}>
-          Users
-        </Link>
         <Typography variant="body1" color="textPrimary">
-          Create User
+          About
         </Typography>
       </Breadcrumbs>
       <Typography variant="h3" color="textPrimary">
-        Create User
+        About
       </Typography>
     </div>
   );

@@ -1,7 +1,7 @@
 import React from 'react';
 import Details from './Details';
-import Page from '../../components/Page';
 import { makeStyles } from '@material-ui/core';
+import Header from './Header';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -12,8 +12,8 @@ const WelcomePage = () => {
   const classes = useStyles();
   return (
     <React.Fragment className={classes.root}>
+      <Header />
       <Details />
-      hello ????
     </React.Fragment>
   );
 };

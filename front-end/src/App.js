@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Router, Switch } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import WelcomePage from './views/Welcome';
 import NavBar from './components/NavBar';
@@ -8,22 +8,33 @@ import DogBreeds from './views/DogBreeds';
 import companies from './views/Companies';
 import About from './views/About';
 import Page from './components/Page';
+import { Box, makeStyles } from '@material-ui/core';
+
 const history = createBrowserHistory();
+
+const useStyles = makeStyles((theme) => ({
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing(3),
+    marginLeft: 250
+  }
+}));
 const App = () => {
+  const classes = useStyles();
   return (
-    <React.Fragment>
-      <Page title="KGNET">
-        <Router history={history}>
-          <NavBar />
+    <Page title="KGNET">
+      <Router history={history}>
+        <NavBar />
+        <Box className={classes.content}>
           <Switch>
-            <Route path="/" component={Home} />
-            <Route path="/dogs" component={DogBreeds} />
-            <Route path="/companies" component={WelcomePage} />
-            <Route path="/about" component={About} />
+            <Route exact path="/" component={Home} />
+            <Route exact path="/dogs" component={DogBreeds} />
+            <Route exact path="/companies" component={WelcomePage} />
+            <Route exact path="/about" component={About} />
           </Switch>
-        </Router>
-      </Page>
-    </React.Fragment>
+        </Box>
+      </Router>
+    </Page>
   );
 };
 

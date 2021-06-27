@@ -18,7 +18,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Box, Button, SvgIcon } from '@material-ui/core';
 import InfoIcon from '@material-ui/icons/Info';
-import { Link } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -81,7 +81,7 @@ function NavBar(props) {
   const drawer = (
     <div>
       <Box ml={2} mt={2}>
-        <Button component={Link} to="/">
+        <Button component={RouterLink} to="/">
           <Typography variant="h3">KGNET</Typography>
         </Button>
       </Box>
@@ -89,7 +89,7 @@ function NavBar(props) {
       <Divider />
       <List>
         {routes.map((route, index) => (
-          <ListItem component={Link} to={route.path} button key={route.name}>
+          <ListItem component={RouterLink} to={route.path} button key={route.name}>
             <ListItemIcon>
               <SvgIcon>{route.icon}</SvgIcon>
             </ListItemIcon>
@@ -99,7 +99,7 @@ function NavBar(props) {
       </List>
       <Divider />
       <List>
-        <ListItem component={Link} to="/about" button key={'About'}>
+        <ListItem component={RouterLink} to="/about" button key={'About'}>
           <ListItemIcon>
             <SvgIcon>
               <InfoIcon />
