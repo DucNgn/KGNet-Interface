@@ -116,7 +116,7 @@ function NavBar(props) {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar position="relative" className={classes.appBar}>
+      <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
           <IconButton
             color="inherit"
