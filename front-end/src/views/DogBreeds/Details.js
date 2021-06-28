@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import '@fontsource/roboto';
-import { Typography, TextField, makeStyles } from '@material-ui/core';
-import { Box, Card, CardContent } from '@material-ui/core';
-import Header from './Header';
+import { Typography, TextField, makeStyles, CardActions, Button, SvgIcon } from '@material-ui/core';
+import { Box, Card, CardContent, CardMedia, CardActionArea } from '@material-ui/core';
+import useDebounce from '../../hooks/useDebounce';
+import { useHistory } from 'react-router-dom';
+import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 
 const useStyles = makeStyles((theme) => ({
   link: {
@@ -28,20 +30,50 @@ const useStyles = makeStyles((theme) => ({
 }));
 const Details = () => {
   const classes = useStyles();
-  const [link, setLink] = useState();
+  const history = useHistory();
+  const [link, setLink] = useState('');
+  const debouncedLink = useDebounce(link, 500);
+
+  const handleOnchange = (val) => {
+    console.log(val || null);
+    if (val !== undefined) setLink(val);
+  };
+
+  const handleOnClick = (e) => {
+    console.log('hello');
+  };
+
   return (
     <Box mt={5} ml={2}>
-      <TextField className={classes.link} value={link} label="Image link" name="Link" variant="outlined" />
+      <TextField
+        className={classes.link}
+        onChange={(e) => handleOnchange(e.target.value)}
+        label="Image link"
+        name="Link"
+        variant="outlined"
+      />
       <Box my={5} display="flex" justifyContent="center">
-        <Card className={classes.card}>
-          <CardContent className={classes.centerItem}>
-            {link === undefined ? (
-              <Typography className={classes.nothingToDisplay} variant="caption" color="textSecondary">
-                Nothing to display
-              </Typography>
-            ) : null}
-          </CardContent>
+        <Card className={debouncedLink === '' ? classes.card : null}>
+          <CardActionArea>
+            <CardContent className={classes.centerItem}>
+              {debouncedLink === '' ? (
+                <Typography className={classes.nothingToDisplay} variant="caption" color="textSecondary">
+                  Nothing to display
+                </Typography>
+              ) : (
+                <img height="100%" width="100%" src={debouncedLink} />
+              )}
+            </CardContent>
+          </CardActionArea>
         </Card>
+      </Box>
+      <Box my={2} className={classes.centerItem}>
+        <Button variant="contained" color="primary" onClick={handleOnClick}>
+          Next
+          <SvgIcon>
+            <ArrowRightAltIcon />
+          </SvgIcon>
+        </Button>
       </Box>
     </Box>
   );
