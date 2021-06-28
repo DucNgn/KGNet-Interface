@@ -1,0 +1,103 @@
+{
+  "getDogBreedInfo": [
+    {
+      "image_url": "https://www.thesprucepets.com/thmb/KVHRKN0xV6Aus9PinwjfGrE-c8Q=/1414x1414/smart/filters:no_upscale()/GettyImages-514726067-3ebfca58995d434391af4097ed2a861d.jpg",
+      "description": "The Boykin Spaniel is a medium-sized breed of dog, a Spaniel bred for hunting wild turkeys and ducks in the Wateree River Swamp of South Carolina, in the United States. It is the state dog of South Carolina, where it was discovered and further developed by hunters in the 1900s.",
+      "breed_class": "035.Boykin_spaniel",
+      "min_height": "18.0",
+      "max_height": "21.0",
+      "min_weight": "41",
+      "max_weight": "56",
+      "level_of_obey": "0.6",
+      "min_response_count": "26",
+      "max_response_count": "42.5"
+    },
+    {
+      "image_url": "https://s3.amazonaws.com/cdn-origin-etr.akc.org/wp-content/uploads/2017/11/19033403/Brittany-1.jpg",
+      "description": "The Brittany is a breed of gun dog bred primarily for bird hunting. Although it is often referred to as the Brittany Spaniel, the breed's working characteristics are more akin to those of a pointer or setter than a spaniel. Brittanys were developed in Brittany, a province in northwest France, between the 17th and 19th centuries, becoming officially recognized early in the 20th.",
+      "breed_class": "037.Brittany",
+      "min_height": "17.0",
+      "max_height": "21.0",
+      "min_weight": "30",
+      "max_weight": "40",
+      "level_of_obey": "0.85",
+      "min_response_count": "5",
+      "max_response_count": "15.0"
+    }
+  ],
+  "getSimilarKeywords": [
+    {
+      "uri": "http://dbpedia.org/property/place",
+      "word": "place",
+      "Score": "0.399189260399108"
+    },
+    {
+      "uri": "http://dbpedia.org/property/date",
+      "word": "date",
+      "Score": "0.402786165398445"
+    },
+    {
+      "uri": "http://dbpedia.org/property/result",
+      "word": "result",
+      "Score": "0.329974307200694"
+    },
+    {
+      "uri": "http://dbpedia.org/property/side",
+      "word": "side",
+      "Score": "0.461409405605058"
+    }
+  ],
+  "getForbes2013SimilarCompanies": [
+    {
+      "name": "IBM",
+      "logo_url": "https://www.ibm.com/design/language/dce3f5b8db2c0ff04296123f424b3d41/core_blue50_on_black.svg",
+      "description": "International Business Machines Corporation (IBM) is an American multinational technology company headquartered in Armonk, New York, with operations in over 170 countries. The company began in 1911, founded in Endicott, New York, as the Computing-Tabulating-Recording Company (CTR) and was renamed \"International Business Machines\" in 1924. IBM is incorporated in New York.",
+      "MV": "239.5",
+      "Sales": "104.5",
+      "Profits": "16.6",
+      "Score": "0.728150904178619"
+    },
+    {
+      "name": "Coca-Cola",
+      "logo_url": "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/2fd32b58324945.59f83720f0b79.jpg",
+      "description": "The Coca-Cola Company is an American multinational beverage corporation incorporated under Delaware's General Corporation Law[a] and headquartered in Atlanta, Georgia. The Coca-Cola Company has interests in the manufacturing, retailing, and marketing of nonalcoholic beverage concentrates and syrups.",
+      "MV": "173.1",
+      "Sales": "48.0",
+      "Profits": "9.0",
+      "Score": "0.603717684745789"
+    },
+    {
+      "name": "PepsiCo",
+      "logo_url": "https://alltogether.swe.org/wp-content/uploads/2019/09/pepsico-1.jpg",
+      "description": "PepsiCo, Inc. is an American based multinational food, snack, and beverage corporation headquartered in Harrison, New York, in the hamlet of Purchase. PepsiCo's business encompasses all aspects of the food and beverage market. It oversees the manufacturing, distribution, and marketing of its products.",
+      "MV": "118.9",
+      "Sales": "65.5",
+      "Profits": "6.2",
+      "Score": "0.586369276046753"
+    }
+  ],
+  "getSimilarAttacksIPs": [
+    {
+      "attack": "3001",
+      "source_ip": "192.168.20.205",
+      "source_port": "41018",
+      "destination_ip": "8.8.4.4",
+      "destination_port": "443",
+      "ts": "2020-03-25 04:40:42",
+      "duration": "120.731389",
+      "Attack_type": "Malicious",
+      "Score": "0.401709258556366"
+    },
+    {
+      "attack": "3002",
+      "source_ip": "8.8.4.4",
+      "source_port": "443",
+      "destination_ip": "192.168.20.205",
+      "destination_port": "41018",
+      "ts": "2020-03-25 04:42:42",
+      "duration": "120.052751",
+      "Attack_type": "Malicious",
+      "Score": "0.366297274827957"
+    }
+  ]
+}

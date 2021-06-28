@@ -16,6 +16,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "start-mock-api": "cd ../mock-back-end && npm run start-server",
     "build": "react-scripts build",
     "lint": "eslint . --ext .ts",
     "test": "react-scripts test",
