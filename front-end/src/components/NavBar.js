@@ -128,7 +128,7 @@ function NavBar(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            KGNET - CoDS - by Hussein
+            KGNET - by CoDS
           </Typography>
         </Toolbar>
       </AppBar>

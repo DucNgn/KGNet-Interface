@@ -40,7 +40,6 @@ const Details = () => {
 
   const handleOnClick = (e) => {
     console.log('hello');
-    history.push('/result?mode=dog');
   };
 
   return (

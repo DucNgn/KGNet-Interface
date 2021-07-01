@@ -1,44 +1,72 @@
 import React from 'react';
 import { useState } from 'react';
-import { Grid } from '@material-ui/core';
-import About from '../../components/About';
-import SelectBox from '../../components/landing/select';
-import CompanySimilarityForm from '../../components/landing/forms/CompanySimilarity';
-import ImageRecognitionForm from '../../components/landing/forms/ImageRecognition';
+import {
+  Box,
+  Grid,
+  Card,
+  TextField,
+  InputAdornment,
+  SvgIcon,
+  makeStyles,
+  FormControlLabel,
+  Checkbox
+} from '@material-ui/core';
+import SearchIcon from '@material-ui/icons/Search';
 
+const useStyles = makeStyles((theme) => ({
+  queryField: {
+    width: '100%'
+  }
+}));
 const Details = () => {
-  const [mode, setMode] = useState('company');
-
-  const switchMode = (event) => {
-    setMode(event.target.value);
-  };
-
-  const renderForm = () => {
-    if (mode == 'company') {
-      return (
-        <Grid item>
-          <CompanySimilarityForm />
-        </Grid>
-      );
-    }
-
-    if (mode == 'image') {
-      return (
-        <Grid item>
-          <ImageRecognitionForm />
-        </Grid>
-      );
-    }
-  };
-
+  const classes = useStyles();
   return (
-    <React.Fragment>
-      <About />
-      <Grid container justify="center" spacing={10}>
-        <SelectBox mode={mode} onSwitchMode={switchMode} />
-        {renderForm()}
+    <Box mt={4}>
+      <Grid container spacing={5} direction="column">
+        <Grid item xs={12} md={7}>
+          <TextField
+            className={classes.queryField}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SvgIcon fontSize="small" color="action">
+                    <SearchIcon />
+                  </SvgIcon>
+                </InputAdornment>
+              )
+            }}
+            placeholder="Company name ..."
+            id="searchBar"
+            variant="outlined"
+          />
+        </Grid>
+        <Grid item xs={6} md={4}>
+          <Box display="flex">
+            <TextField
+              className={classes.selectField}
+              label="Criteria"
+              name="Criteria"
+              // onChange={handleCustomerChange}
+              select
+              id="mode"
+              SelectProps={{ native: true }}
+              // value={currentCustomer || ''}
+              variant="outlined"
+            >
+              <option value="/dogs">Dog Breeds Recognition</option>
+              <option value="/companies">Companies Similarities</option>
+            </TextField>
+            <Box flexGrow={1} />
+            <FormControlLabel
+              control={<Checkbox name="checkedB" color="primary" />}
+              label="Display Explainer and Query"
+            />
+          </Box>
+        </Grid>
       </Grid>
-    </React.Fragment>
+
+      <Card></Card>
+    </Box>
   );
 };
 

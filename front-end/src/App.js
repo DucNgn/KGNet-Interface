@@ -9,6 +9,7 @@ import companies from './views/Companies';
 import About from './views/About';
 import Page from './components/Page';
 import { Box, makeStyles } from '@material-ui/core';
+import Result from './views/Result';
 
 const history = createBrowserHistory();
 
@@ -25,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 const App = () => {
   const classes = useStyles();
   return (
-    <Page title="KGNET">
+    <Box>
       <Router history={history}>
         <NavBar />
         <Box className={classes.content}>
@@ -34,10 +35,11 @@ const App = () => {
             <Route exact path="/dogs" component={DogBreeds} />
             <Route exact path="/companies" component={WelcomePage} />
             <Route exact path="/about" component={About} />
+            <Route exact path="/result" component={Result} />
           </Switch>
         </Box>
       </Router>
-    </Page>
+    </Box>
   );
 };
 
