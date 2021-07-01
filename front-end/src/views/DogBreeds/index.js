@@ -4,13 +4,16 @@ import Typography from '@material-ui/core/Typography';
 import { Box, Paper } from '@material-ui/core';
 import Header from './Header';
 import Details from './Details';
+import Page from '../../components/Page';
 
 const DogBreeds = () => {
   return (
-    <Box>
-      <Header />
-      <Details />
-    </Box>
+    <Page title="KGNET - Dog Breed Finder">
+      <Box>
+        <Header />
+        <Details />
+      </Box>
+    </Page>
   );
 };
 
