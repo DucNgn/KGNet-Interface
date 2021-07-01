@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '@fontsource/roboto';
-import { Typography, TextField, makeStyles, CardActions, Button, SvgIcon } from '@material-ui/core';
-import { Box, Card, CardContent, CardMedia, CardActionArea } from '@material-ui/core';
+import { Typography, TextField, makeStyles, Button, SvgIcon } from '@material-ui/core';
+import { Box, Card, CardContent, CardActionArea } from '@material-ui/core';
 import useDebounce from '../../hooks/useDebounce';
 import { useHistory } from 'react-router-dom';
 import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
@@ -61,7 +61,7 @@ const Details = () => {
                   Nothing to display
                 </Typography>
               ) : (
-                <img height="100%" width="100%" src={debouncedLink} />
+                <img height="100%" alt="dog" width="100%" src={debouncedLink} />
               )}
             </CardContent>
           </CardActionArea>

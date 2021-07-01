@@ -1,17 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
-import {
-  Box,
-  Grid,
-  Card,
-  TextField,
-  InputAdornment,
-  SvgIcon,
-  makeStyles,
-  FormControlLabel,
-  Checkbox,
-  Button
-} from '@material-ui/core';
+import { Box, Grid, TextField, InputAdornment, SvgIcon, makeStyles, Button } from '@material-ui/core';
 import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 import { useHistory } from 'react-router-dom';
 import SearchIcon from '@material-ui/icons/Search';
