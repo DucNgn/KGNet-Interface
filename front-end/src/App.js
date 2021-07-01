@@ -8,7 +8,7 @@ import DogBreeds from './views/DogBreeds';
 import About from './views/About';
 import { Box, makeStyles } from '@material-ui/core';
 import Result from './views/Result';
-
+import NotFound from './views/NotFound';
 const history = createBrowserHistory();
 
 const useStyles = makeStyles((theme) => ({
@@ -18,13 +18,16 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('md')]: {
       marginLeft: 250,
       marginTop: 50
+    },
+    [theme.breakpoints.down('sm')]: {
+      marginTop: 50
     }
   }
 }));
 const App = () => {
   const classes = useStyles();
   return (
-    <Box>
+    <React.Fragment>
       <Router history={history}>
         <NavBar />
         <Box className={classes.content}>
@@ -34,10 +37,11 @@ const App = () => {
             <Route exact path="/companies" component={WelcomePage} />
             <Route exact path="/about" component={About} />
             <Route exact path="/result" component={Result} />
+            <Route component={NotFound} />
           </Switch>
         </Box>
       </Router>
-    </Box>
+    </React.Fragment>
   );
 };
 
