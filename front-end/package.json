@@ -27,7 +27,7 @@
     "start": "react-scripts start",
     "start-mock-api": "cd ../mock-back-end && npm run start-server",
     "build": "react-scripts build",
-    "lint": "eslint . --ext .ts",
+    "lint": "eslint . --ext .js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -41,6 +41,12 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
     ]
   },
   "devDependencies": {}

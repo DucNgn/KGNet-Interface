@@ -4,11 +4,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import TabDetail from './TabDetail';
+import TabDetailCompany from './TabDetailCompany';
 import { UnControlled as CodeMirror } from 'react-codemirror2';
-
+import TabDetailDog from './TabDetailDog';
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -20,11 +19,7 @@ function TabPanel(props) {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && (
-        <Box p={3}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
+      {value === index && <Box p={3}>{children}</Box>}
     </div>
   );
 }
@@ -49,12 +44,27 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function MyTabs({ result }) {
+export default function MyTabs({ mode, result }) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+  };
+
+  /**
+   *
+   * @param {*} mode mode of the use case
+   * @param {*} result the response from the API
+   * @returns the detail of each card
+   */
+  const returnTabDetail = (mode, result) => {
+    if (mode === 'companies') {
+      return result.map((company, idx) => <TabDetailCompany key={idx} companyDetail={company} />);
+    }
+    if (mode === 'dog') {
+      return result.map((dog, idx) => <TabDetailDog key={idx} dogDetail={dog} />);
+    }
   };
 
   return (
@@ -66,9 +76,7 @@ export default function MyTabs({ result }) {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        {result.map((company) => (
-          <TabDetail companyDetail={company} />
-        ))}
+        {returnTabDetail(mode, result)}
       </TabPanel>
       <TabPanel value={value} index={1}>
         Item Two
