@@ -5,9 +5,7 @@ import WelcomePage from './views/Welcome';
 import NavBar from './components/NavBar';
 import Home from './views/Home';
 import DogBreeds from './views/DogBreeds';
-import companies from './views/Companies';
 import About from './views/About';
-import Page from './components/Page';
 import { Box, makeStyles } from '@material-ui/core';
 import Result from './views/Result';
 

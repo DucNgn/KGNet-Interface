@@ -31,9 +31,15 @@ const Header = ({ className, mode, ...rest }) => {
           Result
         </Typography>
       </Breadcrumbs>
-      <Typography variant="h3" color="textPrimary">
-        Result for Dog breed finder
-      </Typography>
+      {mode === 'dog' ? (
+        <Typography variant="h3" color="textPrimary">
+          Result for Dog breed finder
+        </Typography>
+      ) : (
+        <Typography variant="h3" color="textPrimary">
+          Result for Companies Similarities
+        </Typography>
+      )}
     </div>
   );
 };
