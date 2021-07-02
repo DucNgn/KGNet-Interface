@@ -6,7 +6,7 @@
 
 ## (Optional) If you want to start back-end server from ./front-end
 1. Open a new terminal inside ./front-end
-2. npm start-mock-api
+2. npm run start-mock-api
 
 
 # Demo landing page
