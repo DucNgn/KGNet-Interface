@@ -27,7 +27,7 @@ const Result = () => {
       res = await axios.get('/KGNet/getForbes2013SimilarCompanies');
       setCompanyName(params.company);
       setCriteria(params.criteria);
-      setResult(res.data);
+      setResult(res.data.result);
     } else history.push('/404');
   }, [params.mode, history, params.company, params.criteria]);
 
