@@ -24,6 +24,8 @@ const Result = () => {
     let res;
     if (params.mode === 'dog') {
       res = await axios.get('/KGNet/getDogBreedInfo');
+      setQuery(res.data.Query)
+      setQueryKeywords(res.data.QueryKeywords)
       setResult(res.data.result);
     } else if (params.mode === 'companies') {
       res = await axios.get('/KGNet/getForbes2013SimilarCompanies');
@@ -46,7 +48,7 @@ const Result = () => {
         {params.mode === 'companies' ? (
           <DetailCompany companyName={companyName} criteria={criteria} result={result} query={query} queryKeywords={queryKeywords} />
         ) : null}
-        {params.mode === 'dog' ? <DetailDog result={result} /> : null}
+        {params.mode === 'dog' ? <DetailDog result={result} query={query} queryKeywords={queryKeywords} /> : null}
       </Box>
     </Page>
   );
