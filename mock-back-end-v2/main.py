@@ -45,6 +45,9 @@ dog_breed_query = """
 breed_overview_076 = """The Golden Retriever is one of the world’s favourite dog breeds. Originally bred as gun dogs, the Golden Retriever is a smart, trainable and friendly companion. Because of their intelligence, they make great working dogs and can be seen performing a number of different roles including seeing-eye dogs, hearing dogs, hunting & detection dogs, and search and rescue dogs. Golden Retrievers are large, strong dogs with thick coats which repel water. There are three main types of Golden Retrievers, which have arisen due to the breed’s widespread popularity. The British type has a wider, shorter muzzle, shorter legs and tail, a deeper chest and a blockier forehead. British Golden Retrievers tend to be gold or cream, but never red, mahogany or white. American Golden Retrievers are taller than British ones, lankier, and less stocky. Canadian types have thinner, darker coats and are generally taller and leaner than other types. Puppies of all types usually have a very light coat which darkens over time. The breed has a double coat which sheds throughout the year but particularly around the change of the season. It has a thicker, water-repellent top coat and a soft undercoat to keep the dog cool in warmer months and warm in cooler months. Healthy male Golden Retrievers weigh between 29 and 34 kg on average and stand at about 58 – 61 cm tall. Females weigh in at 27 – 32 kg and stand at 55 – 57 cm tall. The average lifespan of a Golden Retriever is around 11-12 years"""
 breed_facts_076 = """Gerald R. Ford, the 38th President of the USA owned a Golden Retriever called Liberty. It is said that if Ford wanted to end a conversation in the Oval Office he would signal the dog who would then greet the visitor, creating a break in the conversation. Golden Retrievers are great watch dogs but not great guard dogs, as they are friendly to everyone, even strangers. Celebrity Golden Retriever owners include Ben Affleck, Denise Richards, Andrew Garfield, Curtis Stone, Betty White, Jackie Chan, Oprah and Adam Levine. Golden Retrievers have starred in many films and television series, notably the Air Bud series, Homeward Bound, Pushing Daisies and the Aussie kids’ favourite, Napoleon. Despite the fact Golden Retrievers are physically mature by the age of 2, they still act like puppies until around 3 years of age – some act like puppies for their entire life! Golden Retrievers are “crepuscular” dogs, meaning they’re active in the morning and at night, but tend to sleep during a large portion of the day. They have very high pain tolerance, which makes them perfect for potentially dangerous jobs, e.g. police work, search & rescue and hunting. Their origin as hunting dogs make them great playmates, as they were bred to be able to seek and catch!"""
 
+breed_overview_112 = """"""
+breed_facts_112 = """The smallest of the AKC's retrievers, the Nova Scotia Duck Tolling Retriever is intelligent, affectionate, and eager to please. Play fetch with a tireless Toller until your right arm falls off, and he will ask you to throw left-handed. The little gundog with the big name is the smallest AKC retriever, standing ideally 18 or 19 inches at the shoulder. The Toller's trademark is a coat of stunning crimson, ranging from golden red to a dark coppery color, with white markings. Strong and agile, Tollers are medium dogs: medium in size, bone, and coat length. The almond-shaped eyes project an alert expression. Tollers are upbeat athletes who require outlets for their boundless vigor: hunting, hiking, camping, and, of course, swimming (for which they are ideally suited, down to their webbed feet). Tollers are smart, handsome, affectionate companions, but these red tornadoes can be recommended only to those with enough time and energy to keep them usefully occupied."""
+
 breed_overview_096 = """The Labrador Retriever (known simply as the Labrador) is the most popular breed of dog in Australia, New Zealand, the UK, the USA and Canada. Bred originally as gun dogs, today’s Labrador is famous for its roles as assistance dogs for visually impaired and autistic people, detection & screening dogs, therapy dogs and law enforcement dogs. Labradors vary widely, but they are generally quite large and muscular with a short, dense, water-repellent coat, a broad head, brown or hazel eyes, strong jaws, a medium muzzle, and an “otter tail” which is thick at the base and narrower at the tip. There are three main colour varieties in Golden Retrievers: black, yellow, and chocolate, and occasionally all three can be present in the same litter. Average shedders, Labradors are easy to groom. It is recommended that they are brushed regularly with a firm bristle brush, especially in the undercoat, and are bathed only when necessary. Healthy male Labradors should weigh between 29 and 36 kg and stand at about 57 – 62 cm tall. Females should weigh about 25 – 32 kg and stand at 55 – 60 cm tall. Labradors are energetic dogs and therefore need to be taken on a long, brisk walk or jog at least once a day. They tend to gain weight quite easily, so exercise and a proper diet are especially important for the Labrador. Life expectancy in Labradors is around 10-13 years."""
 breed_facts_096 = """Labradors have a high tolerance for pain, making them great working dogs. It is not until the age of 4 that Labradors are considered to be adults. A service dog named Endal, a Labrador from the UK, is honoured with the title of “the most decorated dog in the world”. He was awarded with the PDSA’s Gold Medal for Animal Gallantry and Devotion to Duty, which is the highest award that an animal can receive. Zanjeer, a Labrador from India, was a detection dog who helped the Mumbai Police during the 1993 Mumbai bombings and was given a full state funeral. An American Labrador named Jake was a search and rescue dog during the 9/11 attacks and Hurricane Katrina. Two Labradors, Lucky and Flo, were the first animals trained to detect optical discs by scent, and in their careers they sniffed out nearly 2 million pirated DVDs. Sarbi is an Australian explosives detection Labrador who was MIA for 14 months in Afghanistan but was rediscovered by an American soldier. She received an RSPCA Purple Cross Award in 2011. Bill Clinton, Prince William, Vladimir Putin, Denise Richards, Pamela Anderson and Hulk Hogan are all Labrador enthusiasts."""
 
@@ -81,9 +84,9 @@ def getDogBreedInfo():
             },
             {
                 "breed_class": "112.Nova_scotia_duck_tolling_retriever",
-                "breed_overview": "",
+                "breed_overview": breed_overview_112,
                 "recommended_for": "",
-                "breed_facts": "",
+                "breed_facts": breed_facts_112,
                 "dog_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Female_Nova_Scotia_Duck_Tolling_Retriever.jpg/1200px-Female_Nova_Scotia_Duck_Tolling_Retriever.jpg",
                 "min_height": "18.0",
                 "max_height": "21.0",
@@ -246,9 +249,9 @@ def getDogSimilarTo():
             },
             {
                 "breed_class": "112.Nova_scotia_duck_tolling_retriever",
-                "breed_overview": "",
+                "breed_overview": breed_overview_112,
                 "recommended_for": "",
-                "breed_facts": "",
+                "breed_facts": breed_facts_112,
                 "dog_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Female_Nova_Scotia_Duck_Tolling_Retriever.jpg/1200px-Female_Nova_Scotia_Duck_Tolling_Retriever.jpg",
                 "min_height": "18.0",
                 "max_height": "21.0",
@@ -452,7 +455,7 @@ forbes2013Query = """
                     order by DESC(?Score) ?class ?Market_Value_class 
 """
 
-company_shap_description = "Company rank contribute more to target class"
+company_shap_description = "Company rank contributes more to target class"
 
 
 @app.get("/KGNet/getForbes2013SimilarCompanies")
@@ -477,7 +480,7 @@ def getForbes2013SimilarCompanies():
                 "name": "Coca-Cola",
                 "brief": "Mexican multinational beverage company. It operates the largest independent Coca-Cola bottling group in the world.",
                 "Logo": "https://upload.wikimedia.org/wikipedia/commons/b/b1/Coca-Cola_Femsa_Logo.png",
-                "employees_count": "0",
+                "employees_count": "86200",
                 "Market_Value_class": "high",
                 "Sales": "48.0",
                 "Profits": "9.0",
@@ -494,7 +497,7 @@ def getForbes2013SimilarCompanies():
                 "Sales": "65.5",
                 "Profits": "6.2",
                 "Score": "0.586369276046753",
-                "SHAPFigure": "https://i.ibb.co/GWnfv7K/Cocacola-MV-explaination.png",
+                "SHAPFigure": "https://i.ibb.co/2Wjpyt8/Pepscico-MV-explaination.png",
                 "SHAPDescription": company_shap_description,
             },
             {
@@ -512,7 +515,7 @@ def getForbes2013SimilarCompanies():
             {
                 "name": "Intel",
                 "brief": "American semiconductor chip manufacturer",
-                "Logo": "https://upload.wikimedia.org/wikipedia/commons/b/ba/Intel_logo_%282020%2C_dark_blue%29.svg",
+                "Logo": "https://upload.wikimedia.org/wikipedia/commons/0/0e/Intel_logo_%282020%2C_light_blue%29.svg",
                 "employees_count": "110800.0",
                 "Market_Value_class": "high",
                 "Sales": "53.3",
@@ -536,7 +539,7 @@ def getForbes2013SimilarCompanies():
             {
                 "name": "Ford_Motor",
                 "brief": "Vehicle manufacturing company based in Changping, Beijing, China",
-                "Logo": "https://upload.wikimedia.org/wikipedia/commons/f/fa/Foton_Motor_logo.svg",
+                "Logo": "https://upload.wikimedia.org/wikipedia/commons/a/a0/Ford_Motor_Company_Logo.svg",
                 "employees_count": "0.0",
                 "Market_Value_class": "high",
                 "Sales": "134.3",
@@ -548,7 +551,7 @@ def getForbes2013SimilarCompanies():
             {
                 "name": "General_Motors",
                 "brief": "automotive manufacturing corporation based in Detroit, Michigan, USA",
-                "Logo": "https://upload.wikimedia.org/wikipedia/commons/d/d7/General_Motors_%282021%29.svg",
+                "Logo": "https://upload.wikimedia.org/wikipedia/commons/b/b0/General_Motors_%282021%29.svg",
                 "employees_count": "164000.0",
                 "Market_Value_class": "high",
                 "Sales": "152.3",
@@ -572,7 +575,7 @@ def getForbes2013SimilarCompanies():
             {
                 "name": "Facebook",
                 "brief": "American social media and technology company",
-                "Logo": "https://upload.wikimedia.org/wikipedia/commons/e/ec/Facebook%2C_Inc._Logo_2019.svg",
+                "Logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/1280px-Facebook_f_logo_%282019%29.svg.png",
                 "employees_count": "44942.0",
                 "Market_Value_class": "high",
                 "Sales": "5.1",
