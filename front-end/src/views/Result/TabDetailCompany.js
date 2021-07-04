@@ -40,7 +40,7 @@ const TabDetailCompany = ({ companyDetail }) => {
             </Typography>
             <Box mx={2} />
             <Typography variant="body1" color="textPrimary">
-              {companyDetail.Score}
+              {Number.parseFloat(companyDetail.Score).toFixed(2)}
             </Typography>
           </Box>
           <Box display="flex" alignItems="center">
@@ -90,7 +90,7 @@ const TabDetailCompany = ({ companyDetail }) => {
           <Typography variant="body1" color="textPrimary">
             {companyDetail.SHAPDescription}
           </Typography>
-          <Box my={1} /> 
+          <Box my={1} />
         </Box>
       </Card>
     </Box>
