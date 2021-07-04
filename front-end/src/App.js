@@ -9,13 +9,14 @@ import About from './views/About';
 import { Box, makeStyles } from '@material-ui/core';
 import Result from './views/Result';
 import NotFound from './views/NotFound';
+import AddUseCase from './views/AddUseCase';
 const history = createBrowserHistory();
 
 const useStyles = makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
-    [theme.breakpoints.up('md')]: {
+    [theme.breakpoints.up('sm')]: {
       marginLeft: 250,
       marginTop: 50
     },
@@ -37,6 +38,7 @@ const App = () => {
             <Route exact path="/companies" component={WelcomePage} />
             <Route exact path="/about" component={About} />
             <Route exact path="/result" component={Result} />
+            <Route exact path="/add" component={AddUseCase} />
             <Route component={NotFound} />
           </Switch>
         </Box>

@@ -20,7 +20,7 @@ const Header = ({ className, ...rest }) => {
         </Typography>
         <Link variant="body1" color="inherit" to="/" component={RouterLink}></Link>
       </Breadcrumbs>
-      <Typography variant="h3" color="textPrimary">
+      <Typography variant="h5" color="textPrimary">
         Dashboard
       </Typography>
     </div>

@@ -22,7 +22,7 @@ const Header = ({ className, ...rest }) => {
           Dog breed finder
         </Typography>
       </Breadcrumbs>
-      <Typography variant="h3" color="textPrimary">
+      <Typography variant="h5" color="textPrimary">
         Dog breed finder
       </Typography>
     </div>

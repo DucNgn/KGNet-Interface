@@ -45,7 +45,8 @@ dog_breed_query = """
 breed_overview_076 = """The Golden Retriever is one of the world’s favourite dog breeds. Originally bred as gun dogs, the Golden Retriever is a smart, trainable and friendly companion. Because of their intelligence, they make great working dogs and can be seen performing a number of different roles including seeing-eye dogs, hearing dogs, hunting & detection dogs, and search and rescue dogs. Golden Retrievers are large, strong dogs with thick coats which repel water. There are three main types of Golden Retrievers, which have arisen due to the breed’s widespread popularity. The British type has a wider, shorter muzzle, shorter legs and tail, a deeper chest and a blockier forehead. British Golden Retrievers tend to be gold or cream, but never red, mahogany or white. American Golden Retrievers are taller than British ones, lankier, and less stocky. Canadian types have thinner, darker coats and are generally taller and leaner than other types. Puppies of all types usually have a very light coat which darkens over time. The breed has a double coat which sheds throughout the year but particularly around the change of the season. It has a thicker, water-repellent top coat and a soft undercoat to keep the dog cool in warmer months and warm in cooler months. Healthy male Golden Retrievers weigh between 29 and 34 kg on average and stand at about 58 – 61 cm tall. Females weigh in at 27 – 32 kg and stand at 55 – 57 cm tall. The average lifespan of a Golden Retriever is around 11-12 years"""
 breed_facts_076 = """Gerald R. Ford, the 38th President of the USA owned a Golden Retriever called Liberty. It is said that if Ford wanted to end a conversation in the Oval Office he would signal the dog who would then greet the visitor, creating a break in the conversation. Golden Retrievers are great watch dogs but not great guard dogs, as they are friendly to everyone, even strangers. Celebrity Golden Retriever owners include Ben Affleck, Denise Richards, Andrew Garfield, Curtis Stone, Betty White, Jackie Chan, Oprah and Adam Levine. Golden Retrievers have starred in many films and television series, notably the Air Bud series, Homeward Bound, Pushing Daisies and the Aussie kids’ favourite, Napoleon. Despite the fact Golden Retrievers are physically mature by the age of 2, they still act like puppies until around 3 years of age – some act like puppies for their entire life! Golden Retrievers are “crepuscular” dogs, meaning they’re active in the morning and at night, but tend to sleep during a large portion of the day. They have very high pain tolerance, which makes them perfect for potentially dangerous jobs, e.g. police work, search & rescue and hunting. Their origin as hunting dogs make them great playmates, as they were bred to be able to seek and catch!"""
 
-breed_overview_112 = """"""
+breed_overview_112 = """The smallest of the AKC's retrievers, the Nova Scotia Duck Tolling Retriever is intelligent, affectionate, and eager to please. Play fetch with a tireless Toller until your right arm falls off, and he will ask you to throw left-handed.
+The little gundog with the big name is the smallest AKC retriever, standing ideally 18 or 19 inches at the shoulder. The Toller's trademark is a coat of stunning crimson, ranging from golden red to a dark coppery color, with white markings. Strong and agile, Tollers are medium dogs: medium in size, bone, and coat length. The almond-shaped eyes project an alert expression. Tollers are upbeat athletes who require outlets for their boundless vigor: hunting, hiking, camping, and, of course, swimming (for which they are ideally suited, down to their webbed feet). Tollers are smart, handsome, affectionate companions, but these red tornadoes can be recommended only to those with enough time and energy to keep them usefully occupied"""
 breed_facts_112 = """The smallest of the AKC's retrievers, the Nova Scotia Duck Tolling Retriever is intelligent, affectionate, and eager to please. Play fetch with a tireless Toller until your right arm falls off, and he will ask you to throw left-handed. The little gundog with the big name is the smallest AKC retriever, standing ideally 18 or 19 inches at the shoulder. The Toller's trademark is a coat of stunning crimson, ranging from golden red to a dark coppery color, with white markings. Strong and agile, Tollers are medium dogs: medium in size, bone, and coat length. The almond-shaped eyes project an alert expression. Tollers are upbeat athletes who require outlets for their boundless vigor: hunting, hiking, camping, and, of course, swimming (for which they are ideally suited, down to their webbed feet). Tollers are smart, handsome, affectionate companions, but these red tornadoes can be recommended only to those with enough time and energy to keep them usefully occupied."""
 
 breed_overview_096 = """The Labrador Retriever (known simply as the Labrador) is the most popular breed of dog in Australia, New Zealand, the UK, the USA and Canada. Bred originally as gun dogs, today’s Labrador is famous for its roles as assistance dogs for visually impaired and autistic people, detection & screening dogs, therapy dogs and law enforcement dogs. Labradors vary widely, but they are generally quite large and muscular with a short, dense, water-repellent coat, a broad head, brown or hazel eyes, strong jaws, a medium muzzle, and an “otter tail” which is thick at the base and narrower at the tip. There are three main colour varieties in Golden Retrievers: black, yellow, and chocolate, and occasionally all three can be present in the same litter. Average shedders, Labradors are easy to groom. It is recommended that they are brushed regularly with a firm bristle brush, especially in the undercoat, and are bathed only when necessary. Healthy male Labradors should weigh between 29 and 36 kg and stand at about 57 – 62 cm tall. Females should weigh about 25 – 32 kg and stand at 55 – 60 cm tall. Labradors are energetic dogs and therefore need to be taken on a long, brisk walk or jog at least once a day. They tend to gain weight quite easily, so exercise and a proper diet are especially important for the Labrador. Life expectancy in Labradors is around 10-13 years."""
@@ -65,6 +66,8 @@ def getDogBreedInfo():
     return {
         "Query": dog_breed_query,
         "QueryKeywords": "select,from,where,filter,group by,order by,sql:getDogBreed",
+        "SHAPFigure": "https://i.ibb.co/vmd4VZC/SHAP-Explain-cute-dog.png",
+        "SHAPDescription":shap_Description,
         "result": [
             {
                 "breed_class": "076.Golden_retriever",
@@ -211,6 +214,8 @@ def getDogSimilarTo():
     return {
         "Query": dog_similar_query,
         "QueryKeywords": "select,from,where,filter,group by,order by,sql:getDogSimilarityScore",
+        "SHAPFigure":"https://i.ibb.co/vmd4VZC/SHAP-Explain-cute-dog.png",
+        "SHAPDescription":shap_Description,
         "result": [
             {
                 "breed_class": "",
@@ -279,6 +284,7 @@ def getDogSimilarTo():
                 "max_response_count": "25",
                 "SHAPFigure": "https://i.ibb.co/drLRfNk/SHAP-Explain-Irish-setter-sitting-700x700.png",
                 "SHAPDescription": shap_Description,
+                "Score": "0.345377093248019",
             },
             {
                 "breed_class": "051.Chow_chow",
@@ -463,6 +469,8 @@ def getForbes2013SimilarCompanies():
     return {
         "Query": forbes2013Query,
         "QueryKeywords": "select,from,where,filter,group by,order by,sql:getCompanySimilarity",
+        "SHAPFigure":"https://i.ibb.co/Ns1pV1M/Google-MV-explaination.png",
+        "SHAPDescription":company_shap_description,
         "result": [
             {
                 "name": "IBM",
