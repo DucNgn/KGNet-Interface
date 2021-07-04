@@ -22,7 +22,7 @@ const Header = ({ className, ...rest }) => {
           About
         </Typography>
       </Breadcrumbs>
-      <Typography variant="h3" color="textPrimary">
+      <Typography variant="h5" color="textPrimary">
         About
       </Typography>
     </div>

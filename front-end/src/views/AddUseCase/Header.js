@@ -19,11 +19,11 @@ const Header = ({ className, ...rest }) => {
           Dashboard
         </Link>
         <Typography variant="body1" color="textPrimary">
-          Companies Similarities
+          Create custom use case
         </Typography>
       </Breadcrumbs>
       <Typography variant="h5" color="textPrimary">
-        Companies Similarities
+        Create custom use case
       </Typography>
     </div>
   );

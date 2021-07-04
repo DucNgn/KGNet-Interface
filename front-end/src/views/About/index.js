@@ -14,7 +14,7 @@ const About = () => {
           <CardHeader title="About KGNET" />
           <CardContent>
             <Typography variant="body1" color="textPrimary" gutterBottom>
-              KGNet - CoDS created by Hussien
+              KGNet - CoDS created by Concordia Data System Lab
             </Typography>
           </CardContent>
         </Card>
