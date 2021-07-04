@@ -103,7 +103,7 @@ def getDogBreedInfo():
                 "breed_overview": breed_overview_096,
                 "recommended_for": "Families",
                 "breed_facts": breed_facts_096,
-                "dog_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Female_Nova_Scotia_Duck_Tolling_Retriever.jpg/1200px-Female_Nova_Scotia_Duck_Tolling_Retriever.jpg",
+                "dog_image": "https://bowwowinsurance.com.au/wp-content/uploads/2018/10/chocolate-labrador-700x700.jpg",
                 "min_height": "21.0",
                 "max_height": "24.0",
                 "min_weight": "55",
