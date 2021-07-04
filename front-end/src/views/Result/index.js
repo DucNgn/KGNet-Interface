@@ -16,18 +16,22 @@ const Result = () => {
   const [companyName, setCompanyName] = useState('');
   const [criteria, setCriteria] = useState('');
   const [result, setResult] = useState([]);
+  const [query, setQuery] = useState("");
+  const [queryKeywords, setQueryKeywords] = useState("");
   let params = queryString.parse(location.search);
 
   const getData = useCallback(async () => {
     let res;
     if (params.mode === 'dog') {
       res = await axios.get('/KGNet/getDogBreedInfo');
-      setResult(res.data);
+      setResult(res.data.result);
     } else if (params.mode === 'companies') {
       res = await axios.get('/KGNet/getForbes2013SimilarCompanies');
       setCompanyName(params.company);
       setCriteria(params.criteria);
-      setResult(res.data);
+      setQuery(res.data.Query)
+      setQueryKeywords(res.data.QueryKeywords)
+      setResult(res.data.result);
     } else history.push('/404');
   }, [params.mode, history, params.company, params.criteria]);
 
@@ -40,7 +44,7 @@ const Result = () => {
       <Box>
         <Header mode={params.mode} />
         {params.mode === 'companies' ? (
-          <DetailCompany companyName={companyName} criteria={criteria} result={result} />
+          <DetailCompany companyName={companyName} criteria={criteria} result={result} query={query} queryKeywords={queryKeywords} />
         ) : null}
         {params.mode === 'dog' ? <DetailDog result={result} /> : null}
       </Box>
