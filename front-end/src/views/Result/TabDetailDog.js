@@ -24,9 +24,6 @@ const useStyles = makeStyles((theme) => ({
   bold: {
     fontWeight: 'bold'
   },
-  big: {
-    fontSize: theme.typography.h4
-  },
   shapImage: {
     [theme.breakpoints.down('sm')]: {
       height: '80%',

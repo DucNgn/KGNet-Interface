@@ -111,8 +111,9 @@ export default function MyTabs({ mode, result, query, queryKeywords, shapOrigina
           </Typography>
           <ol>
             {result !== undefined
-              ? result.map((dog, idx) => {
-                  if (idx < 3) return <li>{dog.breed_class}</li>;
+              ? result.map((el, idx) => {
+                  if (mode === 'companies' && idx < 3) return <li>{el.name}</li>;
+                  else if (idx < 3) return <li>{el.breed_class}</li>;
                 })
               : null}
           </ol>
