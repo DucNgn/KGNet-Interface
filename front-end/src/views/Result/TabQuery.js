@@ -5,14 +5,11 @@ import { UnControlled as CodeMirror } from 'react-codemirror2';
 require('codemirror/lib/codemirror.css');
 require('codemirror/theme/material.css');
 require('codemirror/theme/neat.css');
-require('codemirror/mode/xml/xml.js');
-require('codemirror/mode/javascript/javascript.js');
 require('codemirror/mode/sparql/sparql.js');
 
 const QueryTab = ({ query, queryKeywords }) => {
   return (
     <Box mb={7} style={{ height: '500px' }}>
-      {/* {query} */}
       <CodeMirror
         value={query}
         options={{
