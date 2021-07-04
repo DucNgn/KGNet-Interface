@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "bold",
   },
 }));
-const TabDetailDog = ({ dogDetail }) => {
+const TabDetailDog = ({ mode, key, dogDetail }) => {
   const classes = useStyles();
 
   return (
@@ -90,13 +90,15 @@ const TabDetailDog = ({ dogDetail }) => {
               {`${dogDetail.recommended_for}`}
             </Typography>
           </Box>
-          <Box display="flex" alignItems="center">
-            <img
-              src={`${dogDetail.SHAPFigure}`}
-              alt="SHAP Explainer"
-              className={classes.image}
-            />
-          </Box>
+          {mode === "dogSimilarity" ? (
+            <Box display="flex" alignItems="center">
+              <img
+                src={`${dogDetail.SHAPFigure}`}
+                alt="SHAP Explainer"
+                className={classes.image}
+              />
+            </Box>
+          ) : null}
         </Box>
       </Card>
     </Box>

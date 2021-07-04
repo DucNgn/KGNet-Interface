@@ -1,6 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useState } from "react";
+import { useHistory } from 'react-router-dom';
+import { Button, SvgIcon } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import ArrowRightAltIcon from "@material-ui/icons/ArrowRightAlt";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
@@ -46,10 +50,16 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MyTabs({ mode, result, query, queryKeywords }) {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
+  const [UserQuery, setUserQuery] = useState(query);
+  const history = useHistory();
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+  };
+
+  const handleOnClick = () => {
+    history.push("/result?mode=dogSimilarity");
   };
 
   /**
@@ -64,9 +74,9 @@ export default function MyTabs({ mode, result, query, queryKeywords }) {
         <TabDetailCompany key={idx} companyDetail={company} />
       ));
     }
-    if (mode === "dog") {
+    if (mode === "dogInfo" || mode === "dogSimilarity") {
       return result.map((dog, idx) => (
-        <TabDetailDog key={idx} dogDetail={dog} />
+        <TabDetailDog mode={mode} key={idx} dogDetail={dog} />
       ));
     }
   };
@@ -87,7 +97,19 @@ export default function MyTabs({ mode, result, query, queryKeywords }) {
         {returnTabDetail(mode, result)}
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <QueryTab query={query} queryKeywords={queryKeywords} />
+        <QueryTab
+          userQuery={query}
+          setUserQuery={setUserQuery}
+          queryKeywords={queryKeywords}
+        />
+        <Box my={2} className={classes.centerItem}>
+          <Button variant="contained" color="primary" onClick={handleOnClick}>
+            Next
+            <SvgIcon>
+              <ArrowRightAltIcon />
+            </SvgIcon>
+          </Button>
+        </Box>
       </TabPanel>
     </div>
   );
