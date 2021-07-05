@@ -6,8 +6,8 @@
 
 ### Require this change to have a full-sized code editor
 1. In your local code, go to `node_modules/codemirror/lib/codemirror.css`
-2. Search for the keyword `length`
-3. Change the line where `length = 300px` to `length=100%`
+2. Search for the keyword `height`
+3. Change the line where `height = 300px` to `height=100%`
 
 ## Make sure back-end server is also running. (Please visit the folder for back-end-v2 to see how)
 
