@@ -1,4 +1,14 @@
-import { Box, Card, makeStyles, Typography, Grid } from "@material-ui/core";
+import {
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  Box,
+  Card,
+  makeStyles,
+  Typography,
+} from "@material-ui/core";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+
 import React from "react";
 
 const useStyles = makeStyles((theme) => ({
@@ -94,6 +104,7 @@ const TabDetailDog = ({ mode, dogDetail }) => {
               {`From ${dogDetail.min_height} to ${dogDetail.max_height} inches`}
             </Typography>
           </Box>
+
           <Box my={1} />
           <Box display="flex" alignItems="center">
             <Typography variant="body1" color="textPrimary">
@@ -104,6 +115,7 @@ const TabDetailDog = ({ mode, dogDetail }) => {
               {`From ${dogDetail.min_weight} to ${dogDetail.max_weight} pounds`}
             </Typography>
           </Box>
+
           <Box my={1} />
           <Box display="flex" alignItems="center">
             <Typography variant="body1" color="textPrimary">
@@ -114,6 +126,7 @@ const TabDetailDog = ({ mode, dogDetail }) => {
               {`${dogDetail.level_of_obey}`}
             </Typography>
           </Box>
+
           <Box my={1} />
           <Box display="flex" alignItems="center">
             <Typography variant="body1" color="textPrimary">
@@ -124,20 +137,29 @@ const TabDetailDog = ({ mode, dogDetail }) => {
               {`${dogDetail.recommended_for}`}
             </Typography>
           </Box>
+
           <Box my={1} />
-          <Typography variant="body1" color="textPrimary">
-            <span className={classes.bold}>SHAP Explainer graph:</span>
-          </Typography>
-          <Grid direction="column" alignItems="center" xs={12} container>
-            <img
-              src={`${dogDetail.SHAPFigure}`}
-              alt="SHAP Explainer"
-              className={classes.shapImage}
-            />
-            <Typography variant="caption" color="textSecondary">
-              {dogDetail.SHAPDescription}
-            </Typography>
-          </Grid>
+          <Accordion>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1a-content"
+              id="panel1a-header"
+            >
+              <Typography className={classes.bold} color="textPrimary">
+                SHAP Explainer Graph
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography variant="caption" color="textPrimary">
+                {dogDetail.SHAPDescription}
+              </Typography>
+              <img
+                src={`${dogDetail.SHAPFigure}`}
+                alt="SHAP Explainer"
+                className={classes.shapImage}
+              />
+            </AccordionDetails>
+          </Accordion>
         </Box>
       </Card>
     </Box>
