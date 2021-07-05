@@ -1,6 +1,6 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
-import { Card, CardHeader, CardContent, Box, TextField, makeStyles, Button, SvgIcon } from '@material-ui/core';
+import { Card, CardContent, Box, TextField, makeStyles, Button, SvgIcon } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 
