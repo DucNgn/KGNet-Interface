@@ -9,7 +9,10 @@ const useStyles = makeStyles(() => ({
   root: {}
 }));
 
-const Header = ({ className, ...rest }) => {
+type Props = {
+  className?: string
+}
+const Header: React.FunctionComponent<Props> = ({ className, ...rest }) => {
   const classes = useStyles();
 
   return (
