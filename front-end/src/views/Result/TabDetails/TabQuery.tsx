@@ -7,7 +7,13 @@ require('codemirror/theme/material.css');
 require('codemirror/theme/neat.css');
 require('codemirror/mode/sparql/sparql.js');
 
-export default function QueryTab({ userQuery, setUserQuery, queryKeywords, setIsChanged }) {
+type Props = {
+  userQuery: string;
+  setUserQuery: any;
+  queryKeywords: string;
+  setIsChanged: any;
+};
+export default function QueryTab({ userQuery, setUserQuery, queryKeywords, setIsChanged }: Props) {
   return (
     <Box mb={7}>
       <CodeMirror
