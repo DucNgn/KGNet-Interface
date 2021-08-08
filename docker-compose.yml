@@ -1,0 +1,32 @@
+version: "3.9"
+services:
+  backend:
+    container_name: fastapi-backend
+    build:
+      context: ./mock-back-end-v2
+      dockerfile: Dockerfile
+    networks:
+      - kgnet
+    restart: always
+
+  frontend:
+    container_name: react-frontend
+    build:
+      context: ./front-end
+      dockerfile: Dockerfile
+    networks:
+      - kgnet
+    restart: always
+
+  revproxy:
+    container_name: nginx-reverse-proxy
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    networks:
+      - kgnet
+    ports:
+      - 8080:80
+
+networks:
+  kgnet:
