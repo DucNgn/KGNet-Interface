@@ -25,5 +25,10 @@ jobs:
       - name: Build containers
         run: docker-compose -f "docker-compose.yml" up -d --build
 
-      - name: Stop containers
-        run: docker-compose -f "docker-compose.yml" down
+      - name: Deploy to Heroku
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "kgnet"
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
+          usedocker: true
