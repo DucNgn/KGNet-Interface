@@ -21,8 +21,8 @@ services:
   revproxy:
     container_name: nginx-reverse-proxy
     depends_on:
-      - fastapi-backend
-      - react-frontend
+      - backend
+      - frontend
     build:
       context: ./nginx
       dockerfile: Dockerfile
