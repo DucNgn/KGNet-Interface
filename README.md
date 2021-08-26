@@ -1,3 +1,8 @@
-# Interface for KGNet
+# KGNet
 
-There is a separate README in each folder. Please have a look at them before you start the application.
+## Development:
+Each subfolder has a README with details on how to run and start the app.
+
+## Run Docker:
+
+- `docker-compose up` -> Build all the docker containers and use nginx for reverse proxy. The app then starts at port 8080 by default.
