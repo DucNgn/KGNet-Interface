@@ -22,10 +22,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+      - name: Build, Push and Release a Docker container to Heroku. # Your custom step name
+        uses: gonuit/heroku-docker-deploy@v1.3.3 # GitHub action name (leave it as it is).
         with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "kgnet"
-          heroku_email: ${{secrets.HEROKU_EMAIL}}
-          appdir: "front-end"
-          usedocker: true
+          email: ${{ secrets.HEROKU_EMAIL }}
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
+
+          # (Optional, default: "./")
+          # Dockerfile directory.
+          # For example, if you have a Dockerfile in the root of your project, leave it as follows:
+          dockerfile_directory: ./front-end/
+          dockerfile_name: Dockerfile
+          docker_options: "--no-cache"
+          process_type: web
+          
