@@ -64,13 +64,12 @@ type MyTabProps = {
   queryKeywords: string;
   shapOriginalImage: string;
   shapDescription: string | string[];
-  setUserQuery: any;
+  setUserQuery?: any;
 };
 const MyTabs: React.FunctionComponent<MyTabProps> = ({
   mode,
   result,
   query,
-  setUserQuery,
   queryKeywords,
   shapOriginalImage,
   shapDescription
@@ -148,7 +147,6 @@ const MyTabs: React.FunctionComponent<MyTabProps> = ({
           <Box>
             <QueryTab
               userQuery={query}
-              setUserQuery={setUserQuery}
               queryKeywords={queryKeywords}
               setIsChanged={setIsChanged}
             />

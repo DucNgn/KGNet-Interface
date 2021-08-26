@@ -9,8 +9,8 @@ require('codemirror/mode/sparql/sparql.js');
 
 type Props = {
   userQuery: string;
-  setUserQuery: any;
-  queryKeywords: string;
+  setUserQuery?: any;
+  queryKeywords?: string;
   setIsChanged: any;
 };
 export default function QueryTab({ userQuery, setUserQuery, queryKeywords, setIsChanged }: Props) {
@@ -24,7 +24,6 @@ export default function QueryTab({ userQuery, setUserQuery, queryKeywords, setIs
           lineNumbers: true
         }}
         onChange={(editor, data, value) => {
-          setUserQuery(value);
           setIsChanged(true);
         }}
       />
