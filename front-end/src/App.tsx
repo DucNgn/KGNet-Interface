@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
+import { Route, Router, Switch } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import WelcomePage from './views/Welcome';
 import NavBar from './components/NavBar';

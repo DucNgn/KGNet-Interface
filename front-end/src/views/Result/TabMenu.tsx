@@ -8,12 +8,18 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
-import TabDetailCompany from './TabDetailCompany';
-import TabDetailDog from './TabDetailDog';
-import QueryTab from './TabQuery';
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
+import TabDetailCompany from './TabDetails/TabDetailCompany';
+import TabDetailDog from './TabDetails/TabDetailDog';
+import QueryTab from './TabDetails/TabQuery';
+import { ICompany } from 'src/models/company.model';
+import { IDogInfo } from 'src/models/dogInfo.model';
 
+type TabPanelProps = {
+  children: React.ReactNode;
+  value: number;
+  index: number;
+};
+const TabPanel: React.FunctionComponent<TabPanelProps> = ({ children, value, index, ...other }) => {
   return (
     <div
       role="tabpanel"
@@ -25,7 +31,7 @@ function TabPanel(props) {
       {value === index && <Box p={3}>{children}</Box>}
     </div>
   );
-}
+};
 
 TabPanel.propTypes = {
   children: PropTypes.node,
@@ -33,7 +39,7 @@ TabPanel.propTypes = {
   value: PropTypes.any.isRequired
 };
 
-function a11yProps(index) {
+function a11yProps(index: number) {
   return {
     id: `simple-tab-${index}`,
     'aria-controls': `simple-tabpanel-${index}`
@@ -51,14 +57,28 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function MyTabs({ mode, result, query, queryKeywords, shapOriginalImage, shapDescription }) {
+type MyTabProps = {
+  mode: string;
+  result: any;
+  query: any;
+  queryKeywords: string;
+  shapOriginalImage: string;
+  shapDescription: string | string[];
+  setUserQuery?: any;
+};
+const MyTabs: React.FunctionComponent<MyTabProps> = ({
+  mode,
+  result,
+  query,
+  queryKeywords,
+  shapOriginalImage,
+  shapDescription
+}) => {
   const classes = useStyles();
   const [value, setValue] = useState(0);
   const [isChanged, setIsChanged] = useState(false);
-  const [UserQuery, setUserQuery] = useState(query);
   const history = useHistory();
-
-  const handleChange = (event, newValue) => {
+  const handleChange = (event: any, newValue: number) => {
     setValue(newValue);
   };
 
@@ -72,12 +92,12 @@ export default function MyTabs({ mode, result, query, queryKeywords, shapOrigina
    * @param {*} result the response from the API
    * @returns the detail of each card
    */
-  const returnTabDetail = (mode, result) => {
+  const returnTabDetail = (mode: string, result: any) => {
     if (mode === 'companies') {
-      return result.map((company, idx) => <TabDetailCompany key={idx} companyDetail={company} />);
+      return result.map((company: ICompany, idx: number) => <TabDetailCompany key={idx} companyDetail={company} />);
     }
     if (mode === 'dogInfo' || mode === 'dogSimilarity') {
-      return result.map((dog, idx) => <TabDetailDog mode={mode} key={idx} dogDetail={dog} />);
+      return result.map((dog: IDogInfo, idx: number) => <TabDetailDog mode={mode} key={idx} dogDetail={dog} />);
     }
   };
 
@@ -111,9 +131,9 @@ export default function MyTabs({ mode, result, query, queryKeywords, shapOrigina
           </Typography>
           <ol>
             {result !== undefined
-              ? result.map((el, idx) => {
-                  if (mode === 'companies' && idx < 3) return <li>{el.name}</li>;
-                  else if (idx < 3) return <li>{el.breed_class}</li>;
+              ? result.map((el: any, idx: number) => {
+                  if (mode === 'companies' && idx < 3) return <li key={el.name}>{el.name}</li>;
+                  else if (idx < 3) return <li key={el.breed_class}>{el.breed_class}</li>;
                 })
               : null}
           </ol>
@@ -127,13 +147,12 @@ export default function MyTabs({ mode, result, query, queryKeywords, shapOrigina
           <Box>
             <QueryTab
               userQuery={query}
-              setUserQuery={setUserQuery}
               queryKeywords={queryKeywords}
               setIsChanged={setIsChanged}
             />
           </Box>
           <Box my={2} justifyContent="center">
-            <Grid container direction="column" xs={12} alignItems="center">
+            <Grid container direction="column" alignItems="center">
               <Button
                 variant="contained"
                 color="primary"
@@ -157,4 +176,6 @@ export default function MyTabs({ mode, result, query, queryKeywords, shapOrigina
       </TabPanel>
     </div>
   );
-}
+};
+
+export default MyTabs;

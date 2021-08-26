@@ -12,7 +12,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import PetsIcon from '@material-ui/icons/Pets';
-import MenuIcon from '@material-ui/icons/Menu';
+import MenuIcon from '@material-ui/icons/Menu'
 import Toolbar from '@material-ui/core/Toolbar';
 import AddIcon from '@material-ui/icons/Add';
 import Typography from '@material-ui/core/Typography';
