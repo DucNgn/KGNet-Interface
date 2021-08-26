@@ -14,17 +14,17 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Home = () => {
+const Home : React.FunctionComponent = () => {
   const classes = useStyles();
   const history = useHistory();
   const handleOnclick = () => {
-    let val = document.getElementById('mode').value;
+    let val = (document?.getElementById('mode') as HTMLInputElement).value;
     history.push(val);
   };
   return (
     <Page title="KGNET-Homepage">
       <Box>
-        <Header />
+        <Header className='' />
         <Box my={2} />
         <Card className={classes.root}>
           <CardContent>
@@ -41,7 +41,6 @@ const Home = () => {
             <Typography variant="h4">Start with choosing a mode</Typography>
             <Box my={8} />
             <TextField
-              className={classes.selectField}
               label="Mode"
               name="mode"
               // onChange={handleCustomerChange}

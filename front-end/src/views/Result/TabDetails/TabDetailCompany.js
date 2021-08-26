@@ -119,7 +119,7 @@ const TabDetailCompany = ({ companyDetail }) => {
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                  <Grid xs={12} direction="column" container alignItems="center">
+                  <Grid direction="column" container alignItems="center">
                     <img src={`${companyDetail.SHAPFigure}`} alt="SHAP Explainer" className={classes.shapImage} />
                     <Box my={1} />
                     <Typography variant="caption" color="textPrimary">
