@@ -1,7 +1,0 @@
-build:
-  docker:
-    backend: mock-back-end-v2/Dockerfile
-    frontend: front-end/Dockerfile
-    revproxy: nginx/Dockerfile
-release:
-  image: revproxy
