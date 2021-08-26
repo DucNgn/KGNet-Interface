@@ -48,7 +48,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 const TabDetailDog = ({ mode, dogDetail }) => {
   const classes = useStyles();
-
   return (
     <Box mb={7}>
       <Card>
@@ -143,7 +142,7 @@ const TabDetailDog = ({ mode, dogDetail }) => {
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Grid xs={12} direction="column" container alignItems="center">
+              <Grid direction="column" container alignItems="center">
                 <Grid item>
                   <img src={`${dogDetail.SHAPFigure}`} alt="SHAP Explainer" className={classes.shapImage} />
                 </Grid>
