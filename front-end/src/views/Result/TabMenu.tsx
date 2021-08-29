@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Button, SvgIcon, Typography, Grid, makeStyles } from '@material-ui/core';
@@ -13,31 +12,7 @@ import TabDetailDog from './TabDetails/TabDetailDog';
 import QueryTab from './TabDetails/TabQuery';
 import { ICompany } from 'src/models/company.model';
 import { IDogInfo } from 'src/models/dogInfo.model';
-
-type TabPanelProps = {
-  children: React.ReactNode;
-  value: number;
-  index: number;
-};
-const TabPanel: React.FunctionComponent<TabPanelProps> = ({ children, value, index, ...other }) => {
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && <Box p={3}>{children}</Box>}
-    </div>
-  );
-};
-
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired
-};
+import TabPanel from 'src/components/TabPanel';
 
 function a11yProps(index: number) {
   return {
@@ -87,7 +62,7 @@ const MyTabs: React.FunctionComponent<MyTabProps> = ({
   };
 
   /**
-   *
+   * return a data entry in the details tab
    * @param {*} mode mode of the use case
    * @param {*} result the response from the API
    * @returns the detail of each card
@@ -132,9 +107,9 @@ const MyTabs: React.FunctionComponent<MyTabProps> = ({
           <ol>
             {result !== undefined
               ? result.map((el: any, idx: number) => {
-                  if (mode === 'companies' && idx < 3) return <li key={el.name}>{el.name}</li>;
-                  else if (idx < 3) return <li key={el.breed_class}>{el.breed_class}</li>;
-                })
+                if (mode === 'companies' && idx < 3) return <li key={el.name}>{el.name}</li>;
+                else if (idx < 3) return <li key={el.breed_class}>{el.breed_class}</li>;
+              })
               : null}
           </ol>
         </Box>
@@ -144,34 +119,32 @@ const MyTabs: React.FunctionComponent<MyTabProps> = ({
       </TabPanel>
       <TabPanel value={value} index={2}>
         <Box>
-          <Box>
-            <QueryTab
-              userQuery={query}
-              queryKeywords={queryKeywords}
-              setIsChanged={setIsChanged}
-            />
-          </Box>
-          <Box my={2} justifyContent="center">
-            <Grid container direction="column" alignItems="center">
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={handleOnClick}
-                startIcon={
-                  <SvgIcon>
-                    <PlayCircleOutlineIcon />
-                  </SvgIcon>
-                }
-              >
-                Execute
-              </Button>
-              {isChanged ? (
-                <Typography variant="caption" color="textSecondary">
-                  Seems like the query has been changed, let's execute it!
-                </Typography>
-              ) : null}
-            </Grid>
-          </Box>
+          <QueryTab
+            userQuery={query}
+            queryKeywords={queryKeywords}
+            setIsChanged={setIsChanged}
+          />
+        </Box>
+        <Box my={2} justifyContent="center">
+          <Grid container direction="column" alignItems="center">
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleOnClick}
+              startIcon={
+                <SvgIcon>
+                  <PlayCircleOutlineIcon />
+                </SvgIcon>
+              }
+            >
+              Execute
+            </Button>
+            {isChanged ? (
+              <Typography variant="caption" color="textSecondary">
+                Seems like the query has been changed, let's execute it!
+              </Typography>
+            ) : null}
+          </Grid>
         </Box>
       </TabPanel>
     </div>

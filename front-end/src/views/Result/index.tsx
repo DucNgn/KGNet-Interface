@@ -39,7 +39,6 @@ const Result: React.FunctionComponent = () => {
       setCompanyName(`${params.company}`);
       setCriteria(`${params.criteria}`);
     } else history.push('/404');
-    console.log(res.data.SHAPFigure);
     setQuery(res.data.Query);
     setQueryKeywords(res.data.QueryKeywords);
     setResult(res.data.result);
