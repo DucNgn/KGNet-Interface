@@ -35,10 +35,10 @@ const Details = () => {
     // reset value for all states
     if (udfFile !== undefined && ttlFile !== undefined) {
       const data = new FormData()
-      data.append('name', useCaseName)
       data.append('file', udfFile)
+      data.append('ttlFile', ttlFile)
+      data.append('name', useCaseName)
       data.append('EmbeddingEndpoint', newEndPoint)
-      data.append('ttlFileUri', ttlFile)
 
       // const data2 = {
       //   name: useCaseName,

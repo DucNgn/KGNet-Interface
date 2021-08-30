@@ -58,7 +58,7 @@ breed_facts_061 = """An Irish national bus company called Bus Éireann uses the 
 shap_Description = "Red pixels contribute more to class while Blue pixels contribute more against the class"
 
 
-@dog_breeds_router.get("/KGNet/getDogBreedInfo")
+@dog_breeds_router.get("/getDogBreedInfo")
 def getDogBreedInfo():
     return JSONResponse(
         {

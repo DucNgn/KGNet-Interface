@@ -40,7 +40,7 @@ forbes2013Query = """
 company_shap_description = "Company rank contributes more to target class"
 
 
-@companies_router.get("/KGNet/getForbes2013SimilarCompanies")
+@companies_router.get("/getForbes2013SimilarCompanies")
 def getForbes2013SimilarCompanies():
     return JSONResponse(
         {
