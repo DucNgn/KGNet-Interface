@@ -25,6 +25,7 @@
     "cypress": "^8.2.0",
     "history": "^4.10.1",
     "json-server": "^0.16.3",
+    "notistack": "^1.0.10",
     "perfect-scrollbar": "^1.5.1",
     "query-string": "^7.0.1",
     "react": "^17.0.2",

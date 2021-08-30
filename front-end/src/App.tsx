@@ -11,6 +11,9 @@ import Result from './views/Result';
 import NotFound from './views/NotFound';
 import AddUseCase from './views/AddUseCase';
 import './App.css'
+import CustomUseCaseRunner from './views/CustomUseCase';
+import { SnackbarProvider } from 'notistack';
+
 const history = createBrowserHistory();
 
 const useStyles = makeStyles((theme) => ({
@@ -30,20 +33,24 @@ const App = () => {
   const classes = useStyles();
   return (
     <React.Fragment>
-      <Router history={history}>
-        <NavBar />
-        <Box className={classes.content}>
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/dogs" component={DogBreeds} />
-            <Route exact path="/companies" component={WelcomePage} />
-            <Route exact path="/about" component={About} />
-            <Route exact path="/result" component={Result} />
-            <Route exact path="/add" component={AddUseCase} />
-            <Route component={NotFound} />
-          </Switch>
-        </Box>
-      </Router>
+      <SnackbarProvider dense maxSnack={3}>
+        <Router history={history}>
+          <NavBar />
+          <Box className={classes.content}>
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/dogs" component={DogBreeds} />
+              <Route exact path="/companies" component={WelcomePage} />
+              <Route exact path="/about" component={About} />
+              <Route exact path="/result" component={Result} />
+              <Route exact path="/add" component={AddUseCase} />
+              <Route exact path="/customUseCase" component={CustomUseCaseRunner} />
+              <Route component={NotFound} />
+            </Switch>
+          </Box>
+        </Router>
+      </SnackbarProvider>
+
     </React.Fragment>
   );
 };
