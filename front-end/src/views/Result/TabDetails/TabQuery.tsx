@@ -1,4 +1,3 @@
-import React from 'react';
 import { Box } from '@material-ui/core';
 import { UnControlled as CodeMirror } from 'react-codemirror2';
 
@@ -8,10 +7,10 @@ require('codemirror/theme/neat.css');
 require('codemirror/mode/sparql/sparql.js');
 
 type Props = {
-  userQuery: string;
+  userQuery?: string;
   setUserQuery?: any;
   queryKeywords?: string;
-  setIsChanged: any;
+  setIsChanged?: any;
 };
 export default function QueryTab({ userQuery, setUserQuery, queryKeywords, setIsChanged }: Props) {
   return (
@@ -21,10 +20,12 @@ export default function QueryTab({ userQuery, setUserQuery, queryKeywords, setIs
         options={{
           mode: 'sparql',
           theme: 'material',
-          lineNumbers: true
+          lineNumbers: true,
+          lineWrapping: true
         }}
         onChange={(editor, data, value) => {
-          setIsChanged(true);
+          if (setIsChanged !== undefined) setIsChanged(true);
+          if (setUserQuery !== undefined) setUserQuery(value)
         }}
       />
     </Box>
