@@ -10,6 +10,7 @@ import { Box, makeStyles } from '@material-ui/core';
 import Result from './views/Result';
 import NotFound from './views/NotFound';
 import AddUseCase from './views/AddUseCase';
+import './App.css'
 const history = createBrowserHistory();
 
 const useStyles = makeStyles((theme) => ({
