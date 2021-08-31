@@ -42,7 +42,6 @@ const Details = () => {
 
       try {
         const res: HTTPCustomResponse = await axios.post('/KGNet/createCustomUsecase', data);
-        console.log(res)
         if (res.data.code === 200) {
           // success
           enqueueSnackbar(res.data.message, {
