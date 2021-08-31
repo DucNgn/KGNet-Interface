@@ -32,6 +32,6 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           browser: chrome
-          project: ./front-end/
+          working-directory: ./front-end/
           build: npm run build
           start: npm start-mock-api, npm run start
