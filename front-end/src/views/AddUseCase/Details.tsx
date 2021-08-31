@@ -40,26 +40,27 @@ const Details = () => {
       data.append('name', useCaseName)
       data.append('EmbeddingEndpoint', newEndPoint)
 
-      // const data2 = {
-      //   name: useCaseName,
-      //   file: '',
-      //   EmbeddingEndpoint: newEndPoint,
-      //   ttlFileUri: ''
-      // }
-
-      const res: HTTPCustomResponse = await axios.post('/KGNet/createCustomUsecase', data);
-
-      if (res.status === 200) {
-        // success
-        enqueueSnackbar(res.message, {
-          variant: 'success'
-        });
-      }
-      else {
-        enqueueSnackbar(res.message, {
+      try {
+        const res: HTTPCustomResponse = await axios.post('/KGNet/createCustomUsecase', data);
+        console.log(res)
+        if (res.data.code === 200) {
+          // success
+          enqueueSnackbar(res.data.message, {
+            variant: 'success'
+          });
+        }
+        else {
+          enqueueSnackbar(res.data.message, {
+            variant: 'error'
+          });
+        }
+      } catch (error) {
+        console.log(error)
+        enqueueSnackbar(`${error.detail[0].msg}: ${error.detail[0].loc[1]} has ${error.detail[0].type}`, {
           variant: 'error'
         });
       }
+
     }
     else {
       enqueueSnackbar("Files are not uploaded yet", {
