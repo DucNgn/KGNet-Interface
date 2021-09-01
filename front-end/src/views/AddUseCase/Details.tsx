@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import Typography from '@material-ui/core/Typography';
-import { Card, CardContent, Box, TextField, makeStyles, Button, SvgIcon, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@material-ui/core';
+import { Card, CardContent, Box, TextField, makeStyles, Button, SvgIcon, Dialog, DialogTitle, DialogContent, DialogActions } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import CreateIcon from '@material-ui/icons/Create';
 import SaveIcon from '@material-ui/icons/Save';
@@ -23,23 +23,24 @@ const Details = () => {
   // state declaration
   const classes = useStyles();
   const [useCaseName, setUseCaseName] = useState('')
-  const [ttlFile, setTtlFile] = useState<File>()
+  const [ttlUrl, setTtlUrl] = useState('')
   const [udfFile, setUdfFile] = useState<File>()
   const [udfQuery, setUdfQuery] = useState('')
   const [newEndPoint, setNewEndPoint] = useState('')
-  const TtlFileInput = useRef(null)
   const UdfFileInput = useRef(null)
   const { enqueueSnackbar } = useSnackbar();
   const [isDialogOpen, setDialogOpen] = useState(false)
+
+  // Event handlers
   const handleSubmit = async () => {
     // reset value for all states
-    if (udfFile !== undefined && ttlFile !== undefined) {
+    if (ttlUrl !== '' && useCaseName !== '' && newEndPoint !== '') {
       const data = new FormData()
-      data.append('file', udfFile)
-      data.append('ttlFile', ttlFile)
+      if (udfFile !== undefined) data.append('file', udfFile)
+      data.append('ttlFileUri', ttlUrl)
       data.append('name', useCaseName)
       data.append('EmbeddingEndpoint', newEndPoint)
-
+      data.append('UDF', udfQuery)
       try {
         const res: HTTPCustomResponse = await axios.post('/KGNet/createCustomUsecase', data);
         if (res.data.code === 200) {
@@ -62,18 +63,14 @@ const Details = () => {
 
     }
     else {
-      enqueueSnackbar("Files are not uploaded yet", {
-        variant: 'error'
+      enqueueSnackbar("Some field is missing", {
+        variant: 'warning'
       });
     }
 
   }
 
   const fileType: { [key: string]: any } = {
-    'ttl': {
-      inputReference: TtlFileInput,
-      setter: setTtlFile
-    },
     'udf': {
       inputReference: UdfFileInput,
       setter: setUdfFile
@@ -119,23 +116,13 @@ const Details = () => {
               KG data file .ttl
             </Typography>
             <Box mx={10} />
-            <Button
-              onClick={(e) => handleOnClickUpload('ttl')}
-              variant="contained"
-              color="primary"
-              startIcon={
-                <SvgIcon>
-                  <CloudUploadIcon />
-                </SvgIcon>
-              }
-            >
-              Upload
-            </Button>
-            <Box mx={1} />
-            <Typography variant='caption' color='textPrimary'>
-              {ttlFile?.name ?? ''}
-            </Typography>
-            <input type="file" id="image" accept="image/*" ref={TtlFileInput} style={{ display: 'none' }} onChange={(e) => handleFileUploaded(e, 'ttl')} />
+            <TextField
+              className={classes.link}
+              label="URL for .ttl file"
+              variant="outlined"
+              value={ttlUrl}
+              onChange={(e) => setTtlUrl(e.target.value)}
+            />
           </Box>
           <Box my={3} />
           <Box display="flex" alignItems="center" justifyContent="flex-start">
@@ -211,7 +198,7 @@ const Details = () => {
         aria-describedby="alert-dialog-description"
       >
         <DialogContent>
-          <DialogTitle id="simple-dialog-title">Enter query to create the custom precedure</DialogTitle>
+          <DialogTitle id="simple-dialog-title">Enter SPARQL query to define the custom precedure</DialogTitle>
           <QueryTab setUserQuery={setUdfQuery} />
         </DialogContent>
         <DialogActions>
@@ -222,7 +209,9 @@ const Details = () => {
             <SvgIcon>
               <SaveIcon />
             </SvgIcon>
-          }>
+          }
+            onClick={(e) => setDialogOpen(false)}
+          >
             Save
           </Button>
         </DialogActions>
