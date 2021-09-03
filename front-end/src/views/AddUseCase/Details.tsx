@@ -54,7 +54,7 @@ const Details = () => {
             variant: 'error'
           });
         }
-      } catch (error) {
+      } catch (error: any) {
         console.log(error)
         enqueueSnackbar(`${error.detail[0].msg}: ${error.detail[0].loc[1]} has ${error.detail[0].type}`, {
           variant: 'error'
