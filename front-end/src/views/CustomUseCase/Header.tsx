@@ -11,7 +11,7 @@ const useStyles = makeStyles(() => ({
 
 type Props = {
     className?: string,
-    mode: string
+    mode?: string
 }
 const Header: React.FunctionComponent<Props> = ({ className, mode, ...rest }) => {
     const classes = useStyles();
@@ -23,11 +23,11 @@ const Header: React.FunctionComponent<Props> = ({ className, mode, ...rest }) =>
                     Dashboard
                 </Link>
                 <Typography variant="body1" color="textPrimary">
-                    Result
+                    Run custom use case
                 </Typography>
             </Breadcrumbs>
             <Typography variant="h3" color="textPrimary">
-                Result for custom use case
+                Run custom use case
             </Typography>
 
         </div>

@@ -41,6 +41,7 @@ type MyTabProps = {
   shapDescription: string | string[];
   setUserQuery?: any;
 };
+
 const MyTabs: React.FunctionComponent<MyTabProps> = ({
   mode,
   result,
@@ -49,10 +50,13 @@ const MyTabs: React.FunctionComponent<MyTabProps> = ({
   shapOriginalImage,
   shapDescription
 }) => {
+  // States
   const classes = useStyles();
   const [value, setValue] = useState(0);
   const [isChanged, setIsChanged] = useState(false);
   const history = useHistory();
+
+  // Event handler
   const handleChange = (event: any, newValue: number) => {
     setValue(newValue);
   };
@@ -76,6 +80,7 @@ const MyTabs: React.FunctionComponent<MyTabProps> = ({
     }
   };
 
+  // -- Render --
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -106,6 +111,7 @@ const MyTabs: React.FunctionComponent<MyTabProps> = ({
           </Typography>
           <ol>
             {result !== undefined
+              // eslint-disable-next-line array-callback-return
               ? result.map((el: any, idx: number) => {
                 if (mode === 'companies' && idx < 3) return <li key={el.name}>{el.name}</li>;
                 else if (idx < 3) return <li key={el.breed_class}>{el.breed_class}</li>;
