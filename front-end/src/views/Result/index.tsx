@@ -1,12 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import '@fontsource/roboto';
 import { Box, LinearProgress, Typography } from '@material-ui/core';
-import { useLocation } from 'react-router';
-import queryString from 'query-string';
 import MyTabs from './TabMenu';
 
 const Result: React.FunctionComponent = ({ data, mode, handleExecute }: any) => {
-  const location = useLocation();
   const [companyName, setCompanyName] = useState('');
   const [criteria, setCriteria] = useState('');
   const [result, setResult] = useState([]);
@@ -14,7 +11,6 @@ const Result: React.FunctionComponent = ({ data, mode, handleExecute }: any) => 
   const [shapOriginalImage, setShapOriginalImage] = useState('');
   const [shapDescription, setShapDescription] = useState('');
   const [queryKeywords, setQueryKeywords] = useState('');
-  let params = queryString.parse(location.search);
 
   const getData = useCallback(() => {
     setQuery(data.Query);
@@ -59,7 +55,7 @@ const Result: React.FunctionComponent = ({ data, mode, handleExecute }: any) => 
     <Box>
       {result ? (
         <Box>
-          {returnPageDescription(`${params.mode}`)}
+          {returnPageDescription(`${mode}`)}
           <Box my={3} />
           <MyTabs
             mode={`${mode}`}
