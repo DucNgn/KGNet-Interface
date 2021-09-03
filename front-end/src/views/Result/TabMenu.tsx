@@ -1,6 +1,5 @@
 import React from 'react';
 import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import { Button, SvgIcon, Typography, Grid, makeStyles } from '@material-ui/core';
 import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
 import AppBar from '@material-ui/core/AppBar';
@@ -40,6 +39,7 @@ type MyTabProps = {
   shapOriginalImage: string;
   shapDescription: string | string[];
   setUserQuery?: any;
+  handleExecute?: any
 };
 
 const MyTabs: React.FunctionComponent<MyTabProps> = ({
@@ -48,21 +48,17 @@ const MyTabs: React.FunctionComponent<MyTabProps> = ({
   query,
   queryKeywords,
   shapOriginalImage,
-  shapDescription
+  shapDescription,
+  handleExecute
 }) => {
   // States
   const classes = useStyles();
   const [value, setValue] = useState(0);
   const [isChanged, setIsChanged] = useState(false);
-  const history = useHistory();
 
   // Event handler
   const handleChange = (event: any, newValue: number) => {
     setValue(newValue);
-  };
-
-  const handleOnClick = () => {
-    history.push('/result?mode=dogSimilarity');
   };
 
   /**
@@ -136,7 +132,7 @@ const MyTabs: React.FunctionComponent<MyTabProps> = ({
             <Button
               variant="contained"
               color="primary"
-              onClick={handleOnClick}
+              onClick={handleExecute}
               startIcon={
                 <SvgIcon>
                   <PlayCircleOutlineIcon />
