@@ -1,7 +1,6 @@
 import React from 'react';
 import { Box, Grid, TextField, InputAdornment, SvgIcon, makeStyles, Button } from '@material-ui/core';
-import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
-import { useHistory } from 'react-router-dom';
+import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import SearchIcon from '@material-ui/icons/Search';
 
 const useStyles = makeStyles((theme) => ({
@@ -12,15 +11,15 @@ const useStyles = makeStyles((theme) => ({
     width: '100%'
   }
 }));
-const Details = () => {
+const Details = ({ handleShowResult, setCompanyName, setSimilarityFeature }) => {
   const classes = useStyles();
-  const history = useHistory();
 
   const handleOnClick = (e) => {
     let criteria = document.getElementById('criteria').value;
     let company = document.getElementById('company').value;
-    console.log(criteria);
-    history.push(`/result?mode=companies&company=${company}&criteria=${criteria}`);
+    setCompanyName(company)
+    setSimilarityFeature(criteria)
+    handleShowResult()
   };
 
   return (
@@ -72,7 +71,7 @@ const Details = () => {
         <Button variant="contained" color="primary" onClick={handleOnClick}>
           Next
           <SvgIcon>
-            <ArrowRightAltIcon />
+            <ArrowDownwardIcon />
           </SvgIcon>
         </Button>
       </Box>

@@ -15,6 +15,7 @@ import PetsIcon from '@material-ui/icons/Pets';
 import MenuIcon from '@material-ui/icons/Menu'
 import Toolbar from '@material-ui/core/Toolbar';
 import AddIcon from '@material-ui/icons/Add';
+import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Box, Button, SvgIcon } from '@material-ui/core';
@@ -38,6 +39,11 @@ const routes = [
     name: 'Add use case',
     icon: <AddIcon />,
     path: '/add'
+  },
+  {
+    name: 'Run use case',
+    icon: <PlayArrowIcon />,
+    path: '/customUseCase'
   }
 ];
 
