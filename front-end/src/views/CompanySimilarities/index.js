@@ -17,7 +17,8 @@ const CompanySimilarities = () => {
     // make request here
     setLoading(true)
     try {
-      const res = await axios.get(`/KGNet/getForbes2013SimilarCompanies?company_name=${companyName}&similarity_feature=${similarityFeature}`);
+      const data = {"company_name": companyName, "similarity_feature": similarityFeature};
+      const res = await axios.post("KGNet/getForbes2013SimilarCompanies", data);
       if (res.status === 200) {
         setData(res.data)
         console.log(res.data)
@@ -34,7 +35,8 @@ const CompanySimilarities = () => {
     // make request here
     setLoading(true)
     try {
-      const res = await axios.get(`/KGNet/getForbes2013SimilarCompanies?company_name=${companyName}&similarity_feature=${similarityFeature}`);
+      const data = {"company_name": companyName, "similarity_feature": similarityFeature};
+      const res = await axios.post("/KGNet/getForbes2013SimilarCompanies", data);
       if (res.status === 200) {
         setData(res.data)
       }

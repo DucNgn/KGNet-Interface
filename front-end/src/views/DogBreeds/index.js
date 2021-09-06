@@ -19,7 +19,8 @@ const DogBreeds = () => {
     // make request here
     setLoading(true)
     try {
-      const res = await axios.get(`/KGNet/getDogBreedInfo?img_url=${debouncedLink}`);
+      const data = {"img_url": debouncedLink};
+      const res = await axios.post("/KGNet/getDogBreedInfo", data);
       if (res.status === 200) {
         setData(res.data)
       }
@@ -34,7 +35,8 @@ const DogBreeds = () => {
     // make request here
     setLoading(true)
     try {
-      const res = await axios.get(`/KGNet/getDogSimilarTo?img_url=${debouncedLink}`);
+      const data = {"img_url": debouncedLink};
+      const res = await axios.post("/KGNet/getDogSimilarTo", data);
       if (res.status === 200) {
         setData(res.data)
       }

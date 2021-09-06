@@ -1,5 +1,6 @@
 from fastapi import APIRouter
 from starlette.responses import JSONResponse
+from pydantic import BaseModel
 
 companies_router = APIRouter(
     prefix="/KGNet", tags=["companies"], responses={"404": {"description": "Not found"}}
@@ -40,8 +41,12 @@ forbes2013Query = """
 company_shap_description = "Company rank contributes more to target class"
 
 
-@companies_router.get("/getForbes2013SimilarCompanies")
-def getForbes2013SimilarCompanies():
+class Forbes2013SimilarCompaniesBody(BaseModel):
+    company_name: str
+    similarity_feature: str
+
+@companies_router.post("/getForbes2013SimilarCompanies")
+def getForbes2013SimilarCompanies(body: Forbes2013SimilarCompaniesBody):
     return JSONResponse(
         {
             "Query": forbes2013Query,
