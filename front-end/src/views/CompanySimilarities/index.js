@@ -19,6 +19,7 @@ const CompanySimilarities = () => {
     if (companyName !== '') {
       // make request here
       setLoading(true);
+      setData(undefined); // reset result
       try {
         const data = { company_name: companyName, similarity_feature: similarityFeature };
         const res = await axios.post('KGNet/getForbes2013SimilarCompanies', data);

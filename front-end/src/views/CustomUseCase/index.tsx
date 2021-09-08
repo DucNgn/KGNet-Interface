@@ -15,7 +15,7 @@ const CustomUseCaseRunner: React.FunctionComponent = () => {
     const [query, setQuery] = useState('')
     const [useCaseList, setUseCaeList] = useState([])
     const [selectedUseCase, setUseCase] = useState('')
-    const [result, setResult] = useState<any>([])
+    const [result, setResult] = useState<any>()
     const { enqueueSnackbar } = useSnackbar();
     const [isLoading, setLoading] = useState(false)
     // event handlers
