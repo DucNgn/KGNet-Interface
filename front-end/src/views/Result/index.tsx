@@ -18,6 +18,8 @@ const Result: React.FunctionComponent = ({ data, mode, handleExecute }: any) => 
     setResult(data.result);
     setShapOriginalImage(data.SHAPFigure);
     setShapDescription(data.SHAPDescription);
+    console.log("Inside result")
+    console.log(data)
   }, [data]);
 
   useEffect(() => {

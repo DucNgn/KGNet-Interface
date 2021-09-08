@@ -48,7 +48,10 @@ const CompanySimilarities = () => {
     setLoading(false)
   };
 
+  console.log("Inside index company")
   console.log(isLoading)
+  console.log(data)
+  
   return (
     <Page title="KGNET - Companies Similarities">
       <Header />

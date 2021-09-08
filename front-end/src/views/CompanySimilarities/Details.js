@@ -15,10 +15,10 @@ const Details = ({ handleShowResult, setCompanyName, setSimilarityFeature }) => 
   const classes = useStyles();
 
   const handleOnClick = (e) => {
-    let criteria = document.getElementById('criteria').value;
-    let company = document.getElementById('company').value;
-    setCompanyName(company)
-    setSimilarityFeature(criteria)
+    // let criteria = document.getElementById('criteria').value;
+    // let company = document.getElementById('company').value;
+    // setCompanyName(company)
+    // setSimilarityFeature(criteria)
     handleShowResult()
   };
 
@@ -40,6 +40,7 @@ const Details = ({ handleShowResult, setCompanyName, setSimilarityFeature }) => 
             placeholder="Company name ..."
             id="company"
             variant="outlined"
+            onChange={(e) =>  setCompanyName(e.target.value)}
           />
         </Grid>
         <Grid item xs={6} md={4}>
@@ -49,7 +50,7 @@ const Details = ({ handleShowResult, setCompanyName, setSimilarityFeature }) => 
                 className={classes.selectField}
                 label="Criteria"
                 name="Criteria"
-                // onChange={handleCustomerChange}
+                onChange={e => setSimilarityFeature(e.target.value)}
                 select
                 id="criteria"
                 SelectProps={{ native: true }}
