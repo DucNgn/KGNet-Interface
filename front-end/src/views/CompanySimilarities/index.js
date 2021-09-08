@@ -48,11 +48,12 @@ const CompanySimilarities = () => {
     setLoading(false)
   };
 
+  console.log(isLoading)
   return (
     <Page title="KGNET - Companies Similarities">
       <Header />
       <Details handleShowResult={handleShowResult} setCompanyName={setCompanyName} setSimilarityFeature={setSimilarityFeature} />
-      {isLoading && <LinearProgress />}
+      {isLoading ? <LinearProgress /> : null}
       {data !== undefined && <Result data={data} mode='companies' handleExecute={handleExecute} />}
     </Page>
   );
