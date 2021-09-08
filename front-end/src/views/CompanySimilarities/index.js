@@ -50,7 +50,8 @@ const CompanySimilarities = () => {
 
   console.log("Inside index company")
   console.log(isLoading)
-  console.log(data)
+  console.log("Type of data response")
+  console.log(typeof data)
 
   return (
     <Page title="KGNET - Companies Similarities">

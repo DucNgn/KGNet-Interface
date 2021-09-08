@@ -13,12 +13,14 @@ const Result: React.FunctionComponent = ({ data, mode, handleExecute }: any) => 
   const [queryKeywords, setQueryKeywords] = useState('');
 
   const getData = useCallback(() => {
-    setQuery(data.Query);
-    setQueryKeywords(data.QueryKeywords);
-    setResult(data.result);
-    setShapOriginalImage(data.SHAPFigure);
-    setShapDescription(data.SHAPDescription);
+    if(data.Query) setQuery(data.Query);
+    if(data.QueryKeywords) setQueryKeywords(data.QueryKeywords);
+    if(data.result) setResult(data.result);
+    if(data.SHAPFigure) setShapOriginalImage(data.SHAPFigure);
+    if(data.SHAPDescription) setShapDescription(data.SHAPDescription);
     console.log("Inside result")
+    console.log("Type of result inside data")
+    console.log(typeof data)
     console.log(data)
   }, [data]);
 
