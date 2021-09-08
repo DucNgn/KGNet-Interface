@@ -51,12 +51,11 @@ const CompanySimilarities = () => {
   console.log("Inside index company")
   console.log(isLoading)
   console.log(data)
-  
+
   return (
     <Page title="KGNET - Companies Similarities">
       <Header />
       <Details handleShowResult={handleShowResult} setCompanyName={setCompanyName} setSimilarityFeature={setSimilarityFeature} />
-      {isLoading ? <LinearProgress /> : null}
       {data !== undefined && <Result data={data} mode='companies' handleExecute={handleExecute} />}
     </Page>
   );
