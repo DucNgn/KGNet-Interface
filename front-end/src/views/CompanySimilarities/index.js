@@ -21,13 +21,14 @@ const CompanySimilarities = () => {
       const res = await axios.post("KGNet/getForbes2013SimilarCompanies", data);
       if (res.status === 200) {
         setData(res.data)
+        setLoading(false)
+        console.log("SHOULD NOT SHOW SPINNER NOW")
         console.log(res.data)
       }
       else throw new Error('Internal error')
     } catch (error) {
       console.log(error)
     }
-    setLoading(false)
   };
 
   // TODO: May change to execute SPAQL QUERY
