@@ -12,12 +12,12 @@ const GenericResult: React.FunctionComponent<Props> = ({ result }) => {
 
   /* eslint-disable array-callback-return */
 
+  console.log(result)
   return (
     <Box>
       <Typography variant="h4" color="textPrimary">
         Result for your query:
       </Typography>
-      {console.log(result)}
       {result.map((res: any, idx: number) => {
         <Box>
           <Typography variant="body1" color="textPrimary">
