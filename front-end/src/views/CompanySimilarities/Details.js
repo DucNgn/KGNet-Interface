@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
     width: '100%'
   }
 }));
-const Details = ({ handleShowResult, setCompanyName, setSimilarityFeature, similarityFeature }) => {
+const Details = ({ handleShowResult, setCompanyName, setSimilarityFeature, similarityFeature, companyNameRef }) => {
   const classes = useStyles();
 
   const handleOnClick = (e) => {
@@ -28,6 +28,7 @@ const Details = ({ handleShowResult, setCompanyName, setSimilarityFeature, simil
         <Grid item xs={12} md={7}>
           <TextField
             className={classes.queryField}
+            ref={companyNameRef}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">

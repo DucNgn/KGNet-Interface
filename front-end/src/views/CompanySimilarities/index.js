@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Details from './Details';
 import Header from './Header';
 import Page from '../../components/Page';
@@ -12,10 +12,13 @@ const CompanySimilarities = () => {
   const [isLoading, setLoading] = useState(false)
   const [companyName, setCompanyName] = useState('');
   const [similarityFeature, setSimilarityFeature] = useState('profits')
+  const companyNameRef = useRef()
 
   const handleShowResult = async () => {
     // make request here
     setLoading(true)
+    const name = companyNameRef.current
+    console.log(name)
     try {
       const data = {"company_name": companyName, "similarity_feature": similarityFeature};
       const res = await axios.post("KGNet/getForbes2013SimilarCompanies", data);
@@ -56,7 +59,7 @@ const CompanySimilarities = () => {
   return (
     <Page title="KGNET - Companies Similarities">
       <Header />
-      <Details handleShowResult={handleShowResult} similarityFeature={similarityFeature} setCompanyName={setCompanyName} setSimilarityFeature={setSimilarityFeature} />
+      <Details handleShowResult={handleShowResult} companyNameRef={companyNameRef} similarityFeature={similarityFeature} setCompanyName={setCompanyName} setSimilarityFeature={setSimilarityFeature} />
       {isLoading && <LinearProgress/>}
       {data !== undefined && <Result data={data} mode='companies' handleExecute={handleExecute} />}
     </Page>
