@@ -11,7 +11,7 @@ const CompanySimilarities = () => {
   const [data, setData] = useState()
   const [isLoading, setLoading] = useState(false)
   const [companyName, setCompanyName] = useState('');
-  const [similarityFeature, setSimilarityFeature] = useState('')
+  const [similarityFeature, setSimilarityFeature] = useState('profits')
 
   const handleShowResult = async () => {
     // make request here
@@ -20,7 +20,7 @@ const CompanySimilarities = () => {
       const data = {"company_name": companyName, "similarity_feature": similarityFeature};
       const res = await axios.post("KGNet/getForbes2013SimilarCompanies", data);
       if (res.status === 200) {
-        const json_data = res.data.json()
+        const json_data = res.data
         console.log(json_data)
         setData(json_data)
       }
