@@ -11,16 +11,8 @@ const useStyles = makeStyles((theme) => ({
     width: '100%'
   }
 }));
-const Details = ({ handleShowResult, setCompanyName, setSimilarityFeature, similarityFeature, companyNameRef }) => {
+const Details = ({ handleShowResult, setCompanyName, setSimilarityFeature, similarityFeature }) => {
   const classes = useStyles();
-
-  const handleOnClick = (e) => {
-    // let criteria = document.getElementById('criteria').value;
-    // let company = document.getElementById('company').value;
-    // setCompanyName(company)
-    // setSimilarityFeature(criteria)
-    handleShowResult()
-  };
 
   return (
     <Box mt={4}>
@@ -28,7 +20,6 @@ const Details = ({ handleShowResult, setCompanyName, setSimilarityFeature, simil
         <Grid item xs={12} md={7}>
           <TextField
             className={classes.queryField}
-            ref={companyNameRef}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -52,7 +43,6 @@ const Details = ({ handleShowResult, setCompanyName, setSimilarityFeature, simil
                 label="Criteria"
                 name="Criteria"
                 onChange={e => {
-                  console.log(e.target.value)
                   setSimilarityFeature(e.target.value)
                 }}
                 select
@@ -74,7 +64,7 @@ const Details = ({ handleShowResult, setCompanyName, setSimilarityFeature, simil
       </Grid>
 
       <Box my={2} className={classes.centerItem}>
-        <Button variant="contained" color="primary" onClick={handleOnClick}>
+        <Button variant="contained" color="primary" onClick={handleShowResult}>
           Next
           <SvgIcon>
             <ArrowDownwardIcon />
