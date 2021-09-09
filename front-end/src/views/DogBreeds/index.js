@@ -10,41 +10,40 @@ import useDebounce from '../../hooks/useDebounce';
 
 const DogBreeds = () => {
   // states
-  const [data, setData] = useState()
-  const [isLoading, setLoading] = useState(false)
+  const [data, setData] = useState();
+  const [isLoading, setLoading] = useState(false);
   const [link, setLink] = useState('');
   const debouncedLink = useDebounce(link, 500);
 
   const handleShowResult = async () => {
     // make request here
-    setLoading(true)
+    setLoading(true);
+    setData(undefined); // reset data
     try {
-      const data = {"img_url": debouncedLink};
-      const res = await axios.post("/KGNet/getDogBreedInfo", data);
+      const data = { img_url: debouncedLink };
+      const res = await axios.post('/KGNet/getDogBreedInfo', data);
       if (res.status === 200) {
-        setData(res.data)
-      }
-      else throw new Error('Internal error')
+        setData(res.data);
+      } else throw new Error('Internal error');
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-    setLoading(false)
+    setLoading(false);
   };
 
   const handleExecute = async () => {
     // make request here
-    setLoading(true)
+    setLoading(true);
     try {
-      const data = {"img_url": debouncedLink};
-      const res = await axios.post("/KGNet/getDogSimilarTo", data);
+      const data = { img_url: debouncedLink };
+      const res = await axios.post('/KGNet/getDogSimilarTo', data);
       if (res.status === 200) {
-        setData(res.data)
-      }
-      else throw new Error('Internal error')
+        setData(res.data);
+      } else throw new Error('Internal error');
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-    setLoading(false)
+    setLoading(false);
   };
 
   return (
@@ -53,7 +52,7 @@ const DogBreeds = () => {
         <Header />
         <Details handleShowResult={handleShowResult} debouncedLink={debouncedLink} setLink={setLink} />
         {isLoading && <LinearProgress />}
-        {data !== undefined && <Result data={data} mode='dogInfo' handleExecute={handleExecute} />}
+        {data !== undefined && <Result data={data} mode="dogInfo" handleExecute={handleExecute} />}
       </Box>
     </Page>
   );
