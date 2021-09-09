@@ -85,7 +85,8 @@ const CustomUseCaseRunner: React.FunctionComponent = () => {
                     isChanged={isChanged}
                     handleExecute={handleExecute} />
                 <Box my={3} />
-                {isLoading ? <LinearProgress/> : <GenericResult result={result}/> }
+                {isLoading && <LinearProgress/> }
+                {result !== undefined && <GenericResult result={result}/>}
             </Box>
         </Page>
     );
