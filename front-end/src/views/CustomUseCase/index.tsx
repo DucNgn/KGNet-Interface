@@ -15,7 +15,7 @@ const CustomUseCaseRunner: React.FunctionComponent = () => {
     const [query, setQuery] = useState('')
     const [useCaseList, setUseCaeList] = useState([])
     const [selectedUseCase, setUseCase] = useState('')
-    const [result, setResult] = useState<any>()
+    const [result, setResult] = useState<any>([])
     const { enqueueSnackbar } = useSnackbar();
     const [isLoading, setLoading] = useState(false)
     // event handlers
@@ -31,7 +31,6 @@ const CustomUseCaseRunner: React.FunctionComponent = () => {
                     enqueueSnackbar(res.data.message, {
                         variant: 'success'
                     });
-                    console.log(res)
                     setResult(res.data.result)
                 }
                 else {
@@ -87,7 +86,7 @@ const CustomUseCaseRunner: React.FunctionComponent = () => {
                     handleExecute={handleExecute} />
                 <Box my={3} />
                 {isLoading && <LinearProgress/> }
-                {result !== undefined && result.forEach((el:any) => <GenericResult result={el}/>) }
+                {result !== undefined && <GenericResult result={result}/> }
             </Box>
         </Page>
     );

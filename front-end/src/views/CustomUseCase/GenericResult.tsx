@@ -1,8 +1,8 @@
 import { Box, Typography } from '@material-ui/core';
-import React from 'react';
+import React, { useState } from 'react';
 
 type Props = {
-  result: any;
+  result: any[];
 };
 
 const GenericResult: React.FunctionComponent<Props> = ({ result }) => {
@@ -14,13 +14,20 @@ const GenericResult: React.FunctionComponent<Props> = ({ result }) => {
 
   return (
     <Box>
-      <Typography variant="h1" color="textPrimary">
+      <Typography variant="h4" color="textPrimary">
         Result for your query:
       </Typography>
-      {Object.keys(result).map((key: string) => {
-        <Typography variant="body1" color="textPrimary">
-          {key}: {result[key]}
-        </Typography>;
+      {result.map((res: any, idx: number) => {
+        <Box>
+          <Typography variant="body1" color="textPrimary">
+            {idx+1}
+          </Typography>
+          {Object.keys(res).map((key: string) => {
+            <Typography variant="body1" color="textPrimary">
+              {key}: {res[key]}
+            </Typography>
+          })}
+        </Box>;
       })}
     </Box>
   );
