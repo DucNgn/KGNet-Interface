@@ -20,10 +20,9 @@ const CompanySimilarities = () => {
       const data = {"company_name": companyName, "similarity_feature": similarityFeature};
       const res = await axios.post("KGNet/getForbes2013SimilarCompanies", data);
       if (res.status === 200) {
-        const json_data = JSON.parse(res.data)
-        setData(json_data)
-        console.log("SHOULD NOT SHOW SPINNER NOW")
+        const json_data = res.data.json()
         console.log(json_data)
+        setData(json_data)
       }
       else throw new Error('Internal error')
     } catch (error) {
@@ -57,7 +56,7 @@ const CompanySimilarities = () => {
   return (
     <Page title="KGNET - Companies Similarities">
       <Header />
-      <Details handleShowResult={handleShowResult} setCompanyName={setCompanyName} setSimilarityFeature={setSimilarityFeature} />
+      <Details handleShowResult={handleShowResult} similarityFeature={similarityFeature} setCompanyName={setCompanyName} setSimilarityFeature={setSimilarityFeature} />
       {isLoading && <LinearProgress/>}
       {data !== undefined && <Result data={data} mode='companies' handleExecute={handleExecute} />}
     </Page>

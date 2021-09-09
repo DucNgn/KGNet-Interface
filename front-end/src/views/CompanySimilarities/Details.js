@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
     width: '100%'
   }
 }));
-const Details = ({ handleShowResult, setCompanyName, setSimilarityFeature }) => {
+const Details = ({ handleShowResult, setCompanyName, setSimilarityFeature, similarityFeature }) => {
   const classes = useStyles();
 
   const handleOnClick = (e) => {
@@ -56,6 +56,7 @@ const Details = ({ handleShowResult, setCompanyName, setSimilarityFeature }) => 
                 SelectProps={{ native: true }}
                 // value={currentCustomer || ''}
                 variant="outlined"
+                value={similarityFeature}
               >
                 <option value="profits">Profits</option>
                 <option value="market_value">Market value</option>
