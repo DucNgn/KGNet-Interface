@@ -10,6 +10,8 @@ const GenericResult: React.FunctionComponent<Props> = ({ result }) => {
 
   // event handlers
 
+  /* eslint-disable array-callback-return */
+
   return (
     <Box>
       <Typography variant="h1" color="textPrimary">
