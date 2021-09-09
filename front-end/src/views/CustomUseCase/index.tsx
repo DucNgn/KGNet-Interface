@@ -86,7 +86,7 @@ const CustomUseCaseRunner: React.FunctionComponent = () => {
                     handleExecute={handleExecute} />
                 <Box my={3} />
                 {isLoading && <LinearProgress/> }
-                {result !== undefined && <GenericResult result={result}/>}
+                {result !== undefined && result.forEach((el:any) => <GenericResult result={el}/>) }
             </Box>
         </Page>
     );
