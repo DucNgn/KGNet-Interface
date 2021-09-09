@@ -52,7 +52,7 @@ const Details = ({ handleShowResult, setCompanyName, setSimilarityFeature, simil
                 label="Criteria"
                 name="Criteria"
                 onChange={e => {
-                  console(e.target)
+                  console.log(e.target)
                   //setSimilarityFeature(e.target.value)
                 }}
                 select
