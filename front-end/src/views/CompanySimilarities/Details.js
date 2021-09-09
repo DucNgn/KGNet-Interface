@@ -51,7 +51,10 @@ const Details = ({ handleShowResult, setCompanyName, setSimilarityFeature, simil
                 className={classes.selectField}
                 label="Criteria"
                 name="Criteria"
-                onChange={e => setSimilarityFeature(e.target.value)}
+                onChange={e => {
+                  console(e.target)
+                  //setSimilarityFeature(e.target.value)
+                }}
                 select
                 id="criteria"
                 SelectProps={{ native: true }}
