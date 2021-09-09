@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Details = () => {
+const Details = ({setLoading}:any) => {
   // state declaration
   const classes = useStyles();
   const [useCaseName, setUseCaseName] = useState('')
@@ -35,14 +35,18 @@ const Details = () => {
   const handleSubmit = async () => {
     // reset value for all states
     if (ttlUrl !== '' && useCaseName !== '' && newEndPoint !== '') {
-      const data = new FormData()
-      if (udfFile !== undefined) data.append('file', udfFile)
-      data.append('ttlFileUri', ttlUrl)
-      data.append('name', useCaseName)
-      data.append('EmbeddingEndpoint', newEndPoint)
-      data.append('UDF', udfQuery)
+      const data = {
+        'file':udfFile??'',
+        'ttlFileUri': ttlUrl??'',
+        'name':useCaseName??'',
+        'EmbeddingEndpoint':newEndPoint??'',
+        'UDF':udfQuery??''
+      }
+
       try {
+        setLoading(true)
         const res: HTTPCustomResponse = await axios.post('/KGNet/createCustomUsecase', data);
+        setLoading(false)
         if (res.data.code === 200) {
           // success
           enqueueSnackbar(res.data.message, {

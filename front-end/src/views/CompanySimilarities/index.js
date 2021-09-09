@@ -24,7 +24,6 @@ const CompanySimilarities = () => {
         const res = await axios.post('KGNet/getForbes2013SimilarCompanies', data);
         if (res.status === 200) {
           const json_data = res.data;
-          console.log(json_data);
           setData(json_data);
         } else throw new Error('Internal error');
       } catch (error) {
@@ -53,11 +52,6 @@ const CompanySimilarities = () => {
     }
     setLoading(false);
   };
-
-  console.log('Inside index company');
-  console.log(isLoading);
-  console.log('Type of data response');
-  console.log(typeof data);
 
   return (
     <Page title="KGNET - Companies Similarities">
