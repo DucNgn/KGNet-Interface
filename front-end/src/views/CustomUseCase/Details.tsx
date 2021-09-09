@@ -1,9 +1,8 @@
-import React, { useCallback, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles, Box, Button, Grid, SvgIcon, Typography, TextField } from '@material-ui/core';
 import QueryTab from '../Result/TabDetails/TabQuery';
 import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
-import { useState } from 'react';
 
 const useStyles = makeStyles(() => ({
     root: {}
@@ -45,7 +44,6 @@ const Details: React.FunctionComponent<Props> = ({ query, selectedUseCase, setUs
             </TextField>
             <Box my={2}>
                 <QueryTab
-                    userQuery={query}
                     setUserQuery={setQuery}
                     setIsChanged={setIsChanged}
                 />

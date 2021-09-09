@@ -4,8 +4,6 @@ import { Box, LinearProgress, Typography } from '@material-ui/core';
 import MyTabs from './TabMenu';
 
 const Result: React.FunctionComponent = ({ data, mode, handleExecute }: any) => {
-  const [companyName, setCompanyName] = useState('');
-  const [criteria, setCriteria] = useState('');
   const [result, setResult] = useState([]);
   const [query, setQuery] = useState('');
   const [shapOriginalImage, setShapOriginalImage] = useState('');
@@ -13,15 +11,11 @@ const Result: React.FunctionComponent = ({ data, mode, handleExecute }: any) => 
   const [queryKeywords, setQueryKeywords] = useState('');
 
   const getData = useCallback(() => {
-    if(data.Query) setQuery(data.Query);
-    if(data.QueryKeywords) setQueryKeywords(data.QueryKeywords);
-    if(data.result) setResult(data.result);
-    if(data.SHAPFigure) setShapOriginalImage(data.SHAPFigure);
-    if(data.SHAPDescription) setShapDescription(data.SHAPDescription);
-    console.log("Inside result")
-    console.log("Type of result inside data")
-    console.log(typeof data)
-    console.log(data)
+    if (data.Query) setQuery(data.Query);
+    if (data.QueryKeywords) setQueryKeywords(data.QueryKeywords);
+    if (data.result) setResult(data.result);
+    if (data.SHAPFigure) setShapOriginalImage(data.SHAPFigure);
+    if (data.SHAPDescription) setShapDescription(data.SHAPDescription);
   }, [data]);
 
   useEffect(() => {
@@ -29,15 +23,7 @@ const Result: React.FunctionComponent = ({ data, mode, handleExecute }: any) => 
   }, [getData]);
 
   const returnPageDescription = (mode: string): React.ReactNode => {
-    if (mode === 'companies')
-      return (
-        <Box my={5} ml={2}>
-          <Typography variant="body1" color="textPrimary">
-            {`There are ${result.length} similar companies to ${companyName} in term of ${criteria}`}
-          </Typography>
-        </Box>
-      );
-    else if (mode === 'dogInfo' || mode === 'dogSimilarity')
+    if (mode === 'dogInfo' || mode === 'dogSimilarity')
       return (
         <Box my={5} ml={2}>
           <Typography variant="body1" color="textPrimary">
