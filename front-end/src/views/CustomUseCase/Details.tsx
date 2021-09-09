@@ -32,7 +32,6 @@ const Details: React.FunctionComponent<Props> = ({ query, selectedUseCase, setUs
             <TextField
                 label="Cutom Use Case"
                 name="mode"
-                value={selectedUseCase}
                 onChange={(e) => setUseCase(e.target.value)}
                 select
                 SelectProps={{ native: true }}
