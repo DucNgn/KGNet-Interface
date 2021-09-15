@@ -62,6 +62,10 @@ const MyTabs: React.FunctionComponent<MyTabProps> = ({
     setValue(newValue);
   };
 
+  const handleOnClickExecute = (event: any) => {
+    handleExecute()
+    setValue(0)
+  }
   /**
    * return a data entry in the details tab
    * @param {*} mode mode of the use case
@@ -134,7 +138,7 @@ const MyTabs: React.FunctionComponent<MyTabProps> = ({
             <Button
               variant="contained"
               color="primary"
-              onClick={handleExecute}
+              onClick={handleOnClickExecute}
               startIcon={
                 <SvgIcon>
                   <PlayCircleOutlineIcon />
