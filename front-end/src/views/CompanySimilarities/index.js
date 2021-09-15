@@ -28,6 +28,7 @@ const CompanySimilarities = () => {
         if (res.status === 200) {
           const json_data = res.data;
           setData(json_data);
+          if (res.data.Query) setCustomQuery(res.data.Query);
         } else throw new Error('Internal error');
       } catch (error) {
         console.log(error);
@@ -51,6 +52,7 @@ const CompanySimilarities = () => {
         const res = await axios.post('/KGNet/executeSparqlQuery', data);
         if (res.status === 200) {
           setData(res.data);
+          if (res.data.Query) setCustomQuery(res.data.Query);
         } else throw new Error('Internal error');
       } catch (error) {
         console.log(error);

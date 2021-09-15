@@ -13,10 +13,7 @@ const Result: React.FunctionComponent = ({ setCustomQuery, data, mode, handleExe
   const [queryKeywords, setQueryKeywords] = useState('');
 
   const getData = useCallback(() => {
-    if (data.Query){
-      setQuery(data.Query);
-      setCustomQuery(data.Query)
-    } 
+    if (data.Query) setQuery(data.Query);
     if (data.QueryKeywords) setQueryKeywords(data.QueryKeywords);
     if (data.result) setResult(data.result);
     if (data.SHAPFigure) setShapOriginalImage(data.SHAPFigure);

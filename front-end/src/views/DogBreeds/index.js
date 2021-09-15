@@ -26,6 +26,7 @@ const DogBreeds = () => {
       const res = await axios.post('/KGNet/getDogBreedInfo', data);
       if (res.status === 200) {
         setData(res.data);
+        if (res.data.Query) setCustomQuery(res.data.Query);
       } else throw new Error('Internal error');
     } catch (error) {
       console.log(error);
@@ -43,9 +44,8 @@ const DogBreeds = () => {
       try {
         const res = await axios.post('/KGNet/executeSparqlQuery', data);
         if (res.status === 200) {
-          console.log('Received success response');
-          console.log(res);
           setData(res.data);
+          if (res.data.Query) setCustomQuery(res.data.Query);
         } else throw new Error('Internal error');
       } catch (error) {
         console.log(error);
