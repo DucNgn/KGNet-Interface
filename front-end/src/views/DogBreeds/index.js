@@ -41,6 +41,7 @@ const DogBreeds = () => {
       try {
         const res = await axios.post('/KGNet/executeSparqlQuery', data);
         if (res.status === 200) {
+          console.log(res.data);
           setData(res.data);
         } else throw new Error('Internal error');
       } catch (error) {
