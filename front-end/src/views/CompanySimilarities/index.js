@@ -69,10 +69,10 @@ const CompanySimilarities = () => {
         setSimilarityFeature={setSimilarityFeature}
       />
       {isLoading && <LinearProgress />}
-      {data !== undefined && (
+      {data !== undefined && data !== '' && (
         <Result setCustomQuery={setCustomQuery} data={data} mode="companies" handleExecute={handleExecute} />
       )}
-      {data === undefined && !isLoading && <Typography variant="overline">Error: Please check your input</Typography>}
+      {data === '' && !isLoading && <Typography variant="overline">Error: Please check your input</Typography>}
     </Page>
   );
 };
