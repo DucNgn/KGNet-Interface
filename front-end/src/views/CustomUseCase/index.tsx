@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import '@fontsource/roboto';
-import { Box, LinearProgress } from '@material-ui/core';
+import { Box, LinearProgress, Typography } from '@material-ui/core';
 import Header from './Header';
 import Page from '../../components/Page';
 import Details from './Details';
@@ -86,6 +86,11 @@ const CustomUseCaseRunner: React.FunctionComponent = () => {
         <Box my={3} />
         {isLoading && <LinearProgress />}
         {!isLoading && result !== undefined && result.length > 0 && <GenericResult result={result} />}
+        {!isLoading && result !== undefined && result.length === 0 && (
+          <Typography variant="h4" color="textPrimary">
+            No result found; please check your query syntax
+          </Typography>
+        )}
       </Box>
     </Page>
   );
