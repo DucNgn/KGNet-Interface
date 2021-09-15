@@ -61,9 +61,13 @@ const GenericResult: React.FunctionComponent<Props> = ({ result }) => {
                   <span className={classes.bold}>{key}:</span>
                 </Typography>
                 <Box mx={2} />
-                <Typography variant="body1" color="textPrimary">
-                  {res[key]}
-                </Typography>
+                {res[key].includes('.png') ? (
+                  <img src={`${res[key]}`} alt="URL" className={classes.image} />
+                ) : (
+                  <Typography variant="body1" color="textPrimary">
+                    {res[key]}
+                  </Typography>
+                )}
               </Box>
             ))}
           </Box>
