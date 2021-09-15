@@ -39,7 +39,7 @@ type MyTabProps = {
   shapOriginalImage: string;
   shapDescription: string | string[];
   setUserQuery?: any;
-  handleExecute?: any
+  handleExecute?: any,
 };
 
 const MyTabs: React.FunctionComponent<MyTabProps> = ({
@@ -49,7 +49,8 @@ const MyTabs: React.FunctionComponent<MyTabProps> = ({
   queryKeywords,
   shapOriginalImage,
   shapDescription,
-  handleExecute
+  handleExecute,
+  setUserQuery
 }) => {
   // States
   const classes = useStyles();
@@ -125,6 +126,7 @@ const MyTabs: React.FunctionComponent<MyTabProps> = ({
             userQuery={query}
             queryKeywords={queryKeywords}
             setIsChanged={setIsChanged}
+            setUserQuery={setUserQuery}
           />
         </Box>
         <Box my={2} justifyContent="center">

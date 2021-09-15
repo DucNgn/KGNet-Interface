@@ -24,7 +24,7 @@ export default function QueryTab({ userQuery, setUserQuery, queryKeywords, setIs
           lineWrapping: true
         }}
         onChange={(editor, data, value) => {
-          if (setIsChanged !== undefined) setIsChanged(true);
+          //if (setIsChanged !== undefined) setIsChanged(true);
           if (setUserQuery !== undefined) setUserQuery(value)
         }}
       />

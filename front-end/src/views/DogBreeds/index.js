@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '@fontsource/roboto';
-import { Box, LinearProgress } from '@material-ui/core';
+import { Box, LinearProgress, Typography } from '@material-ui/core';
 import Header from './Header';
 import Details from './Details';
 import Page from '../../components/Page';
@@ -14,7 +14,9 @@ const DogBreeds = () => {
   const [isLoading, setLoading] = useState(false);
   const [link, setLink] = useState('');
   const debouncedLink = useDebounce(link, 500);
+  const [customQuery, setCustomQuery] = useState()
 
+  // event handlers
   const handleShowResult = async () => {
     // make request here
     setLoading(true);
@@ -33,17 +35,22 @@ const DogBreeds = () => {
 
   const handleExecute = async () => {
     // make request here
-    setLoading(true);
-    try {
-      const data = { img_url: debouncedLink };
-      const res = await axios.post('/KGNet/getDogSimilarTo', data);
-      if (res.status === 200) {
-        setData(res.data);
-      } else throw new Error('Internal error');
-    } catch (error) {
-      console.log(error);
+    setLoading(true)
+    if (customQuery !== undefined || customQuery !== '') {
+      const data = { query: customQuery }
+      try {
+        const res = await axios.post('/KGNet/executeSparqlQuery', data);
+        if (res.status === 200) {
+          setData(res.data)
+        }
+        else throw new Error('Internal error')
+      } catch (error) {
+        console.log(error)
+        setData(undefined) // reset result
+      }
     }
-    setLoading(false);
+    else setData(undefined) // reset result
+    setLoading(false)
   };
 
   return (
@@ -52,7 +59,8 @@ const DogBreeds = () => {
         <Header />
         <Details handleShowResult={handleShowResult} debouncedLink={debouncedLink} setLink={setLink} />
         {isLoading && <LinearProgress />}
-        {data !== undefined && <Result data={data} mode="dogInfo" handleExecute={handleExecute} />}
+        {data !== undefined && <Result setCustomQuery={setCustomQuery} data={data} mode='dogInfo' handleExecute={handleExecute} />}
+        {data === undefined && !isLoading && <Typography variant='overline'>Error: Please check your input</Typography>}
       </Box>
     </Page>
   );
