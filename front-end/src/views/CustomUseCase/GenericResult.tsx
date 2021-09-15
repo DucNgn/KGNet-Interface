@@ -12,7 +12,7 @@ const GenericResult: React.FunctionComponent<Props> = ({ result }) => {
 
   /* eslint-disable array-callback-return */
 
-  console.log(result)
+  console.log(result.length)
   return (
     <Box>
       <Typography variant="h4" color="textPrimary">
