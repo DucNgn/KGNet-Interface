@@ -39,7 +39,7 @@ type MyTabProps = {
   shapOriginalImage: string;
   shapDescription: string | string[];
   setUserQuery?: any;
-  handleExecute?: any
+  handleExecute?: any,
 };
 
 const MyTabs: React.FunctionComponent<MyTabProps> = ({
@@ -49,7 +49,8 @@ const MyTabs: React.FunctionComponent<MyTabProps> = ({
   queryKeywords,
   shapOriginalImage,
   shapDescription,
-  handleExecute
+  handleExecute,
+  setUserQuery
 }) => {
   // States
   const classes = useStyles();
@@ -61,6 +62,10 @@ const MyTabs: React.FunctionComponent<MyTabProps> = ({
     setValue(newValue);
   };
 
+  const handleOnClickExecute = (event: any) => {
+    handleExecute()
+    setValue(0)
+  }
   /**
    * return a data entry in the details tab
    * @param {*} mode mode of the use case
@@ -125,6 +130,7 @@ const MyTabs: React.FunctionComponent<MyTabProps> = ({
             userQuery={query}
             queryKeywords={queryKeywords}
             setIsChanged={setIsChanged}
+            setUserQuery={setUserQuery}
           />
         </Box>
         <Box my={2} justifyContent="center">
@@ -132,7 +138,7 @@ const MyTabs: React.FunctionComponent<MyTabProps> = ({
             <Button
               variant="contained"
               color="primary"
-              onClick={handleExecute}
+              onClick={handleOnClickExecute}
               startIcon={
                 <SvgIcon>
                   <PlayCircleOutlineIcon />

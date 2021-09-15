@@ -1,12 +1,13 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import '@fontsource/roboto';
-import { Box } from '@material-ui/core';
+import { Box, LinearProgress } from '@material-ui/core';
 import Header from './Header';
 import Page from '../../components/Page';
 import Details from './Details';
 import { HTTPCustomResponse } from 'src/models/responses';
 import { useSnackbar } from 'notistack';
 import axios from 'src/utils/axios';
+import GenericResult from './GenericResult'
 
 const CustomUseCaseRunner: React.FunctionComponent = () => {
     // States
@@ -14,15 +15,18 @@ const CustomUseCaseRunner: React.FunctionComponent = () => {
     const [query, setQuery] = useState('')
     const [useCaseList, setUseCaeList] = useState([])
     const [selectedUseCase, setUseCase] = useState('')
-    const [result, setResult] = useState()
+    const [result, setResult] = useState<any>()
     const { enqueueSnackbar } = useSnackbar();
+    const [isLoading, setLoading] = useState(false)
 
     // event handlers
     const handleExecute = async () => {
-        if (query !== undefined) {
+        if (query !== '') {
             const data = { query: query }
             try {
+                setLoading(true)
                 const res: HTTPCustomResponse = await axios.post('/KGNet/executeSparqlQuery', data);
+                setLoading(false)
                 if (res.status === 200) {
                     // success
                     enqueueSnackbar(res.data.message, {
@@ -82,7 +86,8 @@ const CustomUseCaseRunner: React.FunctionComponent = () => {
                     isChanged={isChanged}
                     handleExecute={handleExecute} />
                 <Box my={3} />
-                {result}
+                {isLoading && <LinearProgress />}
+                {result !== undefined && <GenericResult result={result} />}
             </Box>
         </Page>
     );

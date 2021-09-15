@@ -4,55 +4,74 @@ import Header from './Header';
 import Page from '../../components/Page';
 import axios from '../../utils/axios';
 import Result from '../Result';
-import { LinearProgress } from '@material-ui/core';
+import { LinearProgress, Typography } from '@material-ui/core';
+import { useSnackbar } from 'notistack';
 
 const CompanySimilarities = () => {
   // States
-  const [data, setData] = useState()
-  const [isLoading, setLoading] = useState(false)
+  const [data, setData] = useState();
+  const [isLoading, setLoading] = useState(false);
   const [companyName, setCompanyName] = useState('');
-  const [similarityFeature, setSimilarityFeature] = useState('')
+  const [similarityFeature, setSimilarityFeature] = useState('profits');
+  const { enqueueSnackbar } = useSnackbar();
+  const [customQuery, setCustomQuery] = useState();
 
+  // event handlers
   const handleShowResult = async () => {
-    // make request here
-    setLoading(true)
-    try {
-      const data = {"company_name": companyName, "similarity_feature": similarityFeature};
-      const res = await axios.post("KGNet/getForbes2013SimilarCompanies", data);
-      if (res.status === 200) {
-        setData(res.data)
-        console.log(res.data)
+    if (companyName !== '') {
+      // make request here
+      setLoading(true);
+      setData(undefined); // reset result
+      try {
+        const data = { company_name: companyName, similarity_feature: similarityFeature };
+        const res = await axios.post('KGNet/getForbes2013SimilarCompanies', data);
+        if (res.status === 200) {
+          const json_data = res.data;
+          setData(json_data);
+        } else throw new Error('Internal error');
+      } catch (error) {
+        console.log(error);
       }
-      else throw new Error('Internal error')
-    } catch (error) {
-      console.log(error)
+      setLoading(false);
+    } else {
+      enqueueSnackbar('Company name is missing', {
+        variant: 'error'
+      });
     }
-    setLoading(false)
   };
 
-  // TODO: May change to execute SPAQL QUERY
   const handleExecute = async () => {
     // make request here
-    setLoading(true)
-    try {
-      const data = {"company_name": companyName, "similarity_feature": similarityFeature};
-      const res = await axios.post("/KGNet/getForbes2013SimilarCompanies", data);
-      if (res.status === 200) {
-        setData(res.data)
+    setLoading(true);
+    if (customQuery !== undefined || customQuery !== '') {
+      const data = { query: customQuery };
+      try {
+        const res = await axios.post('/KGNet/executeSparqlQuery', data);
+        if (res.status === 200) {
+          setData(res.data);
+        } else throw new Error('Internal error');
+      } catch (error) {
+        console.log(error);
+        setData(undefined); // reset result
       }
-      else throw new Error('Internal error')
-    } catch (error) {
-      console.log(error)
-    }
-    setLoading(false)
+    } else setData(undefined); // reset result
+    setLoading(false);
   };
 
   return (
     <Page title="KGNET - Companies Similarities">
       <Header />
-      <Details handleShowResult={handleShowResult} setCompanyName={setCompanyName} setSimilarityFeature={setSimilarityFeature} />
+      <Details
+        handleShowResult={handleShowResult}
+        similarityFeature={similarityFeature}
+        setCompanyName={setCompanyName}
+        setSimilarityFeature={setSimilarityFeature}
+      />
       {isLoading && <LinearProgress />}
-      {data !== undefined && <Result data={data} mode='companies' handleExecute={handleExecute} />}
+      {data !== undefined && (
+        <Result setCustomQuery={setCustomQuery} data={data} mode="companies" handleExecute={handleExecute} />
+      )}
+      {data === undefined && !isLoading && <Typography variant="overline">Error: Please check your input</Typography>}
     </Page>
   );
 };

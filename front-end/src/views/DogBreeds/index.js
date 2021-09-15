@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '@fontsource/roboto';
-import { Box, LinearProgress } from '@material-ui/core';
+import { Box, LinearProgress, Typography } from '@material-ui/core';
 import Header from './Header';
 import Details from './Details';
 import Page from '../../components/Page';
@@ -10,41 +10,45 @@ import useDebounce from '../../hooks/useDebounce';
 
 const DogBreeds = () => {
   // states
-  const [data, setData] = useState()
-  const [isLoading, setLoading] = useState(false)
+  const [data, setData] = useState();
+  const [isLoading, setLoading] = useState(false);
   const [link, setLink] = useState('');
   const debouncedLink = useDebounce(link, 500);
+  const [customQuery, setCustomQuery] = useState();
 
+  // event handlers
   const handleShowResult = async () => {
     // make request here
-    setLoading(true)
+    setLoading(true);
+    setData(undefined); // reset data
     try {
-      const data = {"img_url": debouncedLink};
-      const res = await axios.post("/KGNet/getDogBreedInfo", data);
+      const data = { img_url: debouncedLink };
+      const res = await axios.post('/KGNet/getDogBreedInfo', data);
       if (res.status === 200) {
-        setData(res.data)
-      }
-      else throw new Error('Internal error')
+        setData(res.data);
+      } else throw new Error('Internal error');
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-    setLoading(false)
+    setLoading(false);
   };
 
   const handleExecute = async () => {
     // make request here
-    setLoading(true)
-    try {
-      const data = {"img_url": debouncedLink};
-      const res = await axios.post("/KGNet/getDogSimilarTo", data);
-      if (res.status === 200) {
-        setData(res.data)
+    setLoading(true);
+    if (customQuery !== undefined || customQuery !== '') {
+      const data = { query: customQuery };
+      try {
+        const res = await axios.post('/KGNet/executeSparqlQuery', data);
+        if (res.status === 200) {
+          setData(res.data);
+        } else throw new Error('Internal error');
+      } catch (error) {
+        console.log(error);
+        setData(undefined); // reset result
       }
-      else throw new Error('Internal error')
-    } catch (error) {
-      console.log(error)
-    }
-    setLoading(false)
+    } else setData(undefined); // reset result
+    setLoading(false);
   };
 
   return (
@@ -53,7 +57,10 @@ const DogBreeds = () => {
         <Header />
         <Details handleShowResult={handleShowResult} debouncedLink={debouncedLink} setLink={setLink} />
         {isLoading && <LinearProgress />}
-        {data !== undefined && <Result data={data} mode='dogInfo' handleExecute={handleExecute} />}
+        {data !== undefined && (
+          <Result setCustomQuery={setCustomQuery} data={data} mode="dogInfo" handleExecute={handleExecute} />
+        )}
+        {data === undefined && !isLoading && <Typography variant="overline">Error: Please check your input</Typography>}
       </Box>
     </Page>
   );

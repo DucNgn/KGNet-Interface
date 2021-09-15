@@ -11,16 +11,8 @@ const useStyles = makeStyles((theme) => ({
     width: '100%'
   }
 }));
-const Details = ({ handleShowResult, setCompanyName, setSimilarityFeature }) => {
+const Details = ({ handleShowResult, setCompanyName, setSimilarityFeature, similarityFeature }) => {
   const classes = useStyles();
-
-  const handleOnClick = (e) => {
-    let criteria = document.getElementById('criteria').value;
-    let company = document.getElementById('company').value;
-    setCompanyName(company)
-    setSimilarityFeature(criteria)
-    handleShowResult()
-  };
 
   return (
     <Box mt={4}>
@@ -40,6 +32,7 @@ const Details = ({ handleShowResult, setCompanyName, setSimilarityFeature }) => 
             placeholder="Company name ..."
             id="company"
             variant="outlined"
+            onChange={(e) => setCompanyName(e.target.value)}
           />
         </Grid>
         <Grid item xs={6} md={4}>
@@ -49,12 +42,15 @@ const Details = ({ handleShowResult, setCompanyName, setSimilarityFeature }) => 
                 className={classes.selectField}
                 label="Criteria"
                 name="Criteria"
-                // onChange={handleCustomerChange}
+                onChange={(e) => {
+                  setSimilarityFeature(e.target.value);
+                }}
                 select
                 id="criteria"
                 SelectProps={{ native: true }}
                 // value={currentCustomer || ''}
                 variant="outlined"
+                value={similarityFeature}
               >
                 <option value="profits">Profits</option>
                 <option value="market_value">Market value</option>
@@ -68,7 +64,7 @@ const Details = ({ handleShowResult, setCompanyName, setSimilarityFeature }) => 
       </Grid>
 
       <Box my={2} className={classes.centerItem}>
-        <Button variant="contained" color="primary" onClick={handleOnClick}>
+        <Button variant="contained" color="primary" onClick={handleShowResult}>
           Next
           <SvgIcon>
             <ArrowDownwardIcon />

@@ -3,7 +3,7 @@ import '@fontsource/roboto';
 import { Box, LinearProgress, Typography } from '@material-ui/core';
 import MyTabs from './TabMenu';
 
-const Result: React.FunctionComponent = ({ data, mode, handleExecute }: any) => {
+const Result: React.FunctionComponent = ({ setCustomQuery, data, mode, handleExecute }: any) => {
   const [companyName, setCompanyName] = useState('');
   const [criteria, setCriteria] = useState('');
   const [result, setResult] = useState([]);
@@ -13,11 +13,11 @@ const Result: React.FunctionComponent = ({ data, mode, handleExecute }: any) => 
   const [queryKeywords, setQueryKeywords] = useState('');
 
   const getData = useCallback(() => {
-    setQuery(data.Query);
-    setQueryKeywords(data.QueryKeywords);
-    setResult(data.result);
-    setShapOriginalImage(data.SHAPFigure);
-    setShapDescription(data.SHAPDescription);
+    if (data.Query) setQuery(data.Query);
+    if (data.QueryKeywords) setQueryKeywords(data.QueryKeywords);
+    if (data.result) setResult(data.result);
+    if (data.SHAPFigure) setShapOriginalImage(data.SHAPFigure);
+    if (data.SHAPDescription) setShapDescription(data.SHAPDescription);
   }, [data]);
 
   useEffect(() => {
@@ -25,15 +25,7 @@ const Result: React.FunctionComponent = ({ data, mode, handleExecute }: any) => 
   }, [getData]);
 
   const returnPageDescription = (mode: string): React.ReactNode => {
-    if (mode === 'companies')
-      return (
-        <Box my={5} ml={2}>
-          <Typography variant="body1" color="textPrimary">
-            {`There are ${result.length} similar companies to ${companyName} in term of ${criteria}`}
-          </Typography>
-        </Box>
-      );
-    else if (mode === 'dogInfo' || mode === 'dogSimilarity')
+    if (mode === 'dogInfo' || mode === 'dogSimilarity')
       return (
         <Box my={5} ml={2}>
           <Typography variant="body1" color="textPrimary">
@@ -61,7 +53,7 @@ const Result: React.FunctionComponent = ({ data, mode, handleExecute }: any) => 
             mode={`${mode}`}
             result={result}
             query={query}
-            setUserQuery={setQuery}
+            setUserQuery={setCustomQuery}
             queryKeywords={queryKeywords}
             shapOriginalImage={shapOriginalImage}
             shapDescription={shapDescription}
