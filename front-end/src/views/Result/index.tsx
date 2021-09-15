@@ -19,7 +19,7 @@ const Result: React.FunctionComponent = ({ customQuery, setCustomQuery, data, mo
     if (data.result) setResult(data.result);
     if (data.SHAPFigure) setShapOriginalImage(data.SHAPFigure);
     if (data.SHAPDescription) setShapDescription(data.SHAPDescription);
-  }, [data]);
+  }, [data, customQuery]);
 
   useEffect(() => {
     getData();
