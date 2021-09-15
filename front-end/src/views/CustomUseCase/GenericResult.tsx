@@ -1,5 +1,36 @@
-import { Box, Typography } from '@material-ui/core';
+import { Box, Typography, makeStyles } from '@material-ui/core';
 import React from 'react';
+
+const useStyles = makeStyles((theme) => ({
+  root: {},
+  image: {
+    [theme.breakpoints.up('xs')]: {
+      height: '30%',
+      width: '30%'
+    },
+    [theme.breakpoints.up('md')]: {
+      height: '20%',
+      width: '20%'
+    },
+    [theme.breakpoints.up('lg')]: {
+      height: '15%',
+      width: '15%'
+    }
+  },
+  bold: {
+    fontWeight: 'bold'
+  },
+  shapImage: {
+    [theme.breakpoints.down('sm')]: {
+      height: '100%',
+      weight: '100%'
+    },
+    [theme.breakpoints.up('sm')]: {
+      height: '80%',
+      width: '80%'
+    }
+  }
+}));
 
 type Props = {
   result: any[];
@@ -7,29 +38,36 @@ type Props = {
 
 const GenericResult: React.FunctionComponent<Props> = ({ result }) => {
   // States
-
+  const classes = useStyles();
   // event handlers
 
   /* eslint-disable array-callback-return */
 
-  console.log(result.length)
+  console.log(result.length);
   return (
     <Box>
       <Typography variant="h4" color="textPrimary">
         Result for your query:
       </Typography>
       {result.map((res: any, idx: number) => {
-        return(
-        <Box>
-          <Typography variant="body1" color="textPrimary">
-            {idx+1}
-          </Typography>
-          {Object.keys(res).map((key: string) => (
-            <Typography variant="body1" color="textPrimary">
-              {key}: {res[key]}
+        return (
+          <Box my={4}>
+            <Typography variant="h5" color="textPrimary">
+              Result {idx + 1}:
             </Typography>
-          ))}
-        </Box>);
+            {Object.keys(res).map((key: string) => (
+              <Box display="flex" alignItems="center" my={2}>
+                <Typography variant="body1" color="textPrimary">
+                  <span className={classes.bold}>{key}:</span>
+                </Typography>
+                <Box mx={2} />
+                <Typography variant="body1" color="textPrimary">
+                  {res[key]}
+                </Typography>
+              </Box>
+            ))}
+          </Box>
+        );
       })}
     </Box>
   );
