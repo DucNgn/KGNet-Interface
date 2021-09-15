@@ -37,7 +37,7 @@ const DogBreeds = () => {
     // make request here
     setLoading(true);
     if (customQuery !== undefined || customQuery !== '') {
-      const trimmedQuery = customQuery.replace(/(..)+/g, ' ');
+      const trimmedQuery = customQuery.replace(/\s+/g, ' ');
       const data = { query: trimmedQuery };
       try {
         const res = await axios.post('/KGNet/executeSparqlQuery', data);
