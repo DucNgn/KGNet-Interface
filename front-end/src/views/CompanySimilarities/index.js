@@ -15,7 +15,6 @@ const CompanySimilarities = () => {
   const [similarityFeature, setSimilarityFeature] = useState('profits');
   const { enqueueSnackbar } = useSnackbar();
   const [customQuery, setCustomQuery] = useState();
-  console.log(customQuery);
 
   // event handlers
   const handleShowResult = async () => {
@@ -73,7 +72,13 @@ const CompanySimilarities = () => {
       />
       {isLoading && <LinearProgress />}
       {data !== undefined && data !== '' && (
-        <Result setCustomQuery={setCustomQuery} data={data} mode="companies" handleExecute={handleExecute} />
+        <Result
+          customQuery={customQuery}
+          setCustomQuery={setCustomQuery}
+          data={data}
+          mode="companies"
+          handleExecute={handleExecute}
+        />
       )}
       {data === '' && !isLoading && <Typography variant="overline">Error: Please check your input</Typography>}
     </Page>

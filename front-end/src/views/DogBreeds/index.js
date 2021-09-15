@@ -15,7 +15,7 @@ const DogBreeds = () => {
   const [link, setLink] = useState('');
   const debouncedLink = useDebounce(link, 500);
   const [customQuery, setCustomQuery] = useState();
-  console.log(customQuery);
+
   // event handlers
   const handleShowResult = async () => {
     // make request here
@@ -61,7 +61,13 @@ const DogBreeds = () => {
         <Details handleShowResult={handleShowResult} debouncedLink={debouncedLink} setLink={setLink} />
         {isLoading && <LinearProgress />}
         {data !== undefined && data !== '' && (
-          <Result setCustomQuery={setCustomQuery} data={data} mode="dogInfo" handleExecute={handleExecute} />
+          <Result
+            customQuery={customQuery}
+            setCustomQuery={setCustomQuery}
+            data={data}
+            mode="dogInfo"
+            handleExecute={handleExecute}
+          />
         )}
         {data === '' && !isLoading && <Typography variant="overline">Error: Please check your input</Typography>}
       </Box>

@@ -3,7 +3,7 @@ import '@fontsource/roboto';
 import { Box, LinearProgress, Typography } from '@material-ui/core';
 import MyTabs from './TabMenu';
 
-const Result: React.FunctionComponent = ({ setCustomQuery, data, mode, handleExecute }: any) => {
+const Result: React.FunctionComponent = ({ customQuery, setCustomQuery, data, mode, handleExecute }: any) => {
   const [companyName, setCompanyName] = useState('');
   const [criteria, setCriteria] = useState('');
   const [result, setResult] = useState([]);
@@ -14,6 +14,7 @@ const Result: React.FunctionComponent = ({ setCustomQuery, data, mode, handleExe
 
   const getData = useCallback(() => {
     if (data.Query) setQuery(data.Query);
+    else setQuery(customQuery)
     if (data.QueryKeywords) setQueryKeywords(data.QueryKeywords);
     if (data.result) setResult(data.result);
     if (data.SHAPFigure) setShapOriginalImage(data.SHAPFigure);
