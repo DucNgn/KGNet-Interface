@@ -36,6 +36,7 @@ const DogBreeds = () => {
   const handleExecute = async () => {
     // make request here
     setLoading(true);
+    setData(undefined); //reset result
     if (customQuery !== undefined || customQuery !== '') {
       const trimmedQuery = customQuery.replace(/\s+/g, ' ');
       const data = { query: trimmedQuery };
@@ -48,9 +49,8 @@ const DogBreeds = () => {
         } else throw new Error('Internal error');
       } catch (error) {
         console.log(error);
-        setData(undefined); // reset result
       }
-    } else setData(undefined); // reset result
+    }
     setLoading(false);
   };
 

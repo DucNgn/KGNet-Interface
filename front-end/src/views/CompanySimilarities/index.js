@@ -43,8 +43,10 @@ const CompanySimilarities = () => {
   const handleExecute = async () => {
     // make request here
     setLoading(true);
+    setData(undefined); // reset data
     if (customQuery !== undefined || customQuery !== '') {
-      const data = { query: customQuery };
+      const trimmedQuery = customQuery.replace(/\s+/g, ' ');
+      const data = { query: trimmedQuery };
       try {
         const res = await axios.post('/KGNet/executeSparqlQuery', data);
         if (res.status === 200) {
@@ -52,9 +54,8 @@ const CompanySimilarities = () => {
         } else throw new Error('Internal error');
       } catch (error) {
         console.log(error);
-        setData(undefined); // reset result
       }
-    } else setData(undefined); // reset result
+    }
     setLoading(false);
   };
 
