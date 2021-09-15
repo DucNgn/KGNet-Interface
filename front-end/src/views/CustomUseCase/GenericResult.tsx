@@ -24,11 +24,11 @@ const GenericResult: React.FunctionComponent<Props> = ({ result }) => {
           <Typography variant="body1" color="textPrimary">
             {idx+1}
           </Typography>
-          {Object.keys(res).map((key: string) => {
+          {Object.keys(res).map((key: string) => (
             <Typography variant="body1" color="textPrimary">
               {key}: {res[key]}
             </Typography>
-          })}
+          ))}
         </Box>);
       })}
     </Box>
