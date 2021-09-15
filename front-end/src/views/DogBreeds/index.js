@@ -62,7 +62,7 @@ const DogBreeds = () => {
         {data !== undefined && (
           <Result setCustomQuery={setCustomQuery} data={data} mode="dogInfo" handleExecute={handleExecute} />
         )}
-        {data === undefined && !isLoading && <Typography variant="overline">Error: Please check your input</Typography>}
+        {data === '' && !isLoading && <Typography variant="overline">Error: Please check your input</Typography>}
       </Box>
     </Page>
   );
