@@ -18,6 +18,7 @@ const CustomUseCaseRunner: React.FunctionComponent = () => {
     const [result, setResult] = useState<any>()
     const { enqueueSnackbar } = useSnackbar();
     const [isLoading, setLoading] = useState(false)
+
     // event handlers
     const handleExecute = async () => {
         if (query !== '') {
@@ -85,8 +86,8 @@ const CustomUseCaseRunner: React.FunctionComponent = () => {
                     isChanged={isChanged}
                     handleExecute={handleExecute} />
                 <Box my={3} />
-                {isLoading && <LinearProgress/> }
-                {result !== undefined && <GenericResult result={result}/> }
+                {isLoading && <LinearProgress />}
+                {result !== undefined && <GenericResult result={result} />}
             </Box>
         </Page>
     );
