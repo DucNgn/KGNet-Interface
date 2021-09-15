@@ -19,6 +19,7 @@ const GenericResult: React.FunctionComponent<Props> = ({ result }) => {
         Result for your query:
       </Typography>
       {result.map((res: any, idx: number) => {
+        return(
         <Box>
           <Typography variant="body1" color="textPrimary">
             {idx+1}
@@ -28,7 +29,7 @@ const GenericResult: React.FunctionComponent<Props> = ({ result }) => {
               {key}: {res[key]}
             </Typography>
           })}
-        </Box>;
+        </Box>);
       })}
     </Box>
   );
