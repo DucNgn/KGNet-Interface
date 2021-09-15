@@ -33,9 +33,12 @@ const CustomUseCaseRunner: React.FunctionComponent = () => {
           enqueueSnackbar(res.data.message, {
             variant: 'success'
           });
-          setResult(res.data.result);
-          console.log(res.data);
-        } else {
+          if (res.data !== '' && res.data.result !== undefined) {
+            setResult(res.data.result);
+          } else {
+            setResult([]); // unvalid response
+          }
+        } else { // internal error
           enqueueSnackbar(res.data.message, {
             variant: 'error'
           });
