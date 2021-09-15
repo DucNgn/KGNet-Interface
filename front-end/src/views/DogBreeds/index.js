@@ -59,7 +59,7 @@ const DogBreeds = () => {
         <Header />
         <Details handleShowResult={handleShowResult} debouncedLink={debouncedLink} setLink={setLink} />
         {isLoading && <LinearProgress />}
-        {data !== undefined && (
+        {(data !== undefined || data !== '') && (
           <Result setCustomQuery={setCustomQuery} data={data} mode="dogInfo" handleExecute={handleExecute} />
         )}
         {data === '' && !isLoading && <Typography variant="overline">Error: Please check your input</Typography>}
