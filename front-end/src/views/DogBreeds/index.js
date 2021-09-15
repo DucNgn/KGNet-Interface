@@ -15,7 +15,7 @@ const DogBreeds = () => {
   const [link, setLink] = useState('');
   const debouncedLink = useDebounce(link, 500);
   const [customQuery, setCustomQuery] = useState();
-
+  console.log(customQuery);
   // event handlers
   const handleShowResult = async () => {
     // make request here

@@ -15,6 +15,7 @@ const CompanySimilarities = () => {
   const [similarityFeature, setSimilarityFeature] = useState('profits');
   const { enqueueSnackbar } = useSnackbar();
   const [customQuery, setCustomQuery] = useState();
+  console.log(customQuery);
 
   // event handlers
   const handleShowResult = async () => {
