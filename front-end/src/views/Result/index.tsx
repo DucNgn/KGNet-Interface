@@ -7,19 +7,18 @@ const Result: React.FunctionComponent = ({ customQuery, setCustomQuery, data, mo
   const [companyName, setCompanyName] = useState('');
   const [criteria, setCriteria] = useState('');
   const [result, setResult] = useState([]);
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState(customQuery);
   const [shapOriginalImage, setShapOriginalImage] = useState('');
   const [shapDescription, setShapDescription] = useState('');
   const [queryKeywords, setQueryKeywords] = useState('');
 
   const getData = useCallback(() => {
     if (data.Query) setQuery(data.Query);
-    else setQuery(customQuery)
     if (data.QueryKeywords) setQueryKeywords(data.QueryKeywords);
     if (data.result) setResult(data.result);
     if (data.SHAPFigure) setShapOriginalImage(data.SHAPFigure);
     if (data.SHAPDescription) setShapDescription(data.SHAPDescription);
-  }, [data, customQuery]);
+  }, [data]);
 
   useEffect(() => {
     getData();
