@@ -71,6 +71,26 @@ const TabDetailCompany = ({ companyDetail }) => {
                   {Number.parseFloat(companyDetail.Score).toFixed(2)}
                 </Typography>
               </Box>
+		<Box display="flex" alignItems="center">
+                <Typography variant="body1" color="textPrimary">
+                  <span className={classes.bold}>Market Value:</span>
+                </Typography>
+                <Box mx={2} />
+                <Typography variant="body1" color="textPrimary">
+                  {companyDetail.MV}
+                </Typography>
+              </Box>
+		<Box display="flex" alignItems="center">
+                <Typography variant="body1" color="textPrimary">
+                  <span className={classes.bold}>Market Value Class:</span>
+                </Typography>
+                <Box mx={2} />
+                <Typography variant="body1" color="textPrimary">
+                  {companyDetail.Market_Value_class}
+                </Typography>
+              </Box>
+
+
 
               <Box display="flex" alignItems="center">
                 <Typography variant="body1" color="textPrimary">
@@ -79,16 +99,6 @@ const TabDetailCompany = ({ companyDetail }) => {
                 <Box mx={2} />
                 <Typography variant="body1" color="textPrimary">
                   {companyDetail.employees_count}
-                </Typography>
-              </Box>
-
-              <Box display="flex" alignItems="center">
-                <Typography variant="body1" color="textPrimary">
-                  <span className={classes.bold}>Market Value Class:</span>
-                </Typography>
-                <Box mx={2} />
-                <Typography variant="body1" color="textPrimary">
-                  {companyDetail.Market_Value_class}
                 </Typography>
               </Box>
 
