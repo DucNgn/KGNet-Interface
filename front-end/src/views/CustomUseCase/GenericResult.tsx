@@ -1,4 +1,4 @@
-import { Box, Typography, makeStyles } from '@material-ui/core';
+import { Box, Typography, makeStyles, Divider } from '@material-ui/core';
 import React from 'react';
 
 const useStyles = makeStyles((theme) => ({
@@ -52,6 +52,7 @@ const GenericResult: React.FunctionComponent<Props> = ({ result }) => {
       {result.map((res: any, idx: number) => {
         return (
           <Box my={4}>
+            <Divider/>
             <Typography variant="h5" color="textPrimary">
               Result {idx + 1}:
             </Typography>
