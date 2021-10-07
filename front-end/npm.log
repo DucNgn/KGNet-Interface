@@ -1,0 +1,25 @@
+
+> front-end@0.1.0 start /KGNet-Interface/front-end
+> react-scripts -r @cypress/instrument-cra start
+
+[34mℹ[39m [90m｢wds｣[39m: Project is running at http://172.17.0.3/
+[34mℹ[39m [90m｢wds｣[39m: webpack output is served from 
+[34mℹ[39m [90m｢wds｣[39m: Content not from webpack is served from /KGNet-Interface/front-end/public
+[34mℹ[39m [90m｢wds｣[39m: 404s will fallback to /
+Starting the development server...
+
+Files successfully emitted, waiting for typecheck results...
+Compiled with warnings.
+
+src/views/Result/index.tsx
+  Line 7:10:  'companyName' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 7:23:  'setCompanyName' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 8:10:  'criteria' is assigned a value but never used        @typescript-eslint/no-unused-vars
+  Line 8:20:  'setCriteria' is assigned a value but never used     @typescript-eslint/no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+Proxy error: Could not proxy request /favicon.ico from localhost:3000 to http://172.17.0.2:5000.
+See https://nodejs.org/api/errors.html#errors_common_system_errors for more information (ECONNREFUSED).
+
