@@ -133,6 +133,18 @@ const TabDetailDog = ({ mode, dogDetail }) => {
               {`${dogDetail.recommended_for}`}
             </Typography>
           </Box>
+         
+         <Box my={1} />
+          <Box display="flex" alignItems="center">
+            <Typography variant="body1" color="textPrimary">
+              <span className={classes.bold}>Score:</span>
+            </Typography>
+            <Box mx={2} />
+            <Typography variant="body1" color="textPrimary">
+              {`${dogDetail.Score}`}
+            </Typography>
+          </Box>
+
 
           <Box my={1} />
           <Accordion>
