@@ -13,6 +13,7 @@ import AddUseCase from './views/AddUseCase';
 import './App.css'
 import CustomUseCaseRunner from './views/CustomUseCase';
 import { SnackbarProvider } from 'notistack';
+import UseCaseDetail from './views/CustomUseCase/InnerPage';
 
 const history = createBrowserHistory();
 
@@ -45,6 +46,7 @@ const App = () => {
               <Route exact path="/result" component={Result} />
               <Route exact path="/add" component={AddUseCase} />
               <Route exact path="/customUseCase" component={CustomUseCaseRunner} />
+              <Route exact path="/customUseCase/:usecaseName" component={UseCaseDetail} />
               <Route component={NotFound} />
             </Switch>
           </Box>
