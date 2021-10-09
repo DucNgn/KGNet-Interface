@@ -28,20 +28,6 @@ const Details: React.FunctionComponent<Props> = ({ query, selectedUseCase, setUs
     return (
 
         <Box className={classes.root} my={2}>
-            <TextField
-                label="Cutom Use Case"
-                name="mode"
-                onChange={(e) => setUseCase(e.target.value)}
-                select
-                SelectProps={{ native: true }}
-                variant="outlined"
-            >
-                {useCaseList.map((useCase: any) => (
-                    <option value={useCase.UDF_Name}>{useCase.UDF_Name}</option>
-                )
-                )}
-
-            </TextField>
             <Box my={2}>
                 <QueryTab
                     setUserQuery={setQuery}

@@ -41,7 +41,7 @@ const routes = [
     path: '/add'
   },
   {
-    name: 'Run use case',
+    name: 'Custom use case',
     icon: <PlayArrowIcon />,
     path: '/customUseCase'
   }
