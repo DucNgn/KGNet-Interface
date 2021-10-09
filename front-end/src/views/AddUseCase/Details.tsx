@@ -34,13 +34,15 @@ const Details = ({setLoading}:any) => {
   // Event handlers
   const handleSubmit = async () => {
     // reset value for all states
-    if (ttlUrl !== '' && useCaseName !== '' && newEndPoint !== '') {
+    if (ttlUrl !== '' && useCaseName !== '' && newEndPoint !== '' && udfQuery !== '') {
+      const trimmedQuery = udfQuery.replace(/\s+/g, ' ');
+      
       const data = {
         'file':udfFile??'',
         'ttlFileUri': ttlUrl??'',
         'name':useCaseName??'',
         'EmbeddingEndpoint':newEndPoint??'',
-        'UDF':udfQuery??''
+        'UDF':trimmedQuery??''
       }
 
       try {

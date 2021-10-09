@@ -112,16 +112,6 @@ const TabDetailCompany = ({ companyDetail }) => {
                 </Typography>
               </Box>
 
-              <Box display="flex" alignItems="center">
-                <Typography variant="body1" color="textPrimary">
-                  <span className={classes.bold}>Score:</span>
-                </Typography>
-                <Box mx={2} />
-                <Typography variant="body1" color="textPrimary">
-                  {companyDetail.Score}
-                </Typography>
-              </Box>
-
               <Accordion>
                 <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
                   <Typography className={classes.bold} color="textPrimary">
