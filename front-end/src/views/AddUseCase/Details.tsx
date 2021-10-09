@@ -95,7 +95,16 @@ const Details = ({setLoading}:any) => {
     }
     else console.log("ERROR: THE FILE TYPE IS NOT DEFINED IN THE CODE")
   }
+  const saveQuery = (val:string) => {
+    localStorage.setItem('savedQuery', val)
+  }
 
+  const getSavedQuery = () => {
+    const value = localStorage.getItem('savedQuery')
+    if(value !== undefined && value !== '' && value!== null ) return value;
+    else return ''
+  }
+  
   return (
     <Box my={2}>
       <Card>
@@ -203,7 +212,7 @@ const Details = ({setLoading}:any) => {
       >
         <DialogContent>
           <DialogTitle id="simple-dialog-title">Enter SPARQL query to define the custom precedure</DialogTitle>
-          <QueryTab setUserQuery={setUdfQuery} />
+          <QueryTab userQuery={getSavedQuery()} setUserQuery={setUdfQuery} />
         </DialogContent>
         <DialogActions>
           <Button onClick={(e) => setDialogOpen(false)} color="primary">
@@ -214,7 +223,7 @@ const Details = ({setLoading}:any) => {
               <SaveIcon />
             </SvgIcon>
           }
-            onClick={(e) => setDialogOpen(false)}
+            onClick={(e) => {saveQuery(udfQuery); setDialogOpen(false)}}
           >
             Save
           </Button>
