@@ -35,5 +35,5 @@ jobs:
           working-directory: ./front-end/
           build: npm run build
           start: npm start-mock-api, npm run start
-          env: CI=""
+        env: CI=""
 
