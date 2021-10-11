@@ -31,7 +31,7 @@ function createData(name: any, url: any, description: any, parameters: any) {
 }
 
 function fectchData(data: any): Row[] {
-	var res = data.map((el: any) => createData(el.name, el.URL, el.Description, el.parameters));
+	var res = data.map((el: any) => createData(el.usecase_name, el.api_name, el.Description, el.parameters));
 	return res;
 }
 
@@ -57,7 +57,7 @@ export default function MyTable({ data }: any) {
 				<TableHead>
 					<TableRow>
 						<TableCell className={classes.header}>Use-case name</TableCell>
-						<TableCell align='left'>URI</TableCell>
+						<TableCell align='left'>Endpoint</TableCell>
 						<TableCell align='left'>Parameters</TableCell>
 						<TableCell align='left'>Description</TableCell>
 					</TableRow>
@@ -68,7 +68,7 @@ export default function MyTable({ data }: any) {
 							key={row.name}
 							sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
 							component={Link}
-							to={`${currLocation.pathname}/${row.name}`}
+							to={`${currLocation.pathname}/${row.name.replace(" ","_")}`}
 							hover
 							className={classes.link}
 						>
