@@ -33,6 +33,6 @@ jobs:
         with:
           browser: chrome
           working-directory: ./front-end/
-          build: CI=false && npm run build
+          build: CI=false npm run build
           start: npm start-mock-api, npm run start
 
