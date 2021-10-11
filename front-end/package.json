@@ -40,7 +40,7 @@
   "scripts": {
     "start": "react-scripts -r @cypress/instrument-cra start",
     "start-mock-api": "cd ../mock-back-end && npm run start-server",
-    "build": "react-scripts build",
+    "build": "set \"CI=false\" && react-scripts build",
     "lint": "eslint . --ext .js",
     "test": "start-server-and-test start http://localhost:3000 cy:run",
     "eject": "react-scripts eject",
