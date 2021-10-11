@@ -104,9 +104,9 @@ const CustomUseCaseRunner: React.FunctionComponent = () => {
 	};
 
 	const loadUseCase = useCallback(async () => {
-		const data2 = { query: "*" };
+		const data2 = { query: "" };
 		try {
-			const res: HTTPCustomResponse = await axios.post("/KGNet/searchKGNET_APIsCatalogue", data2);
+			const res: HTTPCustomResponse = await axios.post("/KGNet/searchUsecasesCatalogue", data2);
 			if (res.status === 200) {
 				const list = res.data.result
 				setUseCaseList(list);
@@ -114,7 +114,7 @@ const CustomUseCaseRunner: React.FunctionComponent = () => {
 				const map:{[key:string]:any}={}
 				// create a hash map
 				for(let i = 0; i < list.length ; i++){
-					const key:string = list[i].name.toLowerCase() //lower case the name
+					const key:string = list[i].usecase_name.replace(" ", "_") //lower case the name
 					if(map[key] === undefined){
 						// initialize
 						map[key] = list[i]

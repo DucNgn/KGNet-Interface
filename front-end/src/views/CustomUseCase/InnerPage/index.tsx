@@ -8,15 +8,15 @@ import { Box, Typography } from "@material-ui/core";
 
 type Data = {
 	Description: string;
-	URL: string;
-	name: string;
+	usecase_name: string;
+	api_name: string;
 	parameters: { [key: string]: string };
 };
 
 const UseCaseDetail = () => {
 	// States
 	const [description, setDescription] = useState("");
-	const [url, setUrl] = useState("");
+	const [endpoint, setEndpoint] = useState("");
 	const [name, setName] = useState("");
 	const [params, setParams] = useState<Data["parameters"]>();
 	const [keyValueMap, setMap] = useState<any>();
@@ -27,24 +27,24 @@ const UseCaseDetail = () => {
 
 	const currLocation = useLocation().pathname;
 
-	const getUseCaseName = () => {
+	const getUseCaseSearchKey = () => {
 		// get from the current address
 		let useCaseName = "";
 		const idx = currLocation.indexOf("customUseCase");
 		if (idx >= 0) {
-			useCaseName = currLocation.substring(idx + 14);
+			useCaseName = currLocation.substring(idx + 14); // `customUseCase`.length is 14
 		}
 		return useCaseName;
 	};
 
 	const getUseCaseInfo = () => {
-		const searchKey = getUseCaseName().toLowerCase();
+		const searchKey = getUseCaseSearchKey()
 		const response = localStorage.getItem("originalUseCaseMap");
 		let dataMap: { [key: string]: any } = {};
 		let result: Data = {
 			Description: "",
-			URL: "",
-			name: "",
+			api_name: "",
+			usecase_name: "",
 			parameters: {},
 		};
 
@@ -54,8 +54,8 @@ const UseCaseDetail = () => {
 
 			// set the states
 			setDescription(result.Description);
-			setName(result.name);
-			setUrl(result.URL);
+			setName(result.usecase_name);
+			setEndpoint(result.api_name);
 			setParams(result.parameters);
 		}
 	};
@@ -108,7 +108,7 @@ const UseCaseDetail = () => {
 
 	return (
 		<Page title={name}>
-			<Header useCaseName={getUseCaseName()} />
+			<Header useCaseName={name} />
 			<Box my={4} />
 			<Typography variant='body1' color='primary'>
 				{description}
