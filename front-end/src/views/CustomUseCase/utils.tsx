@@ -17,7 +17,7 @@ export const generateTextField = ({ className = "", label, setValue }: any) => {
 				className={className}
 				placeholder={`${label}...`}
 				id={label}
-				variant='outlined'
+				variant="outlined"
 				onChange={(e) => setValue(e.target.value)}
 			/>
 		</Box>
@@ -31,16 +31,16 @@ export const generateImageWithUrl = ({ className = "", label, setUrl, url }: any
 				className={className}
 				onChange={(e) => setUrl(e.target.value)}
 				label={label}
-				name='Link'
-				variant='outlined'
+				name="Link"
+				variant="outlined"
 			/>
 			<Box my={3} />
-			{url === "" ? (
-				<Typography variant='caption' color='textSecondary'>
+			{url === "" || url === undefined ? (
+				<Typography variant="caption" color="textSecondary">
 					Nothing to display
 				</Typography>
 			) : (
-				<img height='100%' alt='dog' width='100%' src={url} />
+				<img height="100%" alt="dog" width="100%" src={url} />
 			)}
 		</Box>
 	);
