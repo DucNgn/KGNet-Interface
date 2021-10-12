@@ -51,7 +51,7 @@ const Details = ({ handleShowResult, setLink, debouncedLink }) => {
                   Nothing to display
                 </Typography>
               ) : (
-                <img height="100%" alt="dog" width="100%" src={debouncedLink} />
+                <img height="100%" alt="dog" width="200px" src={debouncedLink} />
               )}
             </CardContent>
           </CardActionArea>
