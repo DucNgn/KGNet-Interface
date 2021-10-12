@@ -25,9 +25,6 @@ jobs:
           cd mock-back-end-v2
           pip install -r requirements.txt
 
-      - name: Setup npm package
-        run: (cd front-end && npm init -y && npm install)
-
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
@@ -38,5 +35,5 @@ jobs:
           wait-on: 'http://localhost:3000'
           wait-on-timeout: 300
         env: 
-          {'CI':''}
+          {'CI':false}
 
