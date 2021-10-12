@@ -1,14 +1,9 @@
-name: ci-cd not on VM
+name: Build code for VM
 
 on:
   push:
-    branches:
-      ignore:
-        - vm/new-container
-  pull_request:
-    branches:
-      - main
-  workflow_dispatch:
+    branches: 
+      - vm/new-container
 
 jobs:
   build:
@@ -23,20 +18,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Install Python Dependencies
-        run: |
-          cd mock-back-end-v2
-          pip install -r requirements.txt
-
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
           browser: chrome
           working-directory: ./front-end/
           build: npm run build
-          start: npm run start-mock-api, npm run start
+          start: npm run start
           wait-on: 'http://localhost:3000'
           wait-on-timeout: 300
-        env: 
-          {'CI':false}
 
