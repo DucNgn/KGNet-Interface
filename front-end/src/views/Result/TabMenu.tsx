@@ -1,7 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import { Button, SvgIcon, Typography, Grid, makeStyles } from '@material-ui/core';
 import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
 import AppBar from '@material-ui/core/AppBar';
@@ -13,31 +11,7 @@ import TabDetailDog from './TabDetails/TabDetailDog';
 import QueryTab from './TabDetails/TabQuery';
 import { ICompany } from 'src/models/company.model';
 import { IDogInfo } from 'src/models/dogInfo.model';
-
-type TabPanelProps = {
-  children: React.ReactNode;
-  value: number;
-  index: number;
-};
-const TabPanel: React.FunctionComponent<TabPanelProps> = ({ children, value, index, ...other }) => {
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && <Box p={3}>{children}</Box>}
-    </div>
-  );
-};
-
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired
-};
+import TabPanel from 'src/components/TabPanel';
 
 function a11yProps(index: number) {
   return {
@@ -65,29 +39,35 @@ type MyTabProps = {
   shapOriginalImage: string;
   shapDescription: string | string[];
   setUserQuery?: any;
+  handleExecute?: any,
 };
+
 const MyTabs: React.FunctionComponent<MyTabProps> = ({
   mode,
   result,
   query,
   queryKeywords,
   shapOriginalImage,
-  shapDescription
+  shapDescription,
+  handleExecute,
+  setUserQuery
 }) => {
+  // States
   const classes = useStyles();
   const [value, setValue] = useState(0);
   const [isChanged, setIsChanged] = useState(false);
-  const history = useHistory();
+
+  // Event handler
   const handleChange = (event: any, newValue: number) => {
     setValue(newValue);
   };
 
-  const handleOnClick = () => {
-    history.push('/result?mode=dogSimilarity');
-  };
-
+  const handleOnClickExecute = (event: any) => {
+    handleExecute()
+    setValue(0)
+  }
   /**
-   *
+   * return a data entry in the details tab
    * @param {*} mode mode of the use case
    * @param {*} result the response from the API
    * @returns the detail of each card
@@ -101,6 +81,7 @@ const MyTabs: React.FunctionComponent<MyTabProps> = ({
     }
   };
 
+  // -- Render --
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -131,10 +112,11 @@ const MyTabs: React.FunctionComponent<MyTabProps> = ({
           </Typography>
           <ol>
             {result !== undefined
+              // eslint-disable-next-line array-callback-return
               ? result.map((el: any, idx: number) => {
-                  if (mode === 'companies' && idx < 3) return <li key={el.name}>{el.name}</li>;
-                  else if (idx < 3) return <li key={el.breed_class}>{el.breed_class}</li>;
-                })
+                if (mode === 'companies' && idx < 3) return <li key={el.name}>{el.name}</li>;
+                else if (idx < 3) return <li key={el.breed_class}>{el.breed_class}</li>;
+              })
               : null}
           </ol>
         </Box>
@@ -144,34 +126,33 @@ const MyTabs: React.FunctionComponent<MyTabProps> = ({
       </TabPanel>
       <TabPanel value={value} index={2}>
         <Box>
-          <Box>
-            <QueryTab
-              userQuery={query}
-              queryKeywords={queryKeywords}
-              setIsChanged={setIsChanged}
-            />
-          </Box>
-          <Box my={2} justifyContent="center">
-            <Grid container direction="column" alignItems="center">
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={handleOnClick}
-                startIcon={
-                  <SvgIcon>
-                    <PlayCircleOutlineIcon />
-                  </SvgIcon>
-                }
-              >
-                Execute
-              </Button>
-              {isChanged ? (
-                <Typography variant="caption" color="textSecondary">
-                  Seems like the query has been changed, let's execute it!
-                </Typography>
-              ) : null}
-            </Grid>
-          </Box>
+          <QueryTab
+            userQuery={query}
+            queryKeywords={queryKeywords}
+            setIsChanged={setIsChanged}
+            setUserQuery={setUserQuery}
+          />
+        </Box>
+        <Box my={2} justifyContent="center">
+          <Grid container direction="column" alignItems="center">
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleOnClickExecute}
+              startIcon={
+                <SvgIcon>
+                  <PlayCircleOutlineIcon />
+                </SvgIcon>
+              }
+            >
+              Execute
+            </Button>
+            {isChanged ? (
+              <Typography variant="caption" color="textSecondary">
+                Seems like the query has been changed, let's execute it!
+              </Typography>
+            ) : null}
+          </Grid>
         </Box>
       </TabPanel>
     </div>

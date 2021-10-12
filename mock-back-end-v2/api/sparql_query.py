@@ -1,4 +1,6 @@
-from fastapi import APIRouter
+from typing import Optional
+
+from fastapi import APIRouter, File, Form, UploadFile
 from pydantic import BaseModel
 from starlette.responses import JSONResponse
 
@@ -66,14 +68,14 @@ async def search_apis_catalogues(request: SparqlQueryRequest):
     )
 
 
-class CustomUseCase(BaseModel):
-    name: str
-    UDF: str
-    EmbeddingEndpoint: str
-    ttlFileUri: str
-
-
 @sparql_router.post("/createCustomUsecase")
-async def create_custom_use_case(req: CustomUseCase):
+async def create_custom_use_case(
+    file: Optional[UploadFile] = File(None),
+    ttlFile: Optional[UploadFile] = File(None),
+    ttlFileUri: Optional[str] = Form(None),
+    fileUri: Optional[str] = Form(None),
+    name: str = Form(...),
+    EmbeddingEndpoint: str = Form(...),
+):
     # NOTE: Create custom use case
     return format_response(message="Use-case Created")

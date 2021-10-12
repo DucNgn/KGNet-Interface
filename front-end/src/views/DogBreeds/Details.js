@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '@fontsource/roboto';
 import { Typography, TextField, makeStyles, Button, SvgIcon } from '@material-ui/core';
 import { Box, Card, CardContent, CardActionArea } from '@material-ui/core';
-import useDebounce from '../../hooks/useDebounce';
-import { useHistory } from 'react-router-dom';
-import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
+import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 
 const useStyles = makeStyles((theme) => ({
   link: {
@@ -28,19 +26,11 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: '600px'
   }
 }));
-const Details = () => {
+const Details = ({ handleShowResult, setLink, debouncedLink }) => {
   const classes = useStyles();
-  const history = useHistory();
-  const [link, setLink] = useState('');
-  const debouncedLink = useDebounce(link, 500);
 
   const handleOnchange = (val) => {
     if (val !== undefined) setLink(val);
-  };
-
-  const handleOnClick = (e) => {
-    console.log('hello');
-    history.push('/result?mode=dogInfo');
   };
 
   return (
@@ -68,10 +58,10 @@ const Details = () => {
         </Card>
       </Box>
       <Box my={2} className={classes.centerItem}>
-        <Button variant="contained" color="primary" onClick={handleOnClick}>
-          Next
+        <Button variant="contained" color="primary" onClick={e => handleShowResult(debouncedLink)}>
+          Show result
           <SvgIcon>
-            <ArrowRightAltIcon />
+            <ArrowDownwardIcon />
           </SvgIcon>
         </Button>
       </Box>

@@ -1,5 +1,6 @@
 from fastapi import APIRouter
 from starlette.responses import JSONResponse
+from pydantic import BaseModel
 
 dog_breeds_router = APIRouter(
     prefix="/KGNet", tags=["dog"], responses={"404": {"description": "Not found"}}
@@ -57,9 +58,11 @@ breed_facts_061 = """An Irish national bus company called Bus Éireann uses the 
 
 shap_Description = "Red pixels contribute more to class while Blue pixels contribute more against the class"
 
+class DogBreedInfoBody(BaseModel):
+    img_url: str
 
-@dog_breeds_router.get("/KGNet/getDogBreedInfo")
-def getDogBreedInfo():
+@dog_breeds_router.post("/getDogBreedInfo")
+def getDogBreedInfo(body: DogBreedInfoBody):
     return JSONResponse(
         {
             "Query": dog_breed_query,
