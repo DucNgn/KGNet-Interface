@@ -1,0 +1,39 @@
+name: ci-cd
+
+on:
+  push:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: KGNET
+    runs-on: ubuntu-20.04
+    timeout-minutes: 60
+
+    strategy:
+      fail-fast: false
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install Python Dependencies
+        run: |
+          cd mock-back-end-v2
+          pip install -r requirements.txt
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
+        with:
+          browser: chrome
+          working-directory: ./front-end/
+          build: npm run build
+          start: npm start-mock-api, npm run start
+          wait-on: 'http://localhost:3000'
+          wait-on-timeout: 300
+        env: 
+          {'CI':false}
+
