@@ -2,9 +2,9 @@ name: ci-cd not on VM
 
 on:
   push:
-    branches:
-      ignore:
-        - vm/new-container
+    branches-ignore:
+        - 'vm/**'
+
   pull_request:
     branches:
       - main
