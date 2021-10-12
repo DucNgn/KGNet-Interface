@@ -1,13 +1,9 @@
 # Front-end work in ReactJS for KGNEt
+![ci workflow](https://github.com/DukeNgn/KGNet-Interface/actions/workflows/ci-cd.yml/badge.svg)
 
 ## Steps to run front-end:
-1. npm install 
+1. npm ci 
 2. npm start
-
-### Require this change to have a full-sized code editor
-1. In your local code, go to `node_modules/codemirror/lib/codemirror.css`
-2. Search for the keyword `height`
-3. Change the line where `height = 300px` to `height=100%`
 
 ## Make sure back-end server is also running. (Please visit the folder for back-end-v2 to see how)
 
