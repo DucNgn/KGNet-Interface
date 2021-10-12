@@ -16,7 +16,6 @@ type Props = {
 const Header = ({ className, useCaseName, ...rest }: Props) => {
 	const classes = useStyles();
 
-
 	return (
 		<div className={clsx(classes.root, className)} {...rest}>
 			<Breadcrumbs separator={<NavigateNextIcon fontSize='small' />} aria-label='breadcrumb'>

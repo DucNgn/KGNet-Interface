@@ -4,8 +4,6 @@ import { Box, LinearProgress, Typography } from '@material-ui/core';
 import MyTabs from './TabMenu';
 
 const Result: React.FunctionComponent = ({ customQuery, setCustomQuery, data, mode, handleExecute }: any) => {
-  const [companyName, setCompanyName] = useState('');
-  const [criteria, setCriteria] = useState('');
   const [result, setResult] = useState([]);
   const [query, setQuery] = useState(customQuery);
   const [shapOriginalImage, setShapOriginalImage] = useState('');

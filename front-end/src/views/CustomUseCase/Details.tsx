@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles, Box, Button, Grid, SvgIcon, Typography, TextField } from '@material-ui/core';
+import { makeStyles, Box, Grid, Typography } from '@material-ui/core';
 import QueryTab from '../Result/TabDetails/TabQuery';
-import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
+import ExecuteButton from 'src/components/ExecuteButton';
 
 const useStyles = makeStyles(() => ({
     root: {}
@@ -36,18 +36,7 @@ const Details: React.FunctionComponent<Props> = ({ query, selectedUseCase, setUs
             </Box>
             <Box my={2} justifyContent="center">
                 <Grid container direction="column" alignItems="center">
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={handleExecute}
-                        startIcon={
-                            <SvgIcon>
-                                <PlayCircleOutlineIcon />
-                            </SvgIcon>
-                        }
-                    >
-                        Execute
-                    </Button>
+                    <ExecuteButton onClickHandler={handleExecute} />
                     {isChanged ? (
                         <Typography variant="caption" color="textSecondary">
                             Seems like the query has been changed, let's execute it!

@@ -44,7 +44,6 @@ type Row = {
 
 export default function MyTable({ data }: any) {
 	const rows = fectchData(data);
-	console.log(rows)
 	const classes = useStyles();
     const currLocation = useLocation()
 
