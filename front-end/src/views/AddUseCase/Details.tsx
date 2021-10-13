@@ -1,12 +1,5 @@
 import React, { useRef, useState } from "react";
-import {
-	Card,
-	CardContent,
-	Box,
-	makeStyles,
-	Button,
-	SvgIcon
-} from "@material-ui/core";
+import { Card, CardContent, Box, makeStyles, Button, SvgIcon } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import axios from "src/utils/axios";
 import { useSnackbar } from "notistack";
@@ -16,10 +9,11 @@ import QueryFieldWithPopup, {
 	QueryFieldWithPopupProps,
 } from "src/components/addCustomUseCase/QueryFieldWithPopup";
 import useDebounce from "src/hooks/useDebounce";
+import { getSavedQuery, saveQuery } from "src/utils/saveQuery";
 
-export enum FileType{
+export enum FileType {
 	udf = "udf",
-	cognetive = "cognetive"
+	cognitive = "cognitive",
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -32,6 +26,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Details = ({ setLoading }: any) => {
+	// Restore queries if exists
+	const previousUdfQuery = getSavedQuery("udfQuery");
+	const previousCognitiveQuery = getSavedQuery("cognitiveQuery");
+
 	// state declaration
 	const classes = useStyles();
 	const [useCaseName, setUseCaseName] = useState("");
@@ -39,33 +37,34 @@ const Details = ({ setLoading }: any) => {
 
 	// States for udf field
 	const [udfFile, setUdfFile] = useState<File>();
-	const [udfQuery, setUdfQuery] = useState("");
+	const [udfQuery, setUdfQuery] = useState(previousUdfQuery);
 	const [newEndPoint, setNewEndPoint] = useState("");
 	const UdfFileInput = useRef(null);
 	const { enqueueSnackbar } = useSnackbar();
 	const [isDialogOpen, setDialogOpen] = useState(false);
 
-	// states for cognetive query field
-	const [isCognetiveQueryOpen, setCognetiveQueryOpen] = useState(false)
-	const [cognetiveQuery, setCognetiveQuery] = useState("")
+	// states for cognitive query field
+	const [isCognitiveQueryOpen, setCognitiveQueryOpen] = useState(false);
+	const [cognitiveQuery, setCognitiveQuery] = useState(previousCognitiveQuery);
 
 	// debounced states
 	const debouncedUdfQuery = useDebounce(udfQuery, 500);
-	const debouncedCognetiveQuery = useDebounce(cognetiveQuery, 500);
+	const debouncedCognitiveQuery = useDebounce(cognitiveQuery, 500);
 
-	// Some maps for less repetitive code
+	// ----- Some maps for less repetitive code ------
+	// data for showing as file upload
 	const FILE_TYPES: { [key: string]: any } = {
 		udf: {
 			inputReference: UdfFileInput,
 			setter: setUdfFile,
 		},
-		cognetive: {
+		cognitive: {
 			inputReference: UdfFileInput,
 			setter: setUdfFile,
-		}
-
+		},
 	};
 
+	// data for showing as textfield
 	const TEXT_FIELDS: { [key: string]: TextFieldWithTitleProps } = {
 		use_case_name: {
 			placeholder: "Use case name",
@@ -87,12 +86,54 @@ const Details = ({ setLoading }: any) => {
 		},
 	};
 
-	// Event handlers
+	// Data for sending to the api
+	const DATA_FIELDS: { [key: string]: { errorMessage: string; value: any } } = {
+		ttlUrl: {
+			errorMessage: "ttl URL is missing",
+			value: ttlUrl,
+		},
+		useCaseName: {
+			errorMessage: "Use case name is missing",
+			value: useCaseName,
+		},
+		entryPoint: {
+			errorMessage: "Endpoint is missing",
+			value: newEndPoint,
+		},
+		udfQuery: {
+			errorMessage: "udf query is missing",
+			value: udfQuery,
+		},
+		cognitiveQuery: {
+			errorMessage: "cognitive query is missing",
+			value: cognitiveQuery,
+		},
+	};
+
+	// ------- Event handlers ---------
 	const handleSubmit = async () => {
-		// reset value for all states
-		if (ttlUrl !== "" && useCaseName !== "" && newEndPoint !== "" && udfQuery !== "") {
+		// CONSIDER: reset value for all states
+
+		// validate missing fields
+		let hasMissingFields = false;
+
+		try {
+			for (const key in DATA_FIELDS) {
+				if (DATA_FIELDS[key].value === undefined || DATA_FIELDS[key].value === "") {
+					throw new Error(DATA_FIELDS[key].errorMessage);
+				}
+			}
+		} catch (error: any) {
+			hasMissingFields = true;
+			enqueueSnackbar(error.message, {
+				variant: "warning",
+			});
+		}
+
+		// if no misisng field, send form
+		if (!hasMissingFields) {
 			const trimmedUdfQuery = udfQuery.replace(/\s+/g, " ");
-			const trimmedCognitiveQuery = cognetiveQuery.replace(/\s+/g, " ");
+			const trimmedCognitiveQuery = cognitiveQuery.replace(/\s+/g, " ");
 
 			const data = {
 				file: udfFile ?? "",
@@ -100,7 +141,7 @@ const Details = ({ setLoading }: any) => {
 				name: useCaseName ?? "",
 				EmbeddingEndpoint: newEndPoint ?? "",
 				UDF: trimmedUdfQuery ?? "",
-				cognitiveQuery: trimmedCognitiveQuery ?? ""
+				cognitiveQuery: trimmedCognitiveQuery ?? "",
 			};
 
 			try {
@@ -124,9 +165,7 @@ const Details = ({ setLoading }: any) => {
 				});
 			}
 		} else {
-			enqueueSnackbar("Some field is missing", {
-				variant: "warning",
-			});
+			// do nothing
 		}
 	};
 
@@ -143,16 +182,7 @@ const Details = ({ setLoading }: any) => {
 		} else console.log("ERROR: THE FILE TYPE IS NOT SUPPORTED YET");
 	};
 
-	const saveQuery = (key:string, val: string) => {
-		localStorage.setItem(key, val);
-	};
-
-	const getSavedQuery = (storedKey:string) => {
-		const value = localStorage.getItem(storedKey);
-		if (value !== undefined && value !== "" && value !== null) return value;
-		else return "";
-	};
-
+	// Data requires code editor
 	const QUERY_FIELDS: { [key: string]: QueryFieldWithPopupProps } = {
 		udf: {
 			title: "Custom UDF file (Java/C++)",
@@ -167,19 +197,19 @@ const Details = ({ setLoading }: any) => {
 			saveQuery: saveQuery,
 			setUserQuery: setUdfQuery,
 			fileType: FileType.udf,
-			storedKey: "udfQuery"
+			storedKey: "udfQuery",
 		},
 
-		cognetiveQuery: {
-			title: "Cognetive query",
-			setDialog: setCognetiveQueryOpen,
-			isOpen: isCognetiveQueryOpen,
+		cognitiveQuery: {
+			title: "Cognitive query",
+			setDialog: setCognitiveQueryOpen,
+			isOpen: isCognitiveQueryOpen,
 			getSavedQuery: getSavedQuery,
-			queryState: debouncedCognetiveQuery,
+			queryState: debouncedCognitiveQuery,
 			saveQuery: saveQuery,
-			setUserQuery: setCognetiveQuery,
-			storedKey: "cognetiveQuery"
-		}
+			setUserQuery: setCognitiveQuery,
+			storedKey: "cognitiveQuery",
+		},
 	};
 
 	return (
@@ -202,31 +232,9 @@ const Details = ({ setLoading }: any) => {
 						className={classes.link}
 					/>
 					<Box my={3} />
-					<QueryFieldWithPopup
-						title={QUERY_FIELDS["udf"].title}
-						setDialog={QUERY_FIELDS["udf"].setDialog}
-						isOpen={QUERY_FIELDS["udf"].isOpen}
-						onClickUpload={QUERY_FIELDS["udf"].onClickUpload}
-						fileState={QUERY_FIELDS["udf"].fileState}
-						refUdfFileInput={QUERY_FIELDS["udf"].refUdfFileInput}
-						handleFileUploaded={QUERY_FIELDS["udf"].handleFileUploaded}
-						saveQuery={QUERY_FIELDS["udf"].saveQuery}
-						getSavedQuery={QUERY_FIELDS["udf"].getSavedQuery}
-						queryState={QUERY_FIELDS["udf"].queryState}
-						setUserQuery={QUERY_FIELDS["udf"].setUserQuery}
-						storedKey={QUERY_FIELDS["udf"].storedKey}
-					/>
+					<QueryFieldWithPopup params={QUERY_FIELDS["udf"]} />
 					<Box my={3} />
-					<QueryFieldWithPopup
-						title={QUERY_FIELDS["cognetiveQuery"].title}
-						setDialog={QUERY_FIELDS["cognetiveQuery"].setDialog}
-						isOpen={QUERY_FIELDS["cognetiveQuery"].isOpen}
-						saveQuery={QUERY_FIELDS["cognetiveQuery"].saveQuery}
-						getSavedQuery={QUERY_FIELDS["cognetiveQuery"].getSavedQuery}
-						queryState={QUERY_FIELDS["cognetiveQuery"].queryState}
-						setUserQuery={QUERY_FIELDS["cognetiveQuery"].setUserQuery}
-						storedKey={QUERY_FIELDS["cognetiveQuery"].storedKey}
-					/>
+					<QueryFieldWithPopup params={QUERY_FIELDS["cognitiveQuery"]} />
 					<Box my={3} />
 					<TextFieldWithTitle
 						placeholder={TEXT_FIELDS["embedding_endpoint"].placeholder}

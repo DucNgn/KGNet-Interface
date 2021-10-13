@@ -31,7 +31,11 @@ export type QueryFieldWithPopupProps = {
     storedKey: string
 };
 
-const QueryFieldWithPopup = (params:QueryFieldWithPopupProps) => {
+type Props = {
+    params: QueryFieldWithPopupProps
+}
+
+const QueryFieldWithPopup = ({params}:Props) => {
 	return (
 		<Box display='flex' alignItems='center' justifyContent='flex-start'>
 			<Grid xs={12} md={3}>
