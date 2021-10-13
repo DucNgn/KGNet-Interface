@@ -5,15 +5,15 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { Link } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { makeStyles, Typography, Box } from "@material-ui/core";
-import { useLocation } from 'react-router-dom'
 
 const useStyles = makeStyles(() => ({
 	root: {},
 	link: {
 		color: "#FFFFFF",
 		textDecoration: "none",
+		cursor: "pointer",
 	},
 	header: {
 		fontWeight: "bolder",
@@ -27,11 +27,13 @@ function createData(name: any, url: any, description: any, parameters: any) {
 			parsedParameters += `${param} : ${parameters[param]};`;
 		});
 	}
-	return { name, url, parameters:parsedParameters, description };
+	return { name, url, parameters: parsedParameters, description };
 }
 
 function fectchData(data: any): Row[] {
-	var res = data.map((el: any) => createData(el.usecase_name, el.api_name, el.Description, el.parameters));
+	var res = data.map((el: any) =>
+		createData(el.usecase_name, el.api_name, el.Description, el.parameters)
+	);
 	return res;
 }
 
@@ -45,7 +47,13 @@ type Row = {
 export default function MyTable({ data }: any) {
 	const rows = fectchData(data);
 	const classes = useStyles();
-    const currLocation = useLocation()
+	const currLocation = useLocation();
+	const history = useHistory();
+
+	const directTo = (name:string) => {
+		const path = `${currLocation.pathname}/${name.replace(" ","_")}`
+		history.push(path);
+	};
 
 	return (
 		<TableContainer component={Paper}>
@@ -66,14 +74,11 @@ export default function MyTable({ data }: any) {
 						<TableRow
 							key={row.name}
 							sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-							component={Link}
-							to={`${currLocation.pathname}/${row.name.replace(" ","_")}`}
+							onClick={(e) => directTo(row.name)}
 							hover
 							className={classes.link}
 						>
-							<TableCell component='th' scope='row'>
-								{row.name}
-							</TableCell>
+							<TableCell scope='row'>{row.name}</TableCell>
 							<TableCell align='left'>{row.url}</TableCell>
 							<TableCell align='left'>{row.parameters}</TableCell>
 							<TableCell align='left'>{row.description}</TableCell>
