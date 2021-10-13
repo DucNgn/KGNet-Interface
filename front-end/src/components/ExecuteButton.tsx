@@ -21,13 +21,13 @@ const ExecuteButton = ({
 }: Props) => {
 	const { enqueueSnackbar } = useSnackbar();
 
-	const customHandler = async (originalMap: Props["paramsMap"], endpoint: Props["endpoint"]) => {
+	const defaultHandler = async (originalMap: Props["paramsMap"], endpoint: Props["endpoint"]) => {
 		let isMissingParams = false;
 		let paramsMap = { ...originalMap }; // make a copy to re-write data
-
+		const typesTobeTrimmedArr = ["query", "SQL", "cognitiveQuery"];
 		// check if there is any empty field
 		for (const key in originalMap) {
-			if (originalMap[key] === undefined || originalMap[key] === "") {
+			if (originalMap[key] === undefined || originalMap[key] === "" || originalMap[key] === null) {
 				isMissingParams = true;
 			}
 		}
@@ -35,15 +35,24 @@ const ExecuteButton = ({
 		// If there's no missing field, load the data
 		if (!isMissingParams) {
 			// Prep the data body
+			let executeQuery = ''
 			for (const key in originalMap) {
 				// trim whitespace such as \n to avoid syntax error on server back-end
-				if (key === "query" || key === "SQL") {
+				if (typesTobeTrimmedArr.includes(key)) {
+					console.log('running well!')
 					paramsMap[key] = originalMap[key].replace(/\s+/g, " ");
+					//TODO: doublecheck if needed or not
+					paramsMap[key] = paramsMap[key].replace(/\\n+/g, " ");
+					executeQuery = paramsMap[key] // TODO: subject to change if all query params becomes `query`
 				}
 			}
 
 			const data = paramsMap;
-
+			// TODO: subject to change if params become `query`
+			if(endpoint === "executeSparqlQuery" && data["query"] === undefined){
+				data["query"] = executeQuery
+			}
+			
 			try {
 				setLoading(true);
 				const res: HTTPCustomResponse = await axios.post(`/KGNet/${endpoint}`, data);
@@ -91,7 +100,7 @@ const ExecuteButton = ({
 			resultSetter !== undefined &&
 			setLoading !== undefined
 		) {
-			customHandler(paramsMap, endpoint);
+			defaultHandler(paramsMap, endpoint);
 			console.log("Default handler called");
 		} else {
 			console.log("No handler called");
@@ -103,8 +112,8 @@ const ExecuteButton = ({
 
 	return (
 		<Button
-			variant="contained"
-			color="primary"
+			variant='contained'
+			color='primary'
 			onClick={selectHandler}
 			startIcon={
 				<SvgIcon>

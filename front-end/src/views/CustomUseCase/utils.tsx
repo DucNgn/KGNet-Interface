@@ -46,10 +46,10 @@ export const generateImageWithUrl = ({ className = "", label, setUrl, url }: any
 	);
 };
 
-export const generateQueryEditor = (setQuery: any) => {
+export const generateQueryEditor = (setQuery: any, initialVal?: string) => {
 	return (
 		<Box my={2}>
-			<QueryTab setUserQuery={setQuery} />
+			<QueryTab userQuery={initialVal} setUserQuery={setQuery} />
 		</Box>
 	);
 };

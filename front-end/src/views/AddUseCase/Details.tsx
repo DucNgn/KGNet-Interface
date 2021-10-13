@@ -132,8 +132,9 @@ const Details = ({ setLoading }: any) => {
 
 		// if no misisng field, send form
 		if (!hasMissingFields) {
-			const trimmedUdfQuery = udfQuery.replace(/\s+/g, " ");
-			const trimmedCognitiveQuery = cognitiveQuery.replace(/\s+/g, " ");
+			//FIXME: remove redundant \n n the string, backend error
+			const trimmedUdfQuery = udfQuery.replace(/\\n+/g, " ");
+			const trimmedCognitiveQuery = cognitiveQuery.replace(/\\n+/g, " ");
 
 			const data = {
 				file: udfFile ?? "",
