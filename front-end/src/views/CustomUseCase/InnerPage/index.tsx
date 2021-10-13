@@ -103,8 +103,13 @@ const UseCaseDetail = () => {
 				if (extraSetterArr.length > 0) {
 					// return code editor
 					if (keysNeedEditorArr.includes(key)) {
-						response.push(generateQueryEditor(extraSetterArr.shift(), params[key]));
-						map[key] = extraStaterArr.shift();
+						// TODO: will delete if backend changes
+						if (key === "cognitiveQuery" && params[key] === "") {
+							// do nothing, don't render
+						} else {
+							response.push(generateQueryEditor(extraSetterArr.shift(), params[key]));
+							map[key] = extraStaterArr.shift();
+						}
 					}
 					// return textbox with image
 					else if (key.includes("url")) {
