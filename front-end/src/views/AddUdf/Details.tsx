@@ -1,10 +1,19 @@
-import React, { useRef, useState } from "react";
-import { Card, CardContent, Box, makeStyles, Button, SvgIcon } from "@material-ui/core";
+import React, { useState } from "react";
+import {
+	Card,
+	CardContent,
+	Box,
+	makeStyles,
+	Button,
+	SvgIcon,
+} from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import axios from "src/utils/axios";
 import { useSnackbar } from "notistack";
 import { HTTPCustomResponse } from "src/models/responses";
-import TextFieldWithTitle, { TextFieldWithTitleProps } from "src/components/TextFieldWithTitle";
+import TextFieldWithTitle, {
+	TextFieldWithTitleProps,
+} from "src/components/TextFieldWithTitle";
 import QueryFieldWithPopup, {
 	QueryFieldWithPopupProps,
 } from "src/components/addCustomUseCase/QueryFieldWithPopup";
@@ -27,7 +36,9 @@ const Details = ({ setLoading }: any) => {
 
 	// state declaration
 	const classes = useStyles();
-	const history = useHistory()
+	const history = useHistory();
+	const [description, setDescription] = useState("");
+	const [parameters, setParameters] = useState<any>();
 	const { enqueueSnackbar } = useSnackbar();
 
 	// States for udf field
@@ -42,7 +53,23 @@ const Details = ({ setLoading }: any) => {
 		udfQuery: {
 			errorMessage: "udf query is missing",
 			value: udfQuery,
-		}
+		},
+	};
+
+	// data for showing as textfield
+	const TEXT_FIELDS: { [key: string]: TextFieldWithTitleProps } = {
+		Description: {
+			placeholder: "Description",
+			label: "Description",
+			setter: setDescription,
+			value: description,
+		},
+		Parameters: {
+			placeholder: "Parameters",
+			label: "JSON script for the parameters",
+			setter: setParameters,
+			value: parameters,
+		},
 	};
 
 	// ------- Event handlers ---------
@@ -54,7 +81,10 @@ const Details = ({ setLoading }: any) => {
 
 		try {
 			for (const key in DATA_FIELDS) {
-				if (DATA_FIELDS[key].value === undefined || DATA_FIELDS[key].value === "") {
+				if (
+					DATA_FIELDS[key].value === undefined ||
+					DATA_FIELDS[key].value === ""
+				) {
 					throw new Error(DATA_FIELDS[key].errorMessage);
 				}
 			}
@@ -70,24 +100,32 @@ const Details = ({ setLoading }: any) => {
 			//FIXME: remove redundant \n n the string, backend error
 			const trimmedUdfQuery = udfQuery.replace(/\\n+/g, " ");
 
+			// Convert the String input into JSON
+			const jsonifiedParams = JSON.parse(parameters);
+
 			const data = {
-				SQL: trimmedUdfQuery || undefined
+				SQL: trimmedUdfQuery || undefined,
+				Parameters: jsonifiedParams || {},
+				Description: description || "",
 			};
 
 			try {
-                //TODO: Change if Hussein updates
+				//TODO: Change if Hussein updates
 				setLoading(true);
-				const res: HTTPCustomResponse = await axios.post("/KGNet/createVirtuosoProcedure", data);
+				const res: HTTPCustomResponse = await axios.post(
+					"/KGNet/createVirtuosoProcedure",
+					data
+				);
 				setLoading(false);
 				if (res.status === 200) {
 					// success
-					enqueueSnackbar(res.data.result, {
+					enqueueSnackbar(res.data.message, {
 						variant: "success",
 					});
 					// leave users 2s to read the success message, then go back to the list
 					setTimeout(() => {
-						history.goBack()
-					},2000)
+						history.goBack();
+					}, 2000);
 				} else {
 					enqueueSnackbar(res.data.message, {
 						variant: "error",
@@ -115,7 +153,7 @@ const Details = ({ setLoading }: any) => {
 			saveQuery: saveQuery,
 			setUserQuery: setUdfQuery,
 			storedKey: "udfQuery",
-		}
+		},
 	};
 
 	return (
@@ -124,13 +162,29 @@ const Details = ({ setLoading }: any) => {
 				<CardContent>
 					<Box my={3} />
 					<QueryFieldWithPopup params={QUERY_FIELDS["udf"]} />
+					<Box my={3} />
+					<TextFieldWithTitle
+						placeholder={TEXT_FIELDS["Description"].placeholder}
+						label={TEXT_FIELDS["Description"].label}
+						setter={TEXT_FIELDS["Description"].setter}
+						value={TEXT_FIELDS["Description"].value}
+						className={classes.link}
+					/>
+					<Box my={3} />
+					<TextFieldWithTitle
+						placeholder={TEXT_FIELDS["Parameters"].placeholder}
+						label={TEXT_FIELDS["Parameters"].label}
+						setter={TEXT_FIELDS["Parameters"].setter}
+						value={TEXT_FIELDS["Parameters"].value}
+						className={classes.link}
+					/>
 				</CardContent>
 			</Card>
-			<Box my={5} display='flex' justifyContent='center'>
+			<Box my={5} display="flex" justifyContent="center">
 				<Button
-					variant='contained'
+					variant="contained"
 					onClick={handleSubmit}
-					color='primary'
+					color="primary"
 					startIcon={
 						<SvgIcon>
 							<AddIcon />

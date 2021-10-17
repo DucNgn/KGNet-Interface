@@ -18,7 +18,7 @@ import AddIcon from "@material-ui/icons/Add";
 
 const Details: React.FunctionComponent = () => {
 	// States
-	const [useCaseList, setUseCaseList] = useState<any>([]);
+	const [udfList, setUdfList] = useState<any>([]);
 	const [keyWord, setKeyWord] = useState("");
 	const debouncedKeyWord = useDebounce(keyWord, 500);
 	const history = useHistory();
@@ -44,14 +44,15 @@ const Details: React.FunctionComponent = () => {
 			// find key word match by name
 			if (debouncedKeyWord === "" || debouncedKeyWord === undefined) {
 				//restore the list
-				setUseCaseList(originalList);
+				setUdfList(originalList);
 			} else {
 				// check for the keyword
+				// TODO: require changing the property of el to fit the data from backend
 				const lowerCaseKeyWord = debouncedKeyWord.toLowerCase();
 				response = originalList.filter((el) =>
-					el.usecase_name.toLowerCase().includes(lowerCaseKeyWord)
+					el.name.toLowerCase().includes(lowerCaseKeyWord)
 				);
-				setUseCaseList(response);
+				setUdfList(response);
 			}
 		}
 	}, [debouncedKeyWord]);
@@ -59,8 +60,9 @@ const Details: React.FunctionComponent = () => {
 	useEffect(() => {
 		findUseCase();
 	}, [findUseCase]);
-	console.log(useCaseList)
+
 	const loadUseCase = useCallback(async () => {
+		// TODO: update with Hussein to decide use * or empty string
 		const data2 = { query: "*" };
 		try {
 			const res: HTTPCustomResponse = await axios.post(
@@ -69,13 +71,14 @@ const Details: React.FunctionComponent = () => {
 			);
 			if (res.status === 200) {
 				const list = res.data.result;
-				setUseCaseList(list);
+				setUdfList(list);
 
 				const map: { [key: string]: any } = {};
 				// create a hash map
 				for (let i = 0; i < list.length; i++) {
-					// making keys based on names, some names contain whitespace and we want to replace it by _
-					const key: string = list[i].usecase_name.replace(" ", "_");
+					// TODO: making keys based on names, 
+					// some names contain whitespace and we want to replace it by _
+					const key: string = list[i].name.replace(" ", "_");
 					if (map[key] === undefined) {
 						// initialize the cell
 						map[key] = list[i];
@@ -136,7 +139,7 @@ const Details: React.FunctionComponent = () => {
 				</Grid>
 
 				<Box my={2} />
-				{/* <DataTable data={useCaseList} /> */}
+				<DataTable data={udfList} mode="udf"/>
 			</Box>
 	);
 };

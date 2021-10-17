@@ -20,7 +20,12 @@ const useStyles = makeStyles(() => ({
 	},
 }));
 
-function createData(name: any, url: any, description: any, parameters: any) {
+function createDataForUseCase(
+	name: any,
+	url: any,
+	description: any,
+	parameters: any
+) {
 	let parsedParameters = "";
 	if (parameters !== null) {
 		Object.keys(parameters).forEach((param) => {
@@ -30,10 +35,34 @@ function createData(name: any, url: any, description: any, parameters: any) {
 	return { name, url, parameters: parsedParameters, description };
 }
 
-function fectchData(data: any): Row[] {
-	var res = data.map((el: any) =>
-		createData(el.usecase_name, el.api_name, el.Description, el.parameters)
-	);
+function createDataForUdf(name: any, description: any, parameters: any) {
+	let parsedParameters = "";
+	if (parameters !== null) {
+		Object.keys(parameters).forEach((param) => {
+			parsedParameters += `${param} : ${parameters[param]};`;
+		});
+	}
+	return { name, parameters: parsedParameters, description };
+}
+
+function fectchData(data: any, mode?: string): Row[] {
+	var res: any = {};
+	// TODO: May change if backend changes; this component is used by createUDF and createCustomUseCase
+	// with two different response
+	if (mode === "udf") {
+		res = data.map((el: any) =>
+			createDataForUdf(el.name, el.Description, el.parameters)
+		);
+	} else {
+		res = data.map((el: any) =>
+			createDataForUseCase(
+				el.usecase_name,
+				el.api_name,
+				el.Description,
+				el.parameters
+			)
+		);
+	}
 	return res;
 }
 
@@ -44,29 +73,29 @@ type Row = {
 	description: string;
 };
 
-export default function MyTable({ data }: any) {
-	const rows = fectchData(data);
+export default function MyTable({ data, mode }: any) {
+	const rows = fectchData(data, mode);
 	const classes = useStyles();
 	const currLocation = useLocation();
 	const history = useHistory();
 
-	const directTo = (name:string) => {
-		const path = `${currLocation.pathname}/${name.replace(" ","_")}`
+	const directTo = (name: string) => {
+		const path = `${currLocation.pathname}/${name.replace(" ", "_")}`;
 		history.push(path);
 	};
 
 	return (
 		<TableContainer component={Paper}>
-			<Box display='flex' justifyContent='center' my={3}>
-				<Typography variant='h5'>List of available custom use-cases</Typography>
+			<Box display="flex" justifyContent="center" my={3}>
+				<Typography variant="h5">List of available custom use-cases</Typography>
 			</Box>
-			<Table sx={{ minWidth: 650 }} aria-label='simple table'>
+			<Table sx={{ minWidth: 650 }} aria-label="simple table">
 				<TableHead>
 					<TableRow>
 						<TableCell className={classes.header}>Name</TableCell>
-						<TableCell align='left'>Endpoint</TableCell>
-						<TableCell align='left'>Parameters</TableCell>
-						<TableCell align='left'>Description</TableCell>
+						{!mode && <TableCell align="left">Endpoint</TableCell>}
+						<TableCell align="left">Parameters</TableCell>
+						<TableCell align="left">Description</TableCell>
 					</TableRow>
 				</TableHead>
 				<TableBody>
@@ -78,10 +107,10 @@ export default function MyTable({ data }: any) {
 							hover
 							className={classes.link}
 						>
-							<TableCell scope='row'>{row.name}</TableCell>
-							<TableCell align='left'>{row.url}</TableCell>
-							<TableCell align='left'>{row.parameters}</TableCell>
-							<TableCell align='left'>{row.description}</TableCell>
+							<TableCell scope="row">{row.name}</TableCell>
+							{!mode && <TableCell align="left">{row.url}</TableCell>}
+							<TableCell align="left">{row.parameters}</TableCell>
+							<TableCell align="left">{row.description}</TableCell>
 						</TableRow>
 					))}
 				</TableBody>
