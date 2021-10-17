@@ -77,6 +77,10 @@ const UdfDetail = () => {
 				if(res.status === 200) return res.data.UFD_Script
 			}).catch(e => e.message);
 			
+			if(udfScript !== undefined || udfScript !== null){
+				setQuery(udfScript)
+			}
+			
 			// TODO: validate the data
 			if (result?.endpoint === undefined || result?.endpoint === "") {
 				setEndpoint("executeSparqlQuery");

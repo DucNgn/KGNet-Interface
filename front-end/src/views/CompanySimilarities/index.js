@@ -4,7 +4,7 @@ import Header from './Header';
 import Page from '../../components/Page';
 import axios from '../../utils/axios';
 import Result from '../Result';
-import { LinearProgress, Typography } from '@material-ui/core';
+import { LinearProgress, Typography, Box } from '@material-ui/core';
 import { useSnackbar } from 'notistack';
 
 const CompanySimilarities = () => {
@@ -15,6 +15,8 @@ const CompanySimilarities = () => {
   const [similarityFeature, setSimilarityFeature] = useState('profits');
   const { enqueueSnackbar } = useSnackbar();
   const [customQuery, setCustomQuery] = useState();
+  const [preTime, setPreTime] = useState(new Date());
+  const [postTime, setPostTime] = useState(new Date());
 
   // event handlers
   const handleShowResult = async () => {
@@ -43,6 +45,10 @@ const CompanySimilarities = () => {
 
   const handleExecute = async () => {
     // make request here
+    // Time
+    const now = new Date().getTime()
+    setPreTime(now)
+
     setLoading(true);
     setData(undefined); // reset data
     if (customQuery !== undefined || customQuery !== '') {
@@ -58,12 +64,18 @@ const CompanySimilarities = () => {
         console.log(error);
       }
     }
+        // Time
+        const done = new Date().getTime()
+        setPostTime(done)
     setLoading(false);
   };
 
   return (
     <Page title="KGNET - Companies Similarities">
       <Header />
+      <Box my={2}>
+        {`Took: `+new Date(postTime-preTime).getSeconds()}
+      </Box>
       <Details
         handleShowResult={handleShowResult}
         similarityFeature={similarityFeature}
