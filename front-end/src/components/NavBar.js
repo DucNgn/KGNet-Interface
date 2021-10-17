@@ -21,6 +21,7 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Box, Button, SvgIcon } from '@material-ui/core';
 import InfoIcon from '@material-ui/icons/Info';
 import { Link as RouterLink } from 'react-router-dom';
+import Logo from '../assets/KGNET Logo.png'
 
 const drawerWidth = 240;
 
@@ -94,7 +95,7 @@ function NavBar(props) {
     <div>
       <Box ml={2} mt={2}>
         <Button component={RouterLink} to="/">
-          <Typography variant="h3">KGNET</Typography>
+            <img src={Logo} alt="KGNET logo" height="100%" width="100%"/>
         </Button>
       </Box>
 
@@ -144,7 +145,7 @@ function NavBar(props) {
           </Typography>
         </Toolbar>
       </AppBar>
-      <nav className={classes.drawer} aria-label="mailbox folders">
+      <nav className={classes.drawer}>
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Hidden smUp implementation="css">
           <Drawer
