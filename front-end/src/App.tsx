@@ -16,6 +16,7 @@ import { SnackbarProvider } from "notistack";
 import UseCaseDetail from "./views/CustomUseCase/InnerPage";
 import "@fontsource/roboto";
 import CustomUdfRunner from "./views/CustomUdf";
+import AddUdf from "./views/AddUdf";
 
 const history = createBrowserHistory();
 
@@ -46,7 +47,8 @@ const App = () => {
 							<Route exact path="/companies" component={CompanySimilarities} />
 							<Route exact path="/about" component={About} />
 							<Route exact path="/result" component={Result} />
-							<Route exact path="/add" component={AddUseCase} />
+							<Route exact path="/addUseCase" component={AddUseCase} />
+							<Route exact path="/addUdf" component={AddUdf} />
 							<Route
 								exact
 								path="/customUseCase"

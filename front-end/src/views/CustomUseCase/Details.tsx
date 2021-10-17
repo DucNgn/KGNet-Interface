@@ -28,7 +28,7 @@ const Details: React.FunctionComponent = () => {
 	 * Direct to the add page
 	 */
 	const handleCreate = () => {
-		history.push("/add");
+		history.push("/addUseCase");
 	};
 
 	/**
@@ -106,6 +106,7 @@ const Details: React.FunctionComponent = () => {
 				direction="row"
 				justifyContent="space-between"
 				alignItems="center"
+				spacing={3}
 			>
 				<Grid item>
 					<TextField

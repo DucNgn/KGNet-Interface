@@ -8,8 +8,6 @@ import {
 	SvgIcon,
 	TextField,
 } from "@material-ui/core";
-import Header from "./Header";
-import Page from "../../components/Page";
 import { HTTPCustomResponse } from "src/models/responses";
 import axios from "src/utils/axios";
 import DataTable from "../../components/MyTable";
@@ -30,7 +28,7 @@ const Details: React.FunctionComponent = () => {
 	 * Direct to the add page
 	 */
 	const handleCreate = () => {
-		history.push("/add");
+		history.push("/addUdf");
 	};
 
 	/**
@@ -40,7 +38,7 @@ const Details: React.FunctionComponent = () => {
 		// fetch original db
 		let originalList: any[];
 		let response = [];
-		let dataFetched = localStorage.getItem("originalUseCaseList");
+		let dataFetched = localStorage.getItem("originalUdfList");
 		if (dataFetched !== null) {
 			originalList = JSON.parse(dataFetched); // satisfy TypeScript type check
 			// find key word match by name
@@ -61,12 +59,12 @@ const Details: React.FunctionComponent = () => {
 	useEffect(() => {
 		findUseCase();
 	}, [findUseCase]);
-
+	console.log(useCaseList)
 	const loadUseCase = useCallback(async () => {
-		const data2 = { query: "" };
+		const data2 = { query: "*" };
 		try {
 			const res: HTTPCustomResponse = await axios.post(
-				"/KGNet/searchUsecasesCatalogue",
+				"/KGNet/searchUDFsCatalogue",
 				data2
 			);
 			if (res.status === 200) {
@@ -87,8 +85,8 @@ const Details: React.FunctionComponent = () => {
 					}
 				}
 
-				localStorage.setItem("originalUseCaseMap", JSON.stringify(map)); // store the original list for future search
-				localStorage.setItem("originalUseCaseList", JSON.stringify(list)); // store the original list for future search
+				localStorage.setItem("originalUdfMap", JSON.stringify(map)); // store the original list for future search
+				localStorage.setItem("originalUdfList", JSON.stringify(list)); // store the original list for future search
 			} else {
 				throw new Error("Internal error from back-end");
 			}
@@ -102,9 +100,7 @@ const Details: React.FunctionComponent = () => {
 	}, [loadUseCase]);
 
 	return (
-		<Page title='Execute custom use cases'>
 			<Box>
-				<Header />
 				<Box my={2} />
 				<Grid
 					container
@@ -140,9 +136,8 @@ const Details: React.FunctionComponent = () => {
 				</Grid>
 
 				<Box my={2} />
-				<DataTable data={useCaseList} />
+				{/* <DataTable data={useCaseList} /> */}
 			</Box>
-		</Page>
 	);
 };
 
