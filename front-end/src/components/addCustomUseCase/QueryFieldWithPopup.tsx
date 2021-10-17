@@ -44,7 +44,7 @@ const QueryFieldWithPopup = ({params}:Props) => {
 				</Typography>
 			</Grid>
 			<Grid xs={12} md={10}>
-				<Grid container justifyContent='flex-start' alignItems='center'>
+				<Grid container justifyContent='flex-start' alignItems='center' spacing={2}>
 					<Grid xs={12} md={2} item>
 						<Button
 							variant='contained'

@@ -8,6 +8,8 @@ import {
 	SvgIcon,
 	TextField,
 } from "@material-ui/core";
+import Header from "./Header";
+import Page from "../../components/Page";
 import { HTTPCustomResponse } from "src/models/responses";
 import axios from "src/utils/axios";
 import DataTable from "../../components/MyTable";
@@ -100,44 +102,47 @@ const Details: React.FunctionComponent = () => {
 	}, [loadUseCase]);
 
 	return (
-		<Box>
-			<Grid
-				container
-				direction="row"
-				justifyContent="space-between"
-				alignItems="center"
-			>
-				<Grid item>
-					<TextField
-						InputProps={{
-							startAdornment: (
-								<InputAdornment position="start">
-									<SvgIcon fontSize="small" color="action">
-										<SearchIcon />
-									</SvgIcon>
-								</InputAdornment>
-							),
-						}}
-						placeholder="Use-case name ..."
-						variant="outlined"
-						onChange={(e) => setKeyWord(e.target.value)}
-					/>
+		<Page title='Execute custom use cases'>
+			<Box>
+				<Header />
+				<Box my={2} />
+				<Grid
+					container
+					direction='row'
+					justifyContent='space-between'
+					alignItems='center'
+				>
+					<Grid item>
+						<TextField
+							InputProps={{
+								startAdornment: (
+									<InputAdornment position='start'>
+										<SvgIcon fontSize='small' color='action'>
+											<SearchIcon />
+										</SvgIcon>
+									</InputAdornment>
+								),
+							}}
+							placeholder='Use-case name ...'
+							variant='outlined'
+							onChange={(e) => setKeyWord(e.target.value)}
+						/>
+					</Grid>
+					<Grid item>
+						<Button variant='contained' color='primary' onClick={handleCreate}
+						startIcon={
+							<AddIcon/>
+						}
+						>
+							Create
+						</Button>
+					</Grid>
 				</Grid>
-				<Grid item>
-					<Button
-						variant="contained"
-						color="primary"
-						onClick={handleCreate}
-						startIcon={<AddIcon />}
-					>
-						Create
-					</Button>
-				</Grid>
-			</Grid>
 
-			<Box my={2} />
-			<DataTable data={useCaseList} />
-		</Box>
+				<Box my={2} />
+				<DataTable data={useCaseList} />
+			</Box>
+		</Page>
 	);
 };
 

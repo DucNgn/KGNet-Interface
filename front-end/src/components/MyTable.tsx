@@ -63,7 +63,7 @@ export default function MyTable({ data }: any) {
 			<Table sx={{ minWidth: 650 }} aria-label='simple table'>
 				<TableHead>
 					<TableRow>
-						<TableCell className={classes.header}>Use-case name</TableCell>
+						<TableCell className={classes.header}>Name</TableCell>
 						<TableCell align='left'>Endpoint</TableCell>
 						<TableCell align='left'>Parameters</TableCell>
 						<TableCell align='left'>Description</TableCell>

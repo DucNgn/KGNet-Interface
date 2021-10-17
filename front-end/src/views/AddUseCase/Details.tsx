@@ -10,6 +10,7 @@ import QueryFieldWithPopup, {
 } from "src/components/addCustomUseCase/QueryFieldWithPopup";
 import useDebounce from "src/hooks/useDebounce";
 import { getSavedQuery, saveQuery } from "src/utils/saveQuery";
+import { useHistory } from "react-router-dom";
 
 export enum FileType {
 	udf = "udf",
@@ -34,6 +35,7 @@ const Details = ({ setLoading }: any) => {
 	const classes = useStyles();
 	const [useCaseName, setUseCaseName] = useState("");
 	const [ttlUrl, setTtlUrl] = useState("");
+	const history = useHistory()
 
 	// States for udf field
 	const [udfFile, setUdfFile] = useState<File>();
@@ -154,6 +156,10 @@ const Details = ({ setLoading }: any) => {
 					enqueueSnackbar(res.data.message, {
 						variant: "success",
 					});
+					// leave users 2s to read the success message, then go back to the list
+					setTimeout(() => {
+						history.goBack()
+					},2000)
 				} else {
 					enqueueSnackbar(res.data.message, {
 						variant: "error",

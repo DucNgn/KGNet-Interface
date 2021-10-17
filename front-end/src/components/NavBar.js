@@ -14,8 +14,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import PetsIcon from '@material-ui/icons/Pets';
 import MenuIcon from '@material-ui/icons/Menu'
 import Toolbar from '@material-ui/core/Toolbar';
-import AddIcon from '@material-ui/icons/Add';
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import HandymanIcon from '@mui/icons-material/Handyman';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Box, Button, SvgIcon } from '@material-ui/core';
@@ -37,14 +36,14 @@ const routes = [
     path: '/companies'
   },
   {
-    name: 'Add use case',
-    icon: <AddIcon />,
-    path: '/add'
+    name: 'Custom use case',
+    icon: <HandymanIcon />,
+    path: '/customUseCase'
   },
   {
-    name: 'Custom use case',
-    icon: <PlayArrowIcon />,
-    path: '/customUseCase'
+    name: 'Custom UDFs',
+    icon: <HandymanIcon />,
+    path: '/customUdf'
   }
 ];
 
