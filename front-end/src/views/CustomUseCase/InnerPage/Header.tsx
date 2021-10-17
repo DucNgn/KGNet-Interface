@@ -29,7 +29,7 @@ const Header = ({ className, useCaseName, ...rest }: Props) => {
 					{useCaseName}
 				</Typography>
 			</Breadcrumbs>
-			<Typography variant='h3' color='textPrimary'>
+			<Typography variant='h4' color='textPrimary'>
 				{`Use-case: ${useCaseName}`}
 			</Typography>
 		</div>

@@ -35,7 +35,7 @@ const Header : React.FunctionComponent<Props> = ({ className, mode, ...rest }) =
           Result
         </Typography>
       </Breadcrumbs>
-        <Typography variant="h3" color="textPrimary">
+        <Typography variant="h4" color="textPrimary">
           {mode === 'dog' ? ("Result for Dog breed finder") : null}
           {mode === 'dogSimilarity' ? ("Result for Dog Image Similarity") : null}
           {mode === 'company' ? ("Result for Company Similarity") : null}

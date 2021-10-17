@@ -33,7 +33,7 @@ const Header: React.FunctionComponent<Props> = ({
 					Custom use cases
 				</Typography>
 			</Breadcrumbs>
-			<Typography variant="h3" color="textPrimary">
+			<Typography variant="h4" color="textPrimary">
 				List of custom use cases
 			</Typography>
 		</div>

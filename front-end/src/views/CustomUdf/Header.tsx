@@ -23,11 +23,11 @@ const Header: React.FunctionComponent<Props> = ({ className, mode, ...rest }) =>
                     Dashboard
                 </Link>
                 <Typography variant="body1" color="textPrimary">
-                    Run custom use case
+                    Custom UDFs
                 </Typography>
             </Breadcrumbs>
-            <Typography variant="h3" color="textPrimary">
-                Run custom use case
+            <Typography variant="h4" color="textPrimary">
+                List of custom UDFs
             </Typography>
 
         </div>

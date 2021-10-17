@@ -5,7 +5,7 @@ import Typography from "@material-ui/core/Typography";
 const About = () => {
   return (
     <div id="About">
-      <Typography variant="h3" gutterBottom>
+      <Typography variant="h4" gutterBottom>
         KGNet - CoDs
       </Typography>
     </div>
