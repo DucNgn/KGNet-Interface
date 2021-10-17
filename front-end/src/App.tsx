@@ -17,6 +17,7 @@ import UseCaseDetail from "./views/CustomUseCase/InnerPage";
 import "@fontsource/roboto";
 import CustomUdfRunner from "./views/CustomUdf";
 import AddUdf from "./views/AddUdf";
+import UdfDetail from "./views/CustomUdf/InnerPage";
 
 const history = createBrowserHistory();
 
@@ -60,6 +61,11 @@ const App = () => {
 								component={UseCaseDetail}
 							/>
 							<Route exact path="/customUdf" component={CustomUdfRunner} />
+							<Route
+								exact
+								path="/customUdf/:udfName"
+								component={UdfDetail}
+							/>
 							<Route component={NotFound} />
 						</Switch>
 					</Box>
